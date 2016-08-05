@@ -12,50 +12,50 @@
 
 @implementation NSString (Andy)
 
-//对比两个字符串内容是否一致
-- (BOOL)andy_equals:(NSString*) string
+// 对比两个字符串内容是否一致
+- (BOOL)andy_equals:(NSString *)string
 {
     return [self isEqualToString:string];
 }
 
-//判断字符串是否以指定的前缀开头
-- (BOOL)andy_startsWith:(NSString*)prefix
+// 判断字符串是否以指定的前缀开头
+- (BOOL)andy_startsWith:(NSString *)prefix
 {
     return [self hasPrefix:prefix];
 }
 
-//判断字符串是否以指定的后缀结束
-- (BOOL)andy_endsWith:(NSString*)suffix
+// 判断字符串是否以指定的后缀结束
+- (BOOL)andy_endsWith:(NSString *)suffix
 {
     return [self hasSuffix:suffix];
 }
 
-//转换成小写
+// 转换成小写
 - (NSString *)andy_toLowerCase
 {
     return [self lowercaseString];
 }
 
-//转换成大写
+// 转换成大写
 - (NSString *)andy_toUpperCase
 {
     return [self uppercaseString];
 }
 
-//截取字符串前后空格
+// 截取字符串前后空格
 - (NSString *)andy_trim
 {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-//用指定分隔符将字符串分割成数组
-- (NSArray *)andy_split:(NSString*) separator
+// 用指定分隔符将字符串分割成数组
+- (NSArray *)andy_split:(NSString *)separator
 {
     return [self componentsSeparatedByString:separator];
 }
 
-//用指定字符串替换原字符串
-- (NSString *)andy_replaceAll:(NSString*)oldStr with:(NSString*)newStr
+// 用指定字符串替换原字符串
+- (NSString *)andy_replaceAll:(NSString *)oldStr with:(NSString *)newStr
 {
     return [self stringByReplacingOccurrencesOfString:oldStr withString:newStr];
 }
@@ -70,13 +70,16 @@
     return [self substringWithRange:range];
 }
 
+/**
+ *  md5加密
+ */
 - (NSString *)andy_md5HexDigest
 {
-    const char* str = [self UTF8String];
+    const char *str = [self UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(str, strlen(str), result);
     
-    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
+    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
     {
         [ret appendFormat:@"%02x",result[i]];
@@ -84,11 +87,31 @@
     return ret;
 }
 
-- (NSString *)andy_UTF8String
-{
-    return  [NSString stringWithString:[self stringByRemovingPercentEncoding]];
+/**
+ *  sha1加密
+ */
+- (NSString *)andy_sha1HexDigest {
+    const char *cstr = [self UTF8String];
+    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    
+    CC_SHA1(data.bytes, data.length, digest);
+    
+    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
+        [ret appendFormat:@"%02x", digest[i]];
+    }
+    return ret;
 }
 
+// UTF-8转码
+- (NSString *)andy_UTF8String
+{
+    return [NSString stringWithString:[self stringByRemovingPercentEncoding]];
+}
+
+// 正则IP地址
 - (BOOL)andy_isValidIPAdddress
 {
     NSString *emailRegex = @"((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))";
@@ -153,9 +176,7 @@
     {
         return NO;
     }
-    
 }
-
 
 // 正则匹配用户密码6-18位数字和字母组合
 - (BOOL)andy_isValidPassword
@@ -164,7 +185,6 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
 
 // 正则匹配用户姓名,20位的中文或英文
@@ -176,9 +196,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
-
 
 // 正则匹配用户身份证号15或18位
 - (BOOL)andy_isValidUserIdCard
@@ -202,7 +220,6 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
 
 // 正则匹配URL
@@ -212,24 +229,22 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
 
 // 正则匹配昵称
 - (BOOL)andy_isValidNickname
 {
     NSString *nicknameRegex = @"^[\u4e00-\u9fa5]{4,8}$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",nicknameRegex];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", nicknameRegex];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
 }
-
 
 // 正则匹配银行卡号是否正确
 - (BOOL)andy_isValidBankNumber
 {
     NSString *bankNum=@"^([0-9]{16}|[0-9]{19})$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bankNum];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", bankNum];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
 }
@@ -238,26 +253,73 @@
 - (BOOL)andy_isValidOnlyCharAndNumber
 {
     NSString *bankNum=@"^[A-Za-z0-9]+$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bankNum];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", bankNum];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
 }
+
 // 车牌号验证
 - (BOOL)andy_isValidCarNumber
 {
     NSString *bankNum = @"^[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z_0-9]{4}[a-zA-Z_0-9_\u4e00-\u9fa5]$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bankNum];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", bankNum];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
 }
 
+// 格式化手机号
+- (NSString *)andy_standardPhone {
+    NSInteger position = 3;
+    
+    NSMutableString *tmp = [NSMutableString stringWithFormat:@"%@", self];
+    [tmp replaceOccurrencesOfString:@" " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, tmp.length)];
+    
+    while (1) {
+        if (tmp.length > position) {
+            [tmp insertString:@" " atIndex:position];
+            position += 5;
+        } else {
+            break;
+        }
+    }
+    
+    return tmp;
+}
 
+// 格式化手机号
+- (NSString *)andy_standardTele
+{
+    if (self.length < 8) {
+        return self;
+    }
+    
+    NSMutableString *string = [[NSMutableString alloc] initWithString:self];
+    [string insertString:@"-" atIndex:3];
+    [string insertString:@"-" atIndex:7];
+    return string;
+}
+
+// 手机号****处理
+- (NSString *)andy_securitPhone {
+    if (self.length != 11) {
+        return self;
+    }
+    return [self stringByReplacingCharactersInRange:NSMakeRange(3,4) withString:@"****"];
+}
+
+/**
+ *  返回字符串所占用的尺寸
+ *
+ *  @param font    字体
+ *  @param maxSize 最大尺寸
+ */
 - (CGSize)andy_sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize
 {
     NSDictionary *attrs = @{NSFontAttributeName : font};
     return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
 }
 
+// AES加密
 - (NSString *)andy_aes256_encrypt:(NSString *)key
 {
     const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
@@ -278,6 +340,7 @@
     return nil;
 }
 
+// AES解密
 - (NSString *)andy_aes256_decrypt:(NSString *)key
 {
     //转换为2进制Data
@@ -300,5 +363,43 @@
     return nil;
 }
 
+@end
+
+@implementation NSString (ParametersSafe)
+
+- (instancetype)andy_safe_initWithString:(NSString *)aString
+{
+    if (aString == nil || [aString isKindOfClass:[NSNull class]]) {
+        return [self initWithString:@""];
+    }
+    
+    return [self initWithString:aString];
+}
+
+- (NSString *)andy_safe_substringToIndex:(NSInteger)to
+{
+    if (to <= 0) {
+        return @"";
+    }
+    
+    if (to >= self.length) {
+        return self;
+    }
+    
+    return [self substringToIndex:to];
+}
+
+- (NSString *)andy_safe_substringFromIndex:(NSInteger)from
+{
+    if (from <= 0) {
+        return self;
+    }
+    
+    if (from >= self.length) {
+        return @"";
+    }
+    
+    return [self substringFromIndex:from];
+}
 
 @end

@@ -10,6 +10,6 @@
 
 @interface NSAttributedString (Andy)
 
-- (NSAttributedString * )andy_adjustlineSpace:(float)space;
+- (NSAttributedString *)andy_adjustlineSpace:(float)space;
 
 @end

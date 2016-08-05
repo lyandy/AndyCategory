@@ -26,30 +26,30 @@
 + (UIImage *)andy_reSizeImage:(UIImage *)image toSize:(CGSize)reSize;
 + (UIImage *)andy_combineImage:(UIImage *)image1 toImage:(UIImage *)image2;
 + (UIImage *)andy_combineImage:(UIImage *)image1 toImage:(UIImage *)image2 image1Offset:(CGPoint)offset;
-+ (UIImage*)andy_getImageWithContentFile:(NSString*)fileName;
++ (UIImage *)andy_getImageWithContentFile:(NSString *)fileName;
 
 + (UIImage *)andy_normalResImageWithUrl:(NSURL *)url WithinSize:(CGFloat)maxInSize;
 
-+ (UIImage*)andy_createImageWithColor:(UIColor*) color;
++ (UIImage *)andy_createImageWithColor:(UIColor *)color;
 
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color;
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color level:(CGFloat)level;
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color rect:(CGRect)rect;
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color rect:(CGRect)rect level:(CGFloat)level;
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets;
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets level:(CGFloat)level;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color level:(CGFloat)level;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect level:(CGFloat)level;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color insets:(UIEdgeInsets)insets;
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color insets:(UIEdgeInsets)insets level:(CGFloat)level;
 
--(UIImage*)andy_lightenWithLevel:(CGFloat)level;
--(UIImage*)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets;
--(UIImage*)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level;
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level;
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets;
+- (UIImage *)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level;
 
--(UIImage*)andy_darkenWithLevel:(CGFloat)level;
--(UIImage*)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets;
--(UIImage*)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level;
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level;
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets;
+- (UIImage *)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level;
 
 + (UIImage *)andy_imageResourceNamed:(NSString *)name ofType:(NSString *)type;
-+ (UIImage *)andy_imageWithView:(UIView*)view;    // UIView转UIImage
-+ (UIImage *)andy_imageWithView:(UIView*)view withRect:(CGRect)rect;
++ (UIImage *)andy_imageWithView:(UIView *)view;    // UIView转UIImage
++ (UIImage *)andy_imageWithView:(UIView *)view withRect:(CGRect)rect;
 
 - (UIImage *)andy_imageInRect:(CGRect)rect;   //截取部分图像
 - (UIImage *)andy_imageWithScale:(CGFloat)scale;   //按比例缩放

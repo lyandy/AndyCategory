@@ -62,7 +62,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
 }
 
-+(UIImage *)andy_reSizeImage:(UIImage *)image toSize:(CGSize)reSize
++ (UIImage *)andy_reSizeImage:(UIImage *)image toSize:(CGSize)reSize
 {
     UIGraphicsBeginImageContext(CGSizeMake(reSize.width, reSize.height));
     [image drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
@@ -95,7 +95,6 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
         scaledHeight = height * scaleFactor;
         // center the image
         if (widthFactor < heightFactor) {
-            
             thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
         } else if (widthFactor > heightFactor) {
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
@@ -113,17 +112,16 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return newImage ;
 }
 
-- (void)andy_savePictureToDocuments:(UIImage*)image imageName:(NSString*)imageName
+- (void)andy_savePictureToDocuments:(UIImage *)image imageName:(NSString *)imageName
 {
     NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:imageName];
     [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
 }
 
-- (void)andy_savePictureToPhotoLibrary:(UIImage*)image imageName:(NSString*)imageName delegate:(id)delegate
+- (void)andy_savePictureToPhotoLibrary:(UIImage *)image imageName:(NSString *)imageName delegate:(id)delegate
 {
     UIImageWriteToSavedPhotosAlbum(image, delegate, nil, nil);
 }
-
 
 + (UIImage *)andy_combineImage:(UIImage *)image1 toImage:(UIImage *)image2
 {
@@ -156,9 +154,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return newImage;
 }
 
-+ (UIImage*)andy_combineImageForHorizontalTile:(UIImage*)frontImage
-                         backgroundImage:(UIImage*)backgroundImage
-                                    rect:(CGSize)rect
++ (UIImage *)andy_combineImageForHorizontalTile:(UIImage *)frontImage backgroundImage:(UIImage *)backgroundImage rect:(CGSize)rect
 {
     //创建绘图上下文
     UIGraphicsBeginImageContext(rect);
@@ -169,26 +165,25 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     //CGContextTranslateCTM(thisctx, -image2.size.width, -image2.size.height);
     //绘制底图
     //CGContextDrawImage(thisctx, CGRectMake(0, 0, image2.size.width, image2.size.height), [image2 CGImage]);
-    for(int i = 0;i<(rect.width/backgroundImage.size.width)+1 ;i++)
+    for (int i = 0; i < (rect.width/backgroundImage.size.width) + 1; i++)
     {
-        [backgroundImage drawInRect:CGRectMake(backgroundImage.size.width*i, 0, backgroundImage.size.width, backgroundImage.size.height)];
+        [backgroundImage drawInRect:CGRectMake(backgroundImage.size.width * i, 0, backgroundImage.size.width, backgroundImage.size.height)];
     }
-    
     
     //在底图上绘制图片
     //CGContextDrawImage(thisctx, CGRectMake(0, 0, image1.size.width, image1.size.height), [image1 CGImage]);
-    for(int i = 0;i<(rect.width/frontImage.size.width)+1 ;i++)
+    for(int i = 0; i < (rect.width/frontImage.size.width) + 1; i++)
     {
-        [frontImage drawInRect:CGRectMake(frontImage.size.width*i, 0, frontImage.size.width, frontImage.size.height)];
+        [frontImage drawInRect:CGRectMake(frontImage.size.width * i, 0, frontImage.size.width, frontImage.size.height)];
     }
     //得到所绘制的图片
-    UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     //关闭上下文
     UIGraphicsEndImageContext();
     return newImage;
 }
 
-+ (UIImage*)andy_getImageWithContentFile:(NSString*)fileName
++ (UIImage *)andy_getImageWithContentFile:(NSString *)fileName
 {
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"png"];
     return [UIImage imageWithContentsOfFile:imagePath];
@@ -210,17 +205,17 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     if (width > maxSize || height > maxSize) {
         if (width > height) {
             newWidth = maxSize;
-            newHeight = (height*maxSize)/width;
+            newHeight = (height * maxSize) / width;
         } else {
             newHeight = maxSize;
-            newWidth = (width*maxSize)/height;
+            newWidth = (width * maxSize) / height;
         }
     }
     
     // Resize the image
     CGSize newSize = CGSizeMake(newWidth, newHeight);
     UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    [image drawInRect:CGRectMake(0,0,newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -231,9 +226,9 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return processedImage;
 }
 
-+ (UIImage*)andy_createImageWithColor:(UIColor*) color
++ (UIImage *)andy_createImageWithColor:(UIColor *)color
 {
-    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
@@ -244,23 +239,23 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // Tint: Color
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color {
     return [self andy_tintedImageWithColor:color level:1.0f];
 }
 
 // Tint: Color + level
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color level:(CGFloat)level {
     CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     return [self andy_tintedImageWithColor:color rect:rect level:level];
 }
 
 // Tint: Color + Rect
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color rect:(CGRect)rect {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect {
     return [self andy_tintedImageWithColor:color rect:rect level:1.0f];
 }
 
 // Tint: Color + Rect + level
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color rect:(CGRect)rect level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect level:(CGFloat)level {
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     
     UIGraphicsBeginImageContextWithOptions(imageRect.size, NO, self.scale);
@@ -285,68 +280,68 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // Tint: Color + Insets
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets {
     return [self andy_tintedImageWithColor:color insets:insets level:1.0f];
 }
 
 // Tint: Color + Insets + level
--(UIImage*)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color insets:(UIEdgeInsets)insets level:(CGFloat)level {
     CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     return [self andy_tintedImageWithColor:color rect:UIEdgeInsetsInsetRect(rect, insets) level:level];
 }
 
 // Light: Level
--(UIImage*)andy_lightenWithLevel:(CGFloat)level {
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level {
     return [self andy_tintedImageWithColor:[UIColor whiteColor] level:level];
 }
 
 // Light: Level + Insets
--(UIImage*)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
     return [self andy_tintedImageWithColor:[UIColor whiteColor] insets:insets level:level];
 }
 
 // Light: Level + Rect
--(UIImage*)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level {
+- (UIImage *)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level {
     return [self andy_tintedImageWithColor:[UIColor whiteColor] rect:rect level:level];
 }
 
 // Dark: Level
--(UIImage*)andy_darkenWithLevel:(CGFloat)level {
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level {
     return [self andy_tintedImageWithColor:[UIColor blackColor] level:level];
 }
 
 // Dark: Level + Insets
--(UIImage*)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
     return [self andy_tintedImageWithColor:[UIColor blackColor] insets:insets level:level];
 }
 
 // Dark: Level + Rect
--(UIImage*)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level {
+- (UIImage *)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level {
     return [self andy_tintedImageWithColor:[UIColor blackColor] rect:rect level:level];
 }
 
 
 + (UIImage *)andy_imageResourceNamed:(NSString *)name ofType:(NSString *)type {
-    NSString* path = [[NSBundle mainBundle] pathForResource:name ofType:type];
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
     return [UIImage imageWithContentsOfFile:path];
 }
 
 // UIView转UIImage
-+ (UIImage *)andy_imageWithView:(UIView*)view {
++ (UIImage *)andy_imageWithView:(UIView *)view {
     // 创建一个bitmap的context
     // 并把它设置成为当前正在使用的context
     UIGraphicsBeginImageContext(view.bounds.size);
     CGContextRef currnetContext = UIGraphicsGetCurrentContext();
     [view.layer renderInContext:currnetContext];
     // 从当前context中创建一个改变大小后的图片
-    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     // 使当前的context出堆栈
     UIGraphicsEndImageContext();
     return image;
 }
 
 // UIView转UIImage
-+ (UIImage *)andy_imageWithView:(UIView*)view withRect:(CGRect)rect {
++ (UIImage *)andy_imageWithView:(UIView *)view withRect:(CGRect)rect {
     CGSize cropImageSize = rect.size;
     UIGraphicsBeginImageContext(cropImageSize);
     CGContextRef resizedContext = UIGraphicsGetCurrentContext();
@@ -660,6 +655,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
     return [self addImageToImage:blurredFrame atRect:frame];
 }
+
 - (UIImage *)andy_grayScale
 {
     int width = self.size.width;
@@ -716,6 +712,5 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
                                alpha:((CGFloat)rgba[3])/255.0];
     }
 }
-
 
 @end

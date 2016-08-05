@@ -94,6 +94,37 @@
     self.center = center;
 }
 
+- (CGFloat)andy_Top {
+    return [self andy_Y];
+}
+
+- (void)setAndy_Top:(CGFloat)andy_Top {
+    [self setAndy_Y:andy_Top];
+}
+
+- (CGFloat)andy_Left {
+    return [self andy_X];
+}
+
+- (void)setAndy_Left:(CGFloat)andy_Left {
+    [self setAndy_X:andy_Left];
+}
+
+- (CGFloat)andy_Bottom {
+    return self.frame.origin.y + self.frame.size.height;
+}
+
+- (void)setAndy_Bottom:(CGFloat)andy_Bottom {
+    self.frame = CGRectMake(self.andy_Left, andy_Bottom - self.andy_Height, self.andy_Width, self.andy_Height);
+}
+
+- (CGFloat)andy_Right {
+    return self.frame.origin.x + self.frame.size.width;
+}
+
+- (void)setAndy_Right:(CGFloat)andy_Right {
+    self.frame = CGRectMake(andy_Right - self.andy_Width, self.andy_Top, self.andy_Width, self.andy_Height);
+}
 
 - (BOOL)andy_isShowingOnKeyWindow
 {
@@ -131,6 +162,7 @@
         [subview removeFromSuperview];
     }
 }
+
 - (void)andy_removeViewWithTag:(NSInteger)tag
 {
     if (tag == 0)
@@ -143,6 +175,7 @@
         [view removeFromSuperview];
     }
 }
+
 - (void)andy_removeSubViewArray:(NSMutableArray *)views
 {
     for (UIView *sub in views)
@@ -158,6 +191,7 @@
         [self andy_removeViewWithTag:[num integerValue]];
     }
 }
+
 - (void)andy_removeViewWithTagLessThan:(NSInteger)tag
 {
     NSMutableArray *views = [NSMutableArray array];
@@ -170,6 +204,7 @@
     }
     [self andy_removeSubViewArray:views];
 }
+
 - (void)andy_removeViewWithTagGreaterThan:(NSInteger)tag
 {
     NSMutableArray *views = [NSMutableArray array];
@@ -183,19 +218,18 @@
     [self andy_removeSubViewArray:views];
 }
 
-- (UIViewController*)andy_selfViewController
+- (UIViewController *)andy_selfViewController
 {
-    for (UIView* next = [self superview]; next != nil; next = next.superview)
+    for (UIView *next = [self superview]; next != nil; next = next.superview)
     {
-        UIResponder* nextResponder = [next nextResponder];
+        UIResponder *nextResponder = [next nextResponder];
         if ([nextResponder isKindOfClass:[UIViewController class]])
         {
-            return (UIViewController*)nextResponder;
+            return (UIViewController *)nextResponder;
         }
     }
     return nil;
 }
-
 
 - (UIView *)andy_subviewWithTag:(NSInteger)tag
 {
@@ -207,6 +241,89 @@
         }
     }
     return nil;
+}
+
+@end
+
+@implementation UIView (Hierarchy)
+
+- (UIViewController *)viewController
+{
+    UIResponder *nextResponder =  self;
+    
+    do
+    {
+        nextResponder = [nextResponder nextResponder];
+        
+        if ([nextResponder isKindOfClass:[UIViewController class]])
+            return (UIViewController *)nextResponder;
+        
+    } while (nextResponder != nil);
+    
+    return nil;
+}
+
+- (void)andy_removeAllSubviews
+{
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
+    }
+}
+
+@end
+
+
+@implementation UIView (Gesture)
+
+- (void)andy_addTapAction:(SEL)tapAction target:(id)target
+{
+    self.userInteractionEnabled = YES;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:target action:tapAction];
+    gesture.cancelsTouchesInView = NO;
+    [self addGestureRecognizer:gesture];
+}
+
+@end
+
+@implementation UIView (FirstResponder)
+
+- (UIView *)andy_findViewThatIsFirstResponder
+{
+    if (self.isFirstResponder) {
+        return self;
+    }
+    
+    for (UIView *subView in self.subviews) {
+        UIView *firstResponder = [subView andy_findViewThatIsFirstResponder];
+        if (firstResponder != nil) {
+            return firstResponder;
+        }
+    }
+    return nil;
+}
+
+- (NSArray *)andy_descendantViews
+{
+    NSMutableArray *descendantArray = [NSMutableArray array];
+    for (UIView *view in self.subviews) {
+        [descendantArray addObject:view];
+        [descendantArray addObjectsFromArray:[view andy_descendantViews]];
+    }
+    return [descendantArray copy];
+}
+
+@end
+
+@implementation UIView (AutoLayout)
+
+- (void)andy_testAmbiguity
+{
+    if (self.hasAmbiguousLayout) {
+        NSLog(@"<%@:%p>: %@", self.class.description, self, @"Ambiguous");
+    }
+    for (UIView *view in self.subviews) {
+        [view andy_testAmbiguity];
+    }
 }
 
 @end
