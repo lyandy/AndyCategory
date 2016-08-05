@@ -1,0 +1,733 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */; };
+		B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */; };
+		B6A789C71D5444760051CCF1 /* NSError+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C61D5444760051CCF1 /* NSError+Andy.m */; };
+		B6A789CA1D544D9B0051CCF1 /* NSData+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C91D544D9B0051CCF1 /* NSData+Andy.m */; };
+		B6A789CD1D544EB10051CCF1 /* UILabel+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789CC1D544EB10051CCF1 /* UILabel+Andy.m */; };
+		B6A789D01D544ED60051CCF1 /* UIButton+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789CF1D544ED60051CCF1 /* UIButton+Andy.m */; };
+		B6A789D31D5469060051CCF1 /* UIWebView+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D21D5469060051CCF1 /* UIWebView+Andy.m */; };
+		B6A789D61D546B5E0051CCF1 /* UIViewController+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */; };
+		B6A789D91D546D2B0051CCF1 /* UITextField+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */; };
+		B6A789DC1D546FF70051CCF1 /* NSAttributedString+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */; };
+		B6A789DF1D5470D20051CCF1 /* UIColor+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */; };
+		B6FDF88A1D53299100EE6FC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8891D53299100EE6FC0 /* main.m */; };
+		B6FDF8951D53299100EE6FC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FDF8941D53299100EE6FC0 /* Assets.xcassets */; };
+		B6FDF8A31D53299100EE6FC0 /* AndyCategory_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8A21D53299100EE6FC0 /* AndyCategory_TestTests.m */; };
+		B6FDF8AE1D53299100EE6FC0 /* AndyCategory_TestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8AD1D53299100EE6FC0 /* AndyCategory_TestUITests.m */; };
+		B6FDF8C01D53309C00EE6FC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8BF1D53309C00EE6FC0 /* AppDelegate.m */; };
+		B6FDF8C91D53310A00EE6FC0 /* AndyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8C71D53310A00EE6FC0 /* AndyMainViewController.m */; };
+		B6FDF8CA1D53310A00EE6FC0 /* AndyMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6FDF8C81D53310A00EE6FC0 /* AndyMainViewController.xib */; };
+		B6FDF8D01D5336AA00EE6FC0 /* NSString+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8CF1D5336AA00EE6FC0 /* NSString+Andy.m */; };
+		B6FDF8D61D5336CD00EE6FC0 /* UIView+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8D51D5336CD00EE6FC0 /* UIView+Andy.m */; };
+		B6FDF8D91D5336DA00EE6FC0 /* UIImage+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8D81D5336DA00EE6FC0 /* UIImage+Andy.m */; };
+		B6FDF8DC1D5336EC00EE6FC0 /* UIImageView+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8DB1D5336EC00EE6FC0 /* UIImageView+Andy.m */; };
+		B6FDF8DF1D5336F800EE6FC0 /* NSDate+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */; };
+		B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */; };
+		B9BB2CB7D799157BFA00B622 /* libPods-AndyCategory_Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 028C8E1FBD01CEEE4EAD3071 /* libPods-AndyCategory_Test.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B6FDF89F1D53299100EE6FC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6FDF87D1D53299100EE6FC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6FDF8841D53299100EE6FC0;
+			remoteInfo = AndyCategory_Test;
+		};
+		B6FDF8AA1D53299100EE6FC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6FDF87D1D53299100EE6FC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6FDF8841D53299100EE6FC0;
+			remoteInfo = AndyCategory_Test;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		028C8E1FBD01CEEE4EAD3071 /* libPods-AndyCategory_Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AndyCategory_Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04629120B6BC83F57A48B3E5 /* Pods-AndyCategory_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AndyCategory_Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test.debug.xcconfig"; sourceTree = "<group>"; };
+		3448AF7B4AD193CBD1811B70 /* Pods-AndyCategory_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AndyCategory_Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test.release.xcconfig"; sourceTree = "<group>"; };
+		B6A789BF1D543A3D0051CCF1 /* SVProgressHUD+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Andy.h"; sourceTree = "<group>"; };
+		B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Andy.m"; sourceTree = "<group>"; };
+		B6A789C21D543AE20051CCF1 /* UIDevice+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Andy.h"; sourceTree = "<group>"; };
+		B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Andy.m"; sourceTree = "<group>"; };
+		B6A789C51D5444760051CCF1 /* NSError+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Andy.h"; sourceTree = "<group>"; };
+		B6A789C61D5444760051CCF1 /* NSError+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Andy.m"; sourceTree = "<group>"; };
+		B6A789C81D544D9B0051CCF1 /* NSData+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Andy.h"; sourceTree = "<group>"; };
+		B6A789C91D544D9B0051CCF1 /* NSData+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Andy.m"; sourceTree = "<group>"; };
+		B6A789CB1D544EB10051CCF1 /* UILabel+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Andy.h"; sourceTree = "<group>"; };
+		B6A789CC1D544EB10051CCF1 /* UILabel+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Andy.m"; sourceTree = "<group>"; };
+		B6A789CE1D544ED60051CCF1 /* UIButton+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Andy.h"; sourceTree = "<group>"; };
+		B6A789CF1D544ED60051CCF1 /* UIButton+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Andy.m"; sourceTree = "<group>"; };
+		B6A789D11D5469060051CCF1 /* UIWebView+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Andy.h"; sourceTree = "<group>"; };
+		B6A789D21D5469060051CCF1 /* UIWebView+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Andy.m"; sourceTree = "<group>"; };
+		B6A789D41D546B5E0051CCF1 /* UIViewController+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Andy.h"; sourceTree = "<group>"; };
+		B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Andy.m"; sourceTree = "<group>"; };
+		B6A789D71D546D2B0051CCF1 /* UITextField+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Andy.h"; sourceTree = "<group>"; };
+		B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Andy.m"; sourceTree = "<group>"; };
+		B6A789DA1D546FF70051CCF1 /* NSAttributedString+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Andy.h"; sourceTree = "<group>"; };
+		B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Andy.m"; sourceTree = "<group>"; };
+		B6A789DD1D5470D20051CCF1 /* UIColor+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Andy.h"; sourceTree = "<group>"; };
+		B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8851D53299100EE6FC0 /* AndyCategory_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AndyCategory_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6FDF8891D53299100EE6FC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B6FDF8941D53299100EE6FC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B6FDF8991D53299100EE6FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6FDF89E1D53299100EE6FC0 /* AndyCategory_TestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AndyCategory_TestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6FDF8A21D53299100EE6FC0 /* AndyCategory_TestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AndyCategory_TestTests.m; sourceTree = "<group>"; };
+		B6FDF8A41D53299100EE6FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6FDF8A91D53299100EE6FC0 /* AndyCategory_TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AndyCategory_TestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6FDF8AD1D53299100EE6FC0 /* AndyCategory_TestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AndyCategory_TestUITests.m; sourceTree = "<group>"; };
+		B6FDF8AF1D53299100EE6FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6FDF8BE1D53309C00EE6FC0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B6FDF8BF1D53309C00EE6FC0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B6FDF8C61D53310A00EE6FC0 /* AndyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AndyMainViewController.h; sourceTree = "<group>"; };
+		B6FDF8C71D53310A00EE6FC0 /* AndyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AndyMainViewController.m; sourceTree = "<group>"; };
+		B6FDF8C81D53310A00EE6FC0 /* AndyMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AndyMainViewController.xib; sourceTree = "<group>"; };
+		B6FDF8CB1D5331D100EE6FC0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B6FDF8CC1D53321B00EE6FC0 /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		B6FDF8CD1D53357700EE6FC0 /* AndyCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AndyCategory.h; sourceTree = "<group>"; };
+		B6FDF8CE1D5336AA00EE6FC0 /* NSString+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8CF1D5336AA00EE6FC0 /* NSString+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8D41D5336CD00EE6FC0 /* UIView+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8D51D5336CD00EE6FC0 /* UIView+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8D71D5336DA00EE6FC0 /* UIImage+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8D81D5336DA00EE6FC0 /* UIImage+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8DA1D5336EC00EE6FC0 /* UIImageView+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8DB1D5336EC00EE6FC0 /* UIImageView+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8DD1D5336F800EE6FC0 /* NSDate+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Andy.m"; sourceTree = "<group>"; };
+		B6FDF8E01D53370200EE6FC0 /* UIBarButtonItem+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Andy.h"; sourceTree = "<group>"; };
+		B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Andy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B6FDF8821D53299100EE6FC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9BB2CB7D799157BFA00B622 /* libPods-AndyCategory_Test.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF89B1D53299100EE6FC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF8A61D53299100EE6FC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D528FB0072FC0CDADD5D740 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				028C8E1FBD01CEEE4EAD3071 /* libPods-AndyCategory_Test.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6FDF87C1D53299100EE6FC0 = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8C21D5330BE00EE6FC0 /* AndyCategory */,
+				B6FDF8871D53299100EE6FC0 /* AndyCategory_Test */,
+				B6FDF8A11D53299100EE6FC0 /* AndyCategory_TestTests */,
+				B6FDF8AC1D53299100EE6FC0 /* AndyCategory_TestUITests */,
+				B6FDF8861D53299100EE6FC0 /* Products */,
+				FF47668CABA7E6E6E97AEB3E /* Pods */,
+				8D528FB0072FC0CDADD5D740 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B6FDF8861D53299100EE6FC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8851D53299100EE6FC0 /* AndyCategory_Test.app */,
+				B6FDF89E1D53299100EE6FC0 /* AndyCategory_TestTests.xctest */,
+				B6FDF8A91D53299100EE6FC0 /* AndyCategory_TestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B6FDF8871D53299100EE6FC0 /* AndyCategory_Test */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8BB1D53309C00EE6FC0 /* Classes */,
+				B6FDF8881D53299100EE6FC0 /* Supporting Files */,
+			);
+			path = AndyCategory_Test;
+			sourceTree = "<group>";
+		};
+		B6FDF8881D53299100EE6FC0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8991D53299100EE6FC0 /* Info.plist */,
+				B6FDF8941D53299100EE6FC0 /* Assets.xcassets */,
+				B6FDF8891D53299100EE6FC0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6FDF8A11D53299100EE6FC0 /* AndyCategory_TestTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8A21D53299100EE6FC0 /* AndyCategory_TestTests.m */,
+				B6FDF8A41D53299100EE6FC0 /* Info.plist */,
+			);
+			path = AndyCategory_TestTests;
+			sourceTree = "<group>";
+		};
+		B6FDF8AC1D53299100EE6FC0 /* AndyCategory_TestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8AD1D53299100EE6FC0 /* AndyCategory_TestUITests.m */,
+				B6FDF8AF1D53299100EE6FC0 /* Info.plist */,
+			);
+			path = AndyCategory_TestUITests;
+			sourceTree = "<group>";
+		};
+		B6FDF8BB1D53309C00EE6FC0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8BC1D53309C00EE6FC0 /* Main */,
+				B6FDF8BD1D53309C00EE6FC0 /* Other */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B6FDF8BC1D53309C00EE6FC0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8C11D5330B400EE6FC0 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B6FDF8BD1D53309C00EE6FC0 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8BE1D53309C00EE6FC0 /* AppDelegate.h */,
+				B6FDF8BF1D53309C00EE6FC0 /* AppDelegate.m */,
+				B6FDF8CB1D5331D100EE6FC0 /* PrefixHeader.pch */,
+				B6FDF8CC1D53321B00EE6FC0 /* Global.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		B6FDF8C11D5330B400EE6FC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8C61D53310A00EE6FC0 /* AndyMainViewController.h */,
+				B6FDF8C71D53310A00EE6FC0 /* AndyMainViewController.m */,
+				B6FDF8C81D53310A00EE6FC0 /* AndyMainViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B6FDF8C21D5330BE00EE6FC0 /* AndyCategory */ = {
+			isa = PBXGroup;
+			children = (
+				B6FDF8CD1D53357700EE6FC0 /* AndyCategory.h */,
+				B6FDF8CE1D5336AA00EE6FC0 /* NSString+Andy.h */,
+				B6FDF8CF1D5336AA00EE6FC0 /* NSString+Andy.m */,
+				B6FDF8D41D5336CD00EE6FC0 /* UIView+Andy.h */,
+				B6FDF8D51D5336CD00EE6FC0 /* UIView+Andy.m */,
+				B6FDF8D71D5336DA00EE6FC0 /* UIImage+Andy.h */,
+				B6FDF8D81D5336DA00EE6FC0 /* UIImage+Andy.m */,
+				B6FDF8DA1D5336EC00EE6FC0 /* UIImageView+Andy.h */,
+				B6FDF8DB1D5336EC00EE6FC0 /* UIImageView+Andy.m */,
+				B6FDF8DD1D5336F800EE6FC0 /* NSDate+Andy.h */,
+				B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */,
+				B6FDF8E01D53370200EE6FC0 /* UIBarButtonItem+Andy.h */,
+				B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */,
+				B6A789BF1D543A3D0051CCF1 /* SVProgressHUD+Andy.h */,
+				B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */,
+				B6A789C21D543AE20051CCF1 /* UIDevice+Andy.h */,
+				B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */,
+				B6A789C51D5444760051CCF1 /* NSError+Andy.h */,
+				B6A789C61D5444760051CCF1 /* NSError+Andy.m */,
+				B6A789C81D544D9B0051CCF1 /* NSData+Andy.h */,
+				B6A789C91D544D9B0051CCF1 /* NSData+Andy.m */,
+				B6A789CB1D544EB10051CCF1 /* UILabel+Andy.h */,
+				B6A789CC1D544EB10051CCF1 /* UILabel+Andy.m */,
+				B6A789CE1D544ED60051CCF1 /* UIButton+Andy.h */,
+				B6A789CF1D544ED60051CCF1 /* UIButton+Andy.m */,
+				B6A789D11D5469060051CCF1 /* UIWebView+Andy.h */,
+				B6A789D21D5469060051CCF1 /* UIWebView+Andy.m */,
+				B6A789D41D546B5E0051CCF1 /* UIViewController+Andy.h */,
+				B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */,
+				B6A789D71D546D2B0051CCF1 /* UITextField+Andy.h */,
+				B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */,
+				B6A789DA1D546FF70051CCF1 /* NSAttributedString+Andy.h */,
+				B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */,
+				B6A789DD1D5470D20051CCF1 /* UIColor+Andy.h */,
+				B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */,
+			);
+			path = AndyCategory;
+			sourceTree = "<group>";
+		};
+		FF47668CABA7E6E6E97AEB3E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04629120B6BC83F57A48B3E5 /* Pods-AndyCategory_Test.debug.xcconfig */,
+				3448AF7B4AD193CBD1811B70 /* Pods-AndyCategory_Test.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B6FDF8841D53299100EE6FC0 /* AndyCategory_Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6FDF8B21D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_Test" */;
+			buildPhases = (
+				40901C78FEB3353B4B9BD095 /* [CP] Check Pods Manifest.lock */,
+				B6FDF8811D53299100EE6FC0 /* Sources */,
+				B6FDF8821D53299100EE6FC0 /* Frameworks */,
+				B6FDF8831D53299100EE6FC0 /* Resources */,
+				1BF3F1AD0A70D1BD3984DC0F /* [CP] Embed Pods Frameworks */,
+				72F7E23659BB5801367487FF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AndyCategory_Test;
+			productName = AndyCategory_Test;
+			productReference = B6FDF8851D53299100EE6FC0 /* AndyCategory_Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B6FDF89D1D53299100EE6FC0 /* AndyCategory_TestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6FDF8B51D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_TestTests" */;
+			buildPhases = (
+				B6FDF89A1D53299100EE6FC0 /* Sources */,
+				B6FDF89B1D53299100EE6FC0 /* Frameworks */,
+				B6FDF89C1D53299100EE6FC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6FDF8A01D53299100EE6FC0 /* PBXTargetDependency */,
+			);
+			name = AndyCategory_TestTests;
+			productName = AndyCategory_TestTests;
+			productReference = B6FDF89E1D53299100EE6FC0 /* AndyCategory_TestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B6FDF8A81D53299100EE6FC0 /* AndyCategory_TestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6FDF8B81D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_TestUITests" */;
+			buildPhases = (
+				B6FDF8A51D53299100EE6FC0 /* Sources */,
+				B6FDF8A61D53299100EE6FC0 /* Frameworks */,
+				B6FDF8A71D53299100EE6FC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6FDF8AB1D53299100EE6FC0 /* PBXTargetDependency */,
+			);
+			name = AndyCategory_TestUITests;
+			productName = AndyCategory_TestUITests;
+			productReference = B6FDF8A91D53299100EE6FC0 /* AndyCategory_TestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B6FDF87D1D53299100EE6FC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Andy;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = andyli;
+				TargetAttributes = {
+					B6FDF8841D53299100EE6FC0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					B6FDF89D1D53299100EE6FC0 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = B6FDF8841D53299100EE6FC0;
+					};
+					B6FDF8A81D53299100EE6FC0 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = B6FDF8841D53299100EE6FC0;
+					};
+				};
+			};
+			buildConfigurationList = B6FDF8801D53299100EE6FC0 /* Build configuration list for PBXProject "AndyCategory_Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B6FDF87C1D53299100EE6FC0;
+			productRefGroup = B6FDF8861D53299100EE6FC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6FDF8841D53299100EE6FC0 /* AndyCategory_Test */,
+				B6FDF89D1D53299100EE6FC0 /* AndyCategory_TestTests */,
+				B6FDF8A81D53299100EE6FC0 /* AndyCategory_TestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B6FDF8831D53299100EE6FC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6FDF8951D53299100EE6FC0 /* Assets.xcassets in Resources */,
+				B6FDF8CA1D53310A00EE6FC0 /* AndyMainViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF89C1D53299100EE6FC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF8A71D53299100EE6FC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1BF3F1AD0A70D1BD3984DC0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40901C78FEB3353B4B9BD095 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		72F7E23659BB5801367487FF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B6FDF8811D53299100EE6FC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6A789D61D546B5E0051CCF1 /* UIViewController+Andy.m in Sources */,
+				B6FDF8DC1D5336EC00EE6FC0 /* UIImageView+Andy.m in Sources */,
+				B6A789D01D544ED60051CCF1 /* UIButton+Andy.m in Sources */,
+				B6A789C71D5444760051CCF1 /* NSError+Andy.m in Sources */,
+				B6FDF8D91D5336DA00EE6FC0 /* UIImage+Andy.m in Sources */,
+				B6FDF8D61D5336CD00EE6FC0 /* UIView+Andy.m in Sources */,
+				B6FDF8C01D53309C00EE6FC0 /* AppDelegate.m in Sources */,
+				B6FDF8D01D5336AA00EE6FC0 /* NSString+Andy.m in Sources */,
+				B6A789D31D5469060051CCF1 /* UIWebView+Andy.m in Sources */,
+				B6A789CA1D544D9B0051CCF1 /* NSData+Andy.m in Sources */,
+				B6FDF8DF1D5336F800EE6FC0 /* NSDate+Andy.m in Sources */,
+				B6FDF88A1D53299100EE6FC0 /* main.m in Sources */,
+				B6FDF8C91D53310A00EE6FC0 /* AndyMainViewController.m in Sources */,
+				B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */,
+				B6A789DC1D546FF70051CCF1 /* NSAttributedString+Andy.m in Sources */,
+				B6A789D91D546D2B0051CCF1 /* UITextField+Andy.m in Sources */,
+				B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */,
+				B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */,
+				B6A789CD1D544EB10051CCF1 /* UILabel+Andy.m in Sources */,
+				B6A789DF1D5470D20051CCF1 /* UIColor+Andy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF89A1D53299100EE6FC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6FDF8A31D53299100EE6FC0 /* AndyCategory_TestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6FDF8A51D53299100EE6FC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6FDF8AE1D53299100EE6FC0 /* AndyCategory_TestUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B6FDF8A01D53299100EE6FC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6FDF8841D53299100EE6FC0 /* AndyCategory_Test */;
+			targetProxy = B6FDF89F1D53299100EE6FC0 /* PBXContainerItemProxy */;
+		};
+		B6FDF8AB1D53299100EE6FC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6FDF8841D53299100EE6FC0 /* AndyCategory_Test */;
+			targetProxy = B6FDF8AA1D53299100EE6FC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B6FDF8B01D53299100EE6FC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B6FDF8B11D53299100EE6FC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B6FDF8B31D53299100EE6FC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04629120B6BC83F57A48B3E5 /* Pods-AndyCategory_Test.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/AndyCategory_Test/Classes/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = AndyCategory_Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
+			};
+			name = Debug;
+		};
+		B6FDF8B41D53299100EE6FC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3448AF7B4AD193CBD1811B70 /* Pods-AndyCategory_Test.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/AndyCategory_Test/Classes/Other/PrefixHeader.pch";
+				INFOPLIST_FILE = AndyCategory_Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
+			};
+			name = Release;
+		};
+		B6FDF8B61D53299100EE6FC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AndyCategory_TestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AndyCategory_Test.app/AndyCategory_Test";
+			};
+			name = Debug;
+		};
+		B6FDF8B71D53299100EE6FC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AndyCategory_TestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AndyCategory_Test.app/AndyCategory_Test";
+			};
+			name = Release;
+		};
+		B6FDF8B91D53299100EE6FC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AndyCategory_TestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AndyCategory_Test;
+			};
+			name = Debug;
+		};
+		B6FDF8BA1D53299100EE6FC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AndyCategory_TestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andy4app.AndyCategory-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AndyCategory_Test;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B6FDF8801D53299100EE6FC0 /* Build configuration list for PBXProject "AndyCategory_Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6FDF8B01D53299100EE6FC0 /* Debug */,
+				B6FDF8B11D53299100EE6FC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6FDF8B21D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6FDF8B31D53299100EE6FC0 /* Debug */,
+				B6FDF8B41D53299100EE6FC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6FDF8B51D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_TestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6FDF8B61D53299100EE6FC0 /* Debug */,
+				B6FDF8B71D53299100EE6FC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6FDF8B81D53299100EE6FC0 /* Build configuration list for PBXNativeTarget "AndyCategory_TestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6FDF8B91D53299100EE6FC0 /* Debug */,
+				B6FDF8BA1D53299100EE6FC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B6FDF87D1D53299100EE6FC0 /* Project object */;
+}
