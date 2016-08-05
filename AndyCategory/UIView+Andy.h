@@ -58,7 +58,7 @@
 /**
  * 移除所有子视图。
  */
-- (void)removeAllSubviews;
+- (void)andy_removeAllSubviews;
 
 @end
 
@@ -67,19 +67,19 @@
 /**
  * 在当前视图上添加点击事件。
  */
-- (void)addTapAction:(SEL)tapAction target:(id)target;
+- (void)andy_addTapAction:(SEL)tapAction target:(id)target;
 
 @end
 
 @interface UIView (FirstResponder)
 
-- (UIView *)findViewThatIsFirstResponder;
-- (NSArray *)descendantViews;
+- (UIView *)andy_findViewThatIsFirstResponder;
+- (NSArray *)andy_descendantViews;
 
 @end
 
 @interface UIView (AutoLayout)
 
-- (void)testAmbiguity;
+- (void)andy_testAmbiguity;
 
 @end

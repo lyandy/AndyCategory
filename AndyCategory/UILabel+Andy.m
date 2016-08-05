@@ -52,7 +52,7 @@
     [self setText:NSLocalizedString(key, nil)];
 }
 
-+ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
++ (CGFloat)andy_getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
 {
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
@@ -68,7 +68,7 @@
     return height;
 }
 
-+ (CGFloat)getWidthWithTitle:(NSString *)title font:(UIFont *)font {
++ (CGFloat)andy_getWidthWithTitle:(NSString *)title font:(UIFont *)font {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1000, 0)];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

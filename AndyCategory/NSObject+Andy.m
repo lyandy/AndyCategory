@@ -11,7 +11,7 @@
 
 @implementation NSObject (Andy)
 
-- (NSArray *)properties
+- (NSArray *)andy_properties
 {
     unsigned int count;
     
@@ -28,7 +28,7 @@
     return array;
 }
 
-- (NSString *)className
+- (NSString *)andy_className
 {
     return [NSString stringWithUTF8String:class_getName([self class])];
 }

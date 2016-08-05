@@ -10,8 +10,8 @@
 
 @interface NSObject (Andy)
 
-- (NSArray *)properties;
+- (NSArray *)andy_properties;
 
-- (NSString *)className;
+- (NSString *)andy_className;
 
 @end

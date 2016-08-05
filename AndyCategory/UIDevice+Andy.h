@@ -13,51 +13,51 @@
 
 + (NSString *)andy_deviceVersion;
 
-- (NSString *)deviceName;
+- (NSString *)andy_deviceName;
 
-- (NSString *)deviceType;
+- (NSString *)andy_deviceType;
 
-- (NSString *)uuid;
+- (NSString *)andy_uuid;
 
-- (BOOL)touchIdEnable;
+- (BOOL)andy_touchIdEnable;
 
-- (BOOL)ios7OrLater;
-- (BOOL)ios8OrLater;
-- (BOOL)ios9OrLater;
+- (BOOL)andy_ios7OrLater;
+- (BOOL)andy_ios8OrLater;
+- (BOOL)andy_ios9OrLater;
 
-- (BOOL)iphone4;
+- (BOOL)andy_iphone4;
 
-- (BOOL)isPush;
+- (BOOL)andy_isPush;
 
-- (NSString *)validNickName;
+- (NSString *)andy_validNickName;
 
-- (double)bootTime;
+- (double)andy_bootTime;
 
-- (double)freeDiskSpace;
+- (double)andy_freeDiskSpace;
 
-- (double)totalDiskSpace;
+- (double)andy_totalDiskSpace;
 
-- (NSString *)wifiName;
+- (NSString *)andy_wifiName;
 
-- (NSString *)wifiMac;
+- (NSString *)andy_wifiMac;
 
-- (NSString *)localWiFiIPAddress;
+- (NSString *)andy_localWiFiIPAddress;
 
-- (NSString *)appList;
+- (NSString *)andy_appList;
 
 // 是否越狱手机
-- (BOOL)isModify;
+- (BOOL)andy_isModify;
 
-- (BOOL)isSimulator;
+- (BOOL)andy_isSimulator;
 
-- (NSString *)localPhone;
+- (NSString *)andy_localPhone;
 
-- (NSString *)base3GStation;
+- (NSString *)andy_base3GStation;
 
 // 是否可以打电话
-- (BOOL)callPhoneEnable;
+- (BOOL)andy_callPhoneEnable;
 
 // 根据域名获取IP地址   youyouyang.cn--->139.129.209.214
-+ (NSArray *)ipAddress:(NSString *)hostName;
++ (NSArray *)andy_ipAddress:(NSString *)hostName;
 
 @end

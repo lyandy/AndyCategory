@@ -178,7 +178,6 @@
     }
 }
 
-
 // 正则匹配用户密码6-18位数字和字母组合
 - (BOOL)andy_isValidPassword
 {
@@ -186,7 +185,6 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
 
 // 正则匹配用户姓名,20位的中文或英文
@@ -198,9 +196,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
-    
 }
-
 
 // 正则匹配用户身份证号15或18位
 - (BOOL)andy_isValidUserIdCard
@@ -272,7 +268,7 @@
 }
 
 // 格式化手机号
-- (NSString *)standardPhone {
+- (NSString *)andy_standardPhone {
     NSInteger position = 3;
     
     NSMutableString *tmp = [NSMutableString stringWithFormat:@"%@", self];
@@ -291,7 +287,7 @@
 }
 
 // 格式化手机号
-- (NSString *)standardTele
+- (NSString *)andy_standardTele
 {
     if (self.length < 8) {
         return self;
@@ -304,7 +300,7 @@
 }
 
 // 手机号****处理
-- (NSString *)securitPhone {
+- (NSString *)andy_securitPhone {
     if (self.length != 11) {
         return self;
     }
@@ -371,7 +367,7 @@
 
 @implementation NSString (ParametersSafe)
 
-- (instancetype)safe_initWithString:(NSString *)aString
+- (instancetype)andy_safe_initWithString:(NSString *)aString
 {
     if (aString == nil || [aString isKindOfClass:[NSNull class]]) {
         return [self initWithString:@""];
@@ -380,7 +376,7 @@
     return [self initWithString:aString];
 }
 
-- (NSString *)safe_substringToIndex:(NSInteger)to
+- (NSString *)andy_safe_substringToIndex:(NSInteger)to
 {
     if (to <= 0) {
         return @"";
@@ -393,7 +389,7 @@
     return [self substringToIndex:to];
 }
 
-- (NSString *)safe_substringFromIndex:(NSInteger)from
+- (NSString *)andy_safe_substringFromIndex:(NSInteger)from
 {
     if (from <= 0) {
         return self;

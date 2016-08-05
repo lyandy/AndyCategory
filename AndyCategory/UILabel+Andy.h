@@ -22,9 +22,9 @@
 - (void)andy_setTextL:(NSString *)key;
 
 // 计算文字的高度  width:所显示文字显示的最大宽度
-+ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
++ (CGFloat)andy_getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
 
 // 计算文字的宽度
-+ (CGFloat)getWidthWithTitle:(NSString *)title font:(UIFont *)font;
++ (CGFloat)andy_getWidthWithTitle:(NSString *)title font:(UIFont *)font;
 
 @end

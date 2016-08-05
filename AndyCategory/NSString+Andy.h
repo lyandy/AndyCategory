@@ -85,13 +85,13 @@
 - (BOOL)andy_isValidCarNumber;
 
 // 格式化手机号
-- (NSString *)standardPhone;
+- (NSString *)andy_standardPhone;
 
 // 格式化手机号
-- (NSString *)standardTele;
+- (NSString *)andy_standardTele;
 
 // 手机号*处理
-- (NSString *)securitPhone;
+- (NSString *)andy_securitPhone;
 
 /**
  *  返回字符串所占用的尺寸
@@ -107,17 +107,16 @@
 // AES解密
 - (NSString *)andy_aes256_decrypt:(NSString *)key;
 
-
 @end
 
 // oc 语言 是一个很严密的语言，不那么宽松，所以逻辑如果处理不好的时候，在各种数据类型转换、变化时候会导致各种闪退，比如说字典的value不能为nil,数组越界，字符串截取失败等等
 
 @interface NSString (ParametersSafe)
 
-- (instancetype)safe_initWithString:(NSString *)aString;
+- (instancetype)andy_safe_initWithString:(NSString *)aString;
 
-- (NSString *)safe_substringToIndex:(NSInteger)to;
+- (NSString *)andy_safe_substringToIndex:(NSInteger)to;
 
-- (NSString *)safe_substringFromIndex:(NSInteger)from;
+- (NSString *)andy_safe_substringFromIndex:(NSInteger)from;
 
 @end

@@ -105,7 +105,7 @@ char* printEnv(void)
     return platform;
 }
 
-- (NSString *)deviceName
+- (NSString *)andy_deviceName
 {
     char *typeSpecifier = "hw.machine";
     
@@ -121,7 +121,7 @@ char* printEnv(void)
     return machine;
 }
 
-- (NSString *)deviceType
+- (NSString *)andy_deviceType
 {
     char *typeSpecifier = "hw.machine";
     
@@ -175,16 +175,16 @@ char* printEnv(void)
     return Valid(machine);
 }
 
-- (NSString *)uuid
+- (NSString *)andy_uuid
 {
     return Valid([[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]);
 }
 
-- (BOOL)touchIdEnable
+- (BOOL)andy_touchIdEnable
 {
     BOOL deviceEnable = NO;
     
-    NSString *device = [[UIDevice currentDevice] deviceName];
+    NSString *device = [[UIDevice currentDevice] andy_deviceName];
     NSMutableString *first = [NSMutableString stringWithString:Valid([device componentsSeparatedByString:@","].firstObject)];
     NSRange range = [first rangeOfString:@"iPhone"];
     if (range.length > 0 && range.location != NSNotFound) {
@@ -197,28 +197,28 @@ char* printEnv(void)
     return [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && deviceEnable;
 }
 
-- (BOOL)ios7OrLater
+- (BOOL)andy_ios7OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO;
 }
 
-- (BOOL)ios8OrLater
+- (BOOL)andy_ios8OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO;
 }
 
-- (BOOL)ios9OrLater
+- (BOOL)andy_ios9OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) ? YES : NO;
 }
 
-- (BOOL)iphone4
+- (BOOL)andy_iphone4
 {
     return ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(320*2, 480*2), [[UIScreen mainScreen] currentMode].size) : NO);
 }
 
-- (BOOL)isPush {
-    if ([self ios8OrLater]) {
+- (BOOL)andy_isPush {
+    if ([self andy_ios8OrLater]) {
         UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
         if (UIUserNotificationTypeNone == setting.types) {
             return NO;
@@ -235,20 +235,20 @@ char* printEnv(void)
     }
 }
 
-- (NSString *)validNickName
+- (NSString *)andy_validNickName
 {
-    NSMutableString *nickName = [[NSMutableString alloc] safe_initWithString:[[UIDevice currentDevice] name]];
+    NSMutableString *nickName = [[NSMutableString alloc] andy_safe_initWithString:[[UIDevice currentDevice] name]];
     [nickName replaceOccurrencesOfString:@" " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, nickName.length)];
     
-    return Valid([nickName safe_substringToIndex:10]);
+    return Valid([nickName andy_safe_substringToIndex:10]);
 }
 
-- (double)bootTime
+- (double)andy_bootTime
 {
     return [[NSDate date] timeIntervalSince1970] - [[NSProcessInfo processInfo] systemUptime];
 }
 
-- (double)freeDiskSpace
+- (double)andy_freeDiskSpace
 {
     struct statfs buf;
     long long freespace = -1;
@@ -258,7 +258,7 @@ char* printEnv(void)
     return freespace;
 }
 
-- (double)totalDiskSpace
+- (double)andy_totalDiskSpace
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     struct statfs tStats;
@@ -268,17 +268,17 @@ char* printEnv(void)
     return totalSpace;
 }
 
-- (NSString *)wifiName
+- (NSString *)andy_wifiName
 {
-    return [UIDevice wifi:(__bridge NSString *)kCNNetworkInfoKeySSID];
+    return [UIDevice andy_wifi:(__bridge NSString *)kCNNetworkInfoKeySSID];
 }
 
-- (NSString *)wifiMac
+- (NSString *)andy_wifiMac
 {
-    return [UIDevice wifi:(__bridge NSString *)kCNNetworkInfoKeyBSSID];
+    return [UIDevice andy_wifi:(__bridge NSString *)kCNNetworkInfoKeyBSSID];
 }
 
-+ (NSString *)wifi:(NSString *)key
++ (NSString *)andy_wifi:(NSString *)key
 {
     NSString *wifi = nil;
     
@@ -309,7 +309,7 @@ char* printEnv(void)
 // 参考 http://www.jianshu.com/p/a6bab07c4062
 
 // en0（Wifi）、pdp_ip0（移动网络）的ip地址
-- (NSString *)localWiFiIPAddress
+- (NSString *)andy_localWiFiIPAddress
 {
     BOOL success;
     struct ifaddrs * addrs;
@@ -327,12 +327,12 @@ char* printEnv(void)
                     //如果是IPV4地址，直接转化
                     if (cursor->ifa_addr->sa_family == AF_INET){
                         // Get NSString from C String
-                        return [UIDevice formatIPV4Address:((struct sockaddr_in *)cursor->ifa_addr)->sin_addr];
+                        return [UIDevice andy_formatIPV4Address:((struct sockaddr_in *)cursor->ifa_addr)->sin_addr];
                     }
                     
                     //如果是IPV6地址
                     else if (cursor->ifa_addr->sa_family == AF_INET6){
-                        return [UIDevice formatIPV6Address:((struct sockaddr_in6 *)cursor->ifa_addr)->sin6_addr];
+                        return [UIDevice andy_formatIPV6Address:((struct sockaddr_in6 *)cursor->ifa_addr)->sin6_addr];
                     }
                 }
             }
@@ -344,7 +344,7 @@ char* printEnv(void)
 }
 
 //for IPV6
-+ (NSString *)formatIPV6Address:(struct in6_addr)ipv6Addr{
++ (NSString *)andy_formatIPV6Address:(struct in6_addr)ipv6Addr{
     NSString *address = nil;
     
     char dstStr[INET6_ADDRSTRLEN];
@@ -358,7 +358,7 @@ char* printEnv(void)
 }
 
 //for IPV4
-+ (NSString *)formatIPV4Address:(struct in_addr)ipv4Addr{
++ (NSString *)andy_formatIPV4Address:(struct in_addr)ipv4Addr{
     NSString *address = nil;
     
     char dstStr[INET_ADDRSTRLEN];
@@ -371,7 +371,7 @@ char* printEnv(void)
     return address;
 }
 
-- (NSString *)appList
+- (NSString *)andy_appList
 {
     if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH]) {
         NSArray *applist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:USER_APP_PATH error:nil];
@@ -381,7 +381,7 @@ char* printEnv(void)
     return @"";
 }
 
-- (BOOL)isModify
+- (BOOL)andy_isModify
 {
     for (int i = 0; i < ARRAY_SIZE(jailbreak_tool_pathes); i++) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:jailbreak_tool_pathes[i]]]) {
@@ -408,22 +408,22 @@ char* printEnv(void)
     return NO;
 }
 
-- (BOOL)isSimulator
+- (BOOL)andy_isSimulator
 {
     return TARGET_IPHONE_SIMULATOR;
 }
 
-- (NSString *)localPhone
+- (NSString *)andy_localPhone
 {
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"SBFormattedPhoneNumber"];
 }
 
-- (NSString *)base3GStation
+- (NSString *)andy_base3GStation
 {
     return @""; // 这个后面写吧，太难了
 }
 
-- (BOOL)callPhoneEnable
+- (BOOL)andy_callPhoneEnable
 {
     NSString *deviceType = [UIDevice currentDevice].model;
     
@@ -434,7 +434,7 @@ char* printEnv(void)
     return !(podRange.location != NSNotFound || padRange.location != NSNotFound || simulatorRange.location != NSNotFound);
 }
 
-+ (NSArray *)ipAddress:(NSString *)hostName
++ (NSArray *)andy_ipAddress:(NSString *)hostName
 {
     Boolean result;
     CFHostRef hostRef;

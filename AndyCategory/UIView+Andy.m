@@ -263,7 +263,7 @@
     return nil;
 }
 
-- (void)removeAllSubviews
+- (void)andy_removeAllSubviews
 {
     for (UIView *subview in self.subviews) {
         [subview removeFromSuperview];
@@ -275,7 +275,7 @@
 
 @implementation UIView (Gesture)
 
-- (void)addTapAction:(SEL)tapAction target:(id)target
+- (void)andy_addTapAction:(SEL)tapAction target:(id)target
 {
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:target action:tapAction];
@@ -287,14 +287,14 @@
 
 @implementation UIView (FirstResponder)
 
-- (UIView *)findViewThatIsFirstResponder
+- (UIView *)andy_findViewThatIsFirstResponder
 {
     if (self.isFirstResponder) {
         return self;
     }
     
     for (UIView *subView in self.subviews) {
-        UIView *firstResponder = [subView findViewThatIsFirstResponder];
+        UIView *firstResponder = [subView andy_findViewThatIsFirstResponder];
         if (firstResponder != nil) {
             return firstResponder;
         }
@@ -302,12 +302,12 @@
     return nil;
 }
 
-- (NSArray *)descendantViews
+- (NSArray *)andy_descendantViews
 {
     NSMutableArray *descendantArray = [NSMutableArray array];
     for (UIView *view in self.subviews) {
         [descendantArray addObject:view];
-        [descendantArray addObjectsFromArray:[view descendantViews]];
+        [descendantArray addObjectsFromArray:[view andy_descendantViews]];
     }
     return [descendantArray copy];
 }
@@ -316,13 +316,13 @@
 
 @implementation UIView (AutoLayout)
 
-- (void) testAmbiguity
+- (void)andy_testAmbiguity
 {
     if (self.hasAmbiguousLayout) {
         NSLog(@"<%@:%p>: %@", self.class.description, self, @"Ambiguous");
     }
     for (UIView *view in self.subviews) {
-        [view testAmbiguity];
+        [view andy_testAmbiguity];
     }
 }
 
