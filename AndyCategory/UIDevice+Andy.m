@@ -105,7 +105,7 @@ char* printEnv(void)
     return platform;
 }
 
-- (NSString *)andy_deviceName
++ (NSString *)andy_deviceName
 {
     char *typeSpecifier = "hw.machine";
     
@@ -121,7 +121,7 @@ char* printEnv(void)
     return machine;
 }
 
-- (NSString *)andy_deviceType
++ (NSString *)andy_deviceType
 {
     char *typeSpecifier = "hw.machine";
     
@@ -175,16 +175,16 @@ char* printEnv(void)
     return Valid(machine);
 }
 
-- (NSString *)andy_uuid
++ (NSString *)andy_uuid
 {
     return Valid([[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]);
 }
 
-- (BOOL)andy_touchIdEnable
++ (BOOL)andy_touchIdEnable
 {
     BOOL deviceEnable = NO;
     
-    NSString *device = [[UIDevice currentDevice] andy_deviceName];
+    NSString *device = [self andy_deviceName];
     NSMutableString *first = [NSMutableString stringWithString:Valid([device componentsSeparatedByString:@","].firstObject)];
     NSRange range = [first rangeOfString:@"iPhone"];
     if (range.length > 0 && range.location != NSNotFound) {
@@ -197,27 +197,27 @@ char* printEnv(void)
     return [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && deviceEnable;
 }
 
-- (BOOL)andy_ios7OrLater
++ (BOOL)andy_ios7OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO;
 }
 
-- (BOOL)andy_ios8OrLater
++ (BOOL)andy_ios8OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO;
 }
 
-- (BOOL)andy_ios9OrLater
++ (BOOL)andy_ios9OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) ? YES : NO;
 }
 
-- (BOOL)andy_iphone4
++ (BOOL)andy_iphone4
 {
     return ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(320*2, 480*2), [[UIScreen mainScreen] currentMode].size) : NO);
 }
 
-- (BOOL)andy_isPush {
++ (BOOL)andy_isPush {
     if ([self andy_ios8OrLater]) {
         UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
         if (UIUserNotificationTypeNone == setting.types) {
@@ -235,7 +235,7 @@ char* printEnv(void)
     }
 }
 
-- (NSString *)andy_validNickName
++ (NSString *)andy_validNickName
 {
     NSMutableString *nickName = [[NSMutableString alloc] andy_safe_initWithString:[[UIDevice currentDevice] name]];
     [nickName replaceOccurrencesOfString:@" " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, nickName.length)];
@@ -243,12 +243,12 @@ char* printEnv(void)
     return Valid([nickName andy_safe_substringToIndex:10]);
 }
 
-- (double)andy_bootTime
++ (double)andy_bootTime
 {
     return [[NSDate date] timeIntervalSince1970] - [[NSProcessInfo processInfo] systemUptime];
 }
 
-- (double)andy_freeDiskSpace
++ (double)andy_freeDiskSpace
 {
     struct statfs buf;
     long long freespace = -1;
@@ -258,7 +258,7 @@ char* printEnv(void)
     return freespace;
 }
 
-- (double)andy_totalDiskSpace
++ (double)andy_totalDiskSpace
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     struct statfs tStats;
@@ -268,14 +268,14 @@ char* printEnv(void)
     return totalSpace;
 }
 
-- (NSString *)andy_wifiName
++ (NSString *)andy_wifiName
 {
-    return [UIDevice andy_wifi:(__bridge NSString *)kCNNetworkInfoKeySSID];
+    return [self andy_wifi:(__bridge NSString *)kCNNetworkInfoKeySSID];
 }
 
-- (NSString *)andy_wifiMac
++ (NSString *)andy_wifiMac
 {
-    return [UIDevice andy_wifi:(__bridge NSString *)kCNNetworkInfoKeyBSSID];
+    return [self andy_wifi:(__bridge NSString *)kCNNetworkInfoKeyBSSID];
 }
 
 + (NSString *)andy_wifi:(NSString *)key
@@ -309,7 +309,7 @@ char* printEnv(void)
 // 参考 http://www.jianshu.com/p/a6bab07c4062
 
 // en0（Wifi）、pdp_ip0（移动网络）的ip地址
-- (NSString *)andy_localWiFiIPAddress
++ (NSString *)andy_localWiFiIPAddress
 {
     BOOL success;
     struct ifaddrs * addrs;
@@ -371,7 +371,7 @@ char* printEnv(void)
     return address;
 }
 
-- (NSString *)andy_appList
++ (NSString *)andy_appList
 {
     if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH]) {
         NSArray *applist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:USER_APP_PATH error:nil];
@@ -381,7 +381,7 @@ char* printEnv(void)
     return @"";
 }
 
-- (BOOL)andy_isModify
++ (BOOL)andy_isModify
 {
     for (int i = 0; i < ARRAY_SIZE(jailbreak_tool_pathes); i++) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:jailbreak_tool_pathes[i]]]) {
@@ -408,22 +408,22 @@ char* printEnv(void)
     return NO;
 }
 
-- (BOOL)andy_isSimulator
++ (BOOL)andy_isSimulator
 {
     return TARGET_IPHONE_SIMULATOR;
 }
 
-- (NSString *)andy_localPhone
++ (NSString *)andy_localPhone
 {
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"SBFormattedPhoneNumber"];
 }
 
-- (NSString *)andy_base3GStation
++ (NSString *)andy_base3GStation
 {
     return @""; // 这个后面写吧，太难了
 }
 
-- (BOOL)andy_callPhoneEnable
++ (BOOL)andy_callPhoneEnable
 {
     NSString *deviceType = [UIDevice currentDevice].model;
     
