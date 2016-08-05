@@ -47,7 +47,6 @@
     return nil;
 }
 
-
 - (NSData *)andy_aes256_decrypt:(NSString *)key   //解密
 {
     char keyPtr[kCCKeySizeAES256+1];
@@ -71,6 +70,5 @@
     free(buffer);
     return nil;
 }
-
 
 @end

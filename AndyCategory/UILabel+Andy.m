@@ -10,7 +10,6 @@
 
 @implementation UILabel (Andy)
 
-
 + (UILabel *)andy_labelWithText:(NSString *)text fontSize:(NSInteger)fontSize textColor:(UIColor *)color frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
     
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
@@ -22,7 +21,6 @@
     label.textAlignment = textAlignment;
     
     return label;
-    
 }
 
 
@@ -31,7 +29,6 @@
     UILabel *label = [UILabel andy_labelWithText:text fontSize:fontSize textColor:nil frame:frame textAlignment:textAlignment];
     
     return label;
-    
 }
 
 + (UILabel *)andy_labelWithText:(NSString *)text frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
@@ -39,7 +36,6 @@
     UILabel *label = [UILabel andy_labelWithText:text fontSize:0 frame:frame textAlignment:textAlignment];
     
     return label;
-    
 }
 
 + (UILabel *)andy_roundCornerLabelWithText:(NSString *)text fontSize:(NSInteger)fontSize radius:(CGFloat)radius frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
@@ -49,13 +45,39 @@
     label.layer.cornerRadius = radius;
     
     return label;
-    
 }
-
 
 - (void)andy_setTextL:(NSString *)key
 {
     [self setText:NSLocalizedString(key, nil)];
+}
+
++ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
+{
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:3];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [title length])];
+    label.attributedText = attributedString;
+    label.font = font;
+    label.numberOfLines = 0;
+    [label sizeToFit];
+    CGFloat height = label.frame.size.height;
+    return height;
+}
+
++ (CGFloat)getWidthWithTitle:(NSString *)title font:(UIFont *)font {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1000, 0)];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:3];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [title length])];
+    label.attributedText = attributedString;
+    label.font = font;
+    [label sizeToFit];
+    return label.frame.size.width;
 }
 
 @end

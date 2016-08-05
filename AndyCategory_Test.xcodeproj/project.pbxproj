@@ -32,6 +32,7 @@
 		B6FDF8DF1D5336F800EE6FC0 /* NSDate+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */; };
 		B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */; };
 		B9BB2CB7D799157BFA00B622 /* libPods-AndyCategory_Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 028C8E1FBD01CEEE4EAD3071 /* libPods-AndyCategory_Test.a */; };
+		D7724ACA1D549C570087B037 /* NSObject+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = D7724AC91D549C570087B037 /* NSObject+Andy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Andy.m"; sourceTree = "<group>"; };
 		B6FDF8E01D53370200EE6FC0 /* UIBarButtonItem+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Andy.h"; sourceTree = "<group>"; };
 		B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Andy.m"; sourceTree = "<group>"; };
+		D7724AC81D549C570087B037 /* NSObject+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Andy.h"; sourceTree = "<group>"; };
+		D7724AC91D549C570087B037 /* NSObject+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Andy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				B6FDF8CD1D53357700EE6FC0 /* AndyCategory.h */,
+				D7724AC81D549C570087B037 /* NSObject+Andy.h */,
+				D7724AC91D549C570087B037 /* NSObject+Andy.m */,
 				B6FDF8CE1D5336AA00EE6FC0 /* NSString+Andy.h */,
 				B6FDF8CF1D5336AA00EE6FC0 /* NSString+Andy.m */,
 				B6FDF8D41D5336CD00EE6FC0 /* UIView+Andy.h */,
@@ -492,6 +497,7 @@
 				B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */,
 				B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */,
 				B6A789CD1D544EB10051CCF1 /* UILabel+Andy.m in Sources */,
+				D7724ACA1D549C570087B037 /* NSObject+Andy.m in Sources */,
 				B6A789DF1D5470D20051CCF1 /* UIColor+Andy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

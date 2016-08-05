@@ -12,11 +12,11 @@
 
 + (void)andy_showLoadingWithStatus:(NSString *)status;
 
-+ (void)andy_showInfoWithStatus:(NSString*)status;
++ (void)andy_showInfoWithStatus:(NSString *)status;
 
-+ (void)andy_showSuccessWithStatus:(NSString*)status;
++ (void)andy_showSuccessWithStatus:(NSString *)status;
 
-+ (void)andy_showErrorWithStatus:(NSString*)status;
++ (void)andy_showErrorWithStatus:(NSString *)status;
 
 
 @end
