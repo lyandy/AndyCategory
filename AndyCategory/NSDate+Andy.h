@@ -49,6 +49,11 @@
 // 判断是否在某个时间段内,需要手动修改里起始时间
 - (BOOL)css_isInTime;
 
+/**
+ *  格式化日期
+ *
+ *  @return 时间日期字符串。
+ */
 - (NSString *)css_dateYMDString;
 - (NSString *)css_dateYMDString2;
 - (NSString *)css_dateYMDString3;

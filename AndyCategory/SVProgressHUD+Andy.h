@@ -18,5 +18,4 @@
 
 + (void)andy_showErrorWithStatus:(NSString *)status;
 
-
 @end
