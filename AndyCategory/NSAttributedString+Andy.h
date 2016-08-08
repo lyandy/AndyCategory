@@ -10,6 +10,7 @@
 
 @interface NSAttributedString (Andy)
 
+// 富文本设置行高
 - (NSAttributedString *)andy_adjustlineSpace:(float)space;
 
 @end

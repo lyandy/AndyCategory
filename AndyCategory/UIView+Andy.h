@@ -73,7 +73,9 @@
 
 @interface UIView (FirstResponder)
 
+// 获取视图的第一响应者
 - (UIView *)andy_findViewThatIsFirstResponder;
+// 获取所有的子视图
 - (NSArray *)andy_descendantViews;
 
 @end

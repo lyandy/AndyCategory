@@ -113,10 +113,13 @@
 
 @interface NSString (ParametersSafe)
 
+// 安全初始化方法
 - (instancetype)andy_safe_initWithString:(NSString *)aString;
 
+// 安全截取方法
 - (NSString *)andy_safe_substringToIndex:(NSInteger)to;
 
+// 安全截取方法
 - (NSString *)andy_safe_substringFromIndex:(NSInteger)from;
 
 @end

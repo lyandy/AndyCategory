@@ -245,7 +245,7 @@ char* printEnv(void)
 
 + (double)andy_bootTime
 {
-    // NSProcessInfo用于获取当前正在执行的进程信息，包括设备的名称，操作系统版本，进程标识符，进程环境，参数等信息。systemUptime属性返回系统自启动时的累计时间，可以用来精确处理涉及到需要考察时间段的场景（如果直接使用系统时间的插值可能会因为用户修改系统时间而出错）。
+    // NSProcessInfo用于获取当前正在执行的进程信息，包括设备的名称，操作系统版本，进程标识符，进程环境，参数等信息。systemUptime属性返回系统自启动时的累计时间，可以用来精确处理涉及到需要考察时间段的场景（如果直接使用系统时间的差值可能会因为用户修改系统时间而出错）。
     return [[NSDate date] timeIntervalSince1970] - [[NSProcessInfo processInfo] systemUptime];
 }
 
