@@ -11,7 +11,8 @@
 
 @implementation NSAttributedString (Andy)
 
-- (NSAttributedString *)andy_adjustlineSpace:(float)space {
+- (NSAttributedString *)andy_adjustlineSpace:(float)space
+{
     NSMutableAttributedString *attribute  = [[NSMutableAttributedString alloc]initWithAttributedString:self];//创建一个可变属性文本对象
     NSMutableParagraphStyle *paragraph =[[NSMutableParagraphStyle alloc]init];//创建一个段落对象
     [paragraph setLineSpacing:space];//设置段落属性

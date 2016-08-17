@@ -106,7 +106,8 @@
     return [self andy_X];
 }
 
-- (void)setAndy_Left:(CGFloat)andy_Left {
+- (void)setAndy_Left:(CGFloat)andy_Left
+{
     [self setAndy_X:andy_Left];
 }
 
@@ -114,15 +115,19 @@
     return self.frame.origin.y + self.frame.size.height;
 }
 
-- (void)setAndy_Bottom:(CGFloat)andy_Bottom {
+- (void)setAndy_Bottom:(CGFloat)andy_Bottom
+
+{
     self.frame = CGRectMake(self.andy_Left, andy_Bottom - self.andy_Height, self.andy_Width, self.andy_Height);
 }
 
-- (CGFloat)andy_Right {
+- (CGFloat)andy_Right
+{
     return self.frame.origin.x + self.frame.size.width;
 }
 
-- (void)setAndy_Right:(CGFloat)andy_Right {
+- (void)setAndy_Right:(CGFloat)andy_Right
+{
     self.frame = CGRectMake(andy_Right - self.andy_Width, self.andy_Top, self.andy_Width, self.andy_Height);
 }
 
@@ -265,7 +270,8 @@
 
 - (void)andy_removeAllSubviews
 {
-    for (UIView *subview in self.subviews) {
+    for (UIView *subview in self.subviews)
+    {
         [subview removeFromSuperview];
     }
 }
@@ -289,13 +295,16 @@
 
 - (UIView *)andy_findViewThatIsFirstResponder
 {
-    if (self.isFirstResponder) {
+    if (self.isFirstResponder)
+    {
         return self;
     }
     
-    for (UIView *subView in self.subviews) {
+    for (UIView *subView in self.subviews)
+    {
         UIView *firstResponder = [subView andy_findViewThatIsFirstResponder];
-        if (firstResponder != nil) {
+        if (firstResponder != nil)
+        {
             return firstResponder;
         }
     }
@@ -305,7 +314,8 @@
 - (NSArray *)andy_descendantViews
 {
     NSMutableArray *descendantArray = [NSMutableArray array];
-    for (UIView *view in self.subviews) {
+    for (UIView *view in self.subviews)
+    {
         [descendantArray addObject:view];
         [descendantArray addObjectsFromArray:[view andy_descendantViews]];
     }
@@ -318,10 +328,12 @@
 
 - (void)andy_testAmbiguity
 {
-    if (self.hasAmbiguousLayout) {
+    if (self.hasAmbiguousLayout)
+    {
         NSLog(@"<%@:%p>: %@", self.class.description, self, @"Ambiguous");
     }
-    for (UIView *view in self.subviews) {
+    for (UIView *view in self.subviews)
+    {
         [view andy_testAmbiguity];
     }
 }

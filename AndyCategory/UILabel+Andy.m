@@ -10,11 +10,13 @@
 
 @implementation UILabel (Andy)
 
-+ (UILabel *)andy_labelWithText:(NSString *)text fontSize:(NSInteger)fontSize textColor:(UIColor *)color frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
++ (UILabel *)andy_labelWithText:(NSString *)text fontSize:(NSInteger)fontSize textColor:(UIColor *)color frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment
+{
     
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.text = text;
-    if (fontSize) {
+    if (fontSize)
+    {
         label.font = [UIFont systemFontOfSize:fontSize];
     }
     label.textColor = color;
@@ -24,21 +26,24 @@
 }
 
 
-+ (UILabel *)andy_labelWithText:(NSString *)text fontSize:(NSInteger)fontSize frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
++ (UILabel *)andy_labelWithText:(NSString *)text fontSize:(NSInteger)fontSize frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment
+{
     
     UILabel *label = [UILabel andy_labelWithText:text fontSize:fontSize textColor:nil frame:frame textAlignment:textAlignment];
     
     return label;
 }
 
-+ (UILabel *)andy_labelWithText:(NSString *)text frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
++ (UILabel *)andy_labelWithText:(NSString *)text frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment
+{
     
     UILabel *label = [UILabel andy_labelWithText:text fontSize:0 frame:frame textAlignment:textAlignment];
     
     return label;
 }
 
-+ (UILabel *)andy_roundCornerLabelWithText:(NSString *)text fontSize:(NSInteger)fontSize radius:(CGFloat)radius frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment{
++ (UILabel *)andy_roundCornerLabelWithText:(NSString *)text fontSize:(NSInteger)fontSize radius:(CGFloat)radius frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment
+{
     
     UILabel *label = [UILabel andy_labelWithText:text fontSize:fontSize frame:frame textAlignment:textAlignment];
     label.layer.masksToBounds = YES;
@@ -68,7 +73,8 @@
     return height;
 }
 
-+ (CGFloat)andy_getWidthWithTitle:(NSString *)title font:(UIFont *)font {
++ (CGFloat)andy_getWidthWithTitle:(NSString *)title font:(UIFont *)font
+{
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1000, 0)];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

@@ -189,7 +189,8 @@ char* printEnv(void)
     NSRange range = [first rangeOfString:@"iPhone"];
     if (range.length > 0 && range.location != NSNotFound) {
         [first replaceOccurrencesOfString:@"iPhone" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, first.length)];
-        if (first.integerValue >= 6) {
+        if (first.integerValue >= 6)
+        {
             deviceEnable = YES;
         }
     }
@@ -217,19 +218,33 @@ char* printEnv(void)
     return ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(320*2, 480*2), [[UIScreen mainScreen] currentMode].size) : NO);
 }
 
-+ (BOOL)andy_isPush {
-    if ([self andy_ios8OrLater]) {
++ (BOOL)andy_isPush
+{
+    if ([self andy_ios8OrLater])
+    {
         UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        if (UIUserNotificationTypeNone == setting.types) {
+        if (UIUserNotificationTypeNone == setting.types)
+        {
             return NO;
-        } else {
+        }
+        else
+        {
             return YES;
         }
     } else {
+        
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+        UIUserNotificationType type = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+#else
         UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        if (UIRemoteNotificationTypeNone == type) {
+#endif
+        
+        if (UIUserNotificationTypeNone == type)
+        {
             return NO;
-        } else {
+        }
+        else
+        {
             return YES;
         }
     }
@@ -253,7 +268,8 @@ char* printEnv(void)
 {
     struct statfs buf;
     long long freespace = -1;
-    if(statfs("/var", &buf) >= 0){
+    if(statfs("/var", &buf) >= 0)
+    {
         freespace = (long long)(buf.f_bsize * buf.f_bfree);
     }
     return freespace;
@@ -291,10 +307,12 @@ char* printEnv(void)
     
     NSArray *interfaces = (__bridge NSArray *)wifiInterfaces;
     
-    for (NSString *interfaceName in interfaces) {
+    for (NSString *interfaceName in interfaces)
+    {
         CFDictionaryRef dictRef = CNCopyCurrentNetworkInfo((__bridge CFStringRef)(interfaceName));
         
-        if (dictRef) {
+        if (dictRef)
+        {
             NSDictionary *networkInfo = (__bridge NSDictionary *)dictRef;
             
             wifi = [networkInfo objectForKey:key];
@@ -318,21 +336,24 @@ char* printEnv(void)
     success = getifaddrs(&addrs) == 0;
     if (success) {
         cursor = addrs;
-        while (cursor != NULL) {
+        while (cursor != NULL)
+        {
             // the second test keeps from picking up the loopback address
             if ((cursor->ifa_addr->sa_family == AF_INET || cursor->ifa_addr->sa_family == AF_INET6) && (cursor->ifa_flags & IFF_LOOPBACK) == 0)
             {
                 NSString *name = [NSString stringWithUTF8String:cursor->ifa_name];
-                if ([name isEqualToString:@"en0"]){
-                    
+                if ([name isEqualToString:@"en0"])
+                {
                     //如果是IPV4地址，直接转化
-                    if (cursor->ifa_addr->sa_family == AF_INET){
+                    if (cursor->ifa_addr->sa_family == AF_INET)
+                    {
                         // Get NSString from C String
                         return [UIDevice andy_formatIPV4Address:((struct sockaddr_in *)cursor->ifa_addr)->sin_addr];
                     }
                     
                     //如果是IPV6地址
-                    else if (cursor->ifa_addr->sa_family == AF_INET6){
+                    else if (cursor->ifa_addr->sa_family == AF_INET6)
+                    {
                         return [UIDevice andy_formatIPV6Address:((struct sockaddr_in6 *)cursor->ifa_addr)->sin6_addr];
                     }
                 }
@@ -345,13 +366,15 @@ char* printEnv(void)
 }
 
 //for IPV6
-+ (NSString *)andy_formatIPV6Address:(struct in6_addr)ipv6Addr{
++ (NSString *)andy_formatIPV6Address:(struct in6_addr)ipv6Addr
+{
     NSString *address = nil;
     
     char dstStr[INET6_ADDRSTRLEN];
     char srcStr[INET6_ADDRSTRLEN];
     memcpy(srcStr, &ipv6Addr, sizeof(struct in6_addr));
-    if(inet_ntop(AF_INET6, srcStr, dstStr, INET6_ADDRSTRLEN) != NULL){
+    if(inet_ntop(AF_INET6, srcStr, dstStr, INET6_ADDRSTRLEN) != NULL)
+    {
         address = [NSString stringWithUTF8String:dstStr];
     }
     
@@ -359,13 +382,15 @@ char* printEnv(void)
 }
 
 //for IPV4
-+ (NSString *)andy_formatIPV4Address:(struct in_addr)ipv4Addr{
++ (NSString *)andy_formatIPV4Address:(struct in_addr)ipv4Addr
+{
     NSString *address = nil;
     
     char dstStr[INET_ADDRSTRLEN];
     char srcStr[INET_ADDRSTRLEN];
     memcpy(srcStr, &ipv4Addr, sizeof(struct in_addr));
-    if(inet_ntop(AF_INET, srcStr, dstStr, INET_ADDRSTRLEN) != NULL){
+    if(inet_ntop(AF_INET, srcStr, dstStr, INET_ADDRSTRLEN) != NULL)
+    {
         address = [NSString stringWithUTF8String:dstStr];
     }
     
@@ -374,7 +399,8 @@ char* printEnv(void)
 
 + (NSString *)andy_appList
 {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH])
+    {
         NSArray *applist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:USER_APP_PATH error:nil];
         return [applist componentsJoinedByString:@","];
     }
@@ -384,19 +410,23 @@ char* printEnv(void)
 
 + (BOOL)andy_isModify
 {
-    for (int i = 0; i < ARRAY_SIZE(jailbreak_tool_pathes); i++) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:jailbreak_tool_pathes[i]]]) {
+    for (int i = 0; i < ARRAY_SIZE(jailbreak_tool_pathes); i++)
+    {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:jailbreak_tool_pathes[i]]])
+        {
             NSLog(@"The device is jail broken!");
             return YES;
         }
     }
     
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]) {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]])
+    {
         NSLog(@"The device is jail broken!!");
         return YES;
     }
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH])
+    {
         NSLog(@"The device is jail broken!!!");
         return YES;
     }
@@ -443,21 +473,26 @@ char* printEnv(void)
     NSMutableArray *ipAddress = [[NSMutableArray alloc] init];
     
     hostRef = CFHostCreateWithName(kCFAllocatorDefault, (__bridge CFStringRef)hostName);
-    if (hostRef) {
+    if (hostRef)
+    {
         result = CFHostStartInfoResolution(hostRef, kCFHostAddresses, NULL); // pass an error instead of NULL here to find out why it failed
-        if (result == TRUE) {
+        if (result == TRUE)
+        {
             addresses = CFHostGetAddressing(hostRef, &result);
         }
     }
-    if (result == TRUE) {
+    if (result == TRUE)
+    {
         
-        for (int i = 0; i < CFArrayGetCount(addresses); i++) {
+        for (int i = 0; i < CFArrayGetCount(addresses); i++)
+        {
             
             CFDataRef ref = (CFDataRef) CFArrayGetValueAtIndex(addresses, i);
             struct sockaddr_in* remoteAddr;
             char *ip_address;
             remoteAddr = (struct sockaddr_in*) CFDataGetBytePtr(ref);
-            if (remoteAddr != NULL) {
+            if (remoteAddr != NULL)
+            {
                 ip_address = inet_ntoa(remoteAddr->sin_addr);
             }
             NSString *ip = [NSString stringWithCString:ip_address encoding:NSUTF8StringEncoding];

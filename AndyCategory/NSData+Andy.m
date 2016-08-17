@@ -40,7 +40,8 @@
                                           [self bytes], dataLength,
                                           buffer, bufferSize,
                                           &numBytesEncrypted);
-    if (cryptStatus == kCCSuccess) {
+    if (cryptStatus == kCCSuccess)
+    {
         return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
     }
     free(buffer);
@@ -63,7 +64,8 @@
                                           [self bytes], dataLength,
                                           buffer, bufferSize,
                                           &numBytesDecrypted);
-    if (cryptStatus == kCCSuccess) {
+    if (cryptStatus == kCCSuccess)
+    {
         return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
         
     }

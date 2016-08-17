@@ -84,7 +84,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     CGFloat scaledWidth = targetWidth;
     CGFloat scaledHeight = targetHeight;
     CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-    if (CGSizeEqualToSize(imageSize, targetSize) == NO) {
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         if (widthFactor < heightFactor)
@@ -94,9 +95,12 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
         // center the image
-        if (widthFactor < heightFactor) {
+        if (widthFactor < heightFactor)
+        {
             thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
-        } else if (widthFactor > heightFactor) {
+        }
+        else if (widthFactor > heightFactor)
+        {
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
         }
     }
@@ -202,11 +206,15 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     CGFloat newHeight = height;
     
     // If any side exceeds the maximun size, reduce the greater side to 1200px and proportionately the other one
-    if (width > maxSize || height > maxSize) {
-        if (width > height) {
+    if (width > maxSize || height > maxSize)
+    {
+        if (width > height)
+        {
             newWidth = maxSize;
             newHeight = (height * maxSize) / width;
-        } else {
+        }
+        else
+        {
             newHeight = maxSize;
             newWidth = (width * maxSize) / height;
         }
@@ -239,23 +247,27 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // Tint: Color
-- (UIImage *)andy_tintedImageWithColor:(UIColor *)color {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color
+{
     return [self andy_tintedImageWithColor:color level:1.0f];
 }
 
 // Tint: Color + level
-- (UIImage *)andy_tintedImageWithColor:(UIColor *)color level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color level:(CGFloat)level
+{
     CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     return [self andy_tintedImageWithColor:color rect:rect level:level];
 }
 
 // Tint: Color + Rect
-- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect
+{
     return [self andy_tintedImageWithColor:color rect:rect level:1.0f];
 }
 
 // Tint: Color + Rect + level
-- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color rect:(CGRect)rect level:(CGFloat)level
+{
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     
     UIGraphicsBeginImageContextWithOptions(imageRect.size, NO, self.scale);
@@ -280,54 +292,64 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // Tint: Color + Insets
-- (UIImage *)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_tintedImageWithColor:(UIColor*)color insets:(UIEdgeInsets)insets
+{
     return [self andy_tintedImageWithColor:color insets:insets level:1.0f];
 }
 
 // Tint: Color + Insets + level
-- (UIImage *)andy_tintedImageWithColor:(UIColor *)color insets:(UIEdgeInsets)insets level:(CGFloat)level {
+- (UIImage *)andy_tintedImageWithColor:(UIColor *)color insets:(UIEdgeInsets)insets level:(CGFloat)level
+{
     CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     return [self andy_tintedImageWithColor:color rect:UIEdgeInsetsInsetRect(rect, insets) level:level];
 }
 
 // Light: Level
-- (UIImage *)andy_lightenWithLevel:(CGFloat)level {
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level
+{
     return [self andy_tintedImageWithColor:[UIColor whiteColor] level:level];
 }
 
 // Light: Level + Insets
-- (UIImage *)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_lightenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets
+{
     return [self andy_tintedImageWithColor:[UIColor whiteColor] insets:insets level:level];
 }
 
 // Light: Level + Rect
-- (UIImage *)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level {
+- (UIImage *)andy_lightenRect:(CGRect)rect withLevel:(CGFloat)level
+{
     return [self andy_tintedImageWithColor:[UIColor whiteColor] rect:rect level:level];
 }
 
 // Dark: Level
-- (UIImage *)andy_darkenWithLevel:(CGFloat)level {
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level
+{
     return [self andy_tintedImageWithColor:[UIColor blackColor] level:level];
 }
 
 // Dark: Level + Insets
-- (UIImage *)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets {
+- (UIImage *)andy_darkenWithLevel:(CGFloat)level insets:(UIEdgeInsets)insets
+{
     return [self andy_tintedImageWithColor:[UIColor blackColor] insets:insets level:level];
 }
 
 // Dark: Level + Rect
-- (UIImage *)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level {
+- (UIImage *)andy_darkenRect:(CGRect)rect withLevel:(CGFloat)level
+{
     return [self andy_tintedImageWithColor:[UIColor blackColor] rect:rect level:level];
 }
 
 
-+ (UIImage *)andy_imageResourceNamed:(NSString *)name ofType:(NSString *)type {
++ (UIImage *)andy_imageResourceNamed:(NSString *)name ofType:(NSString *)type
+{
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
     return [UIImage imageWithContentsOfFile:path];
 }
 
 // UIView转UIImage
-+ (UIImage *)andy_imageWithView:(UIView *)view {
++ (UIImage *)andy_imageWithView:(UIView *)view
+{
     // 创建一个bitmap的context
     // 并把它设置成为当前正在使用的context
     UIGraphicsBeginImageContext(view.bounds.size);
@@ -341,7 +363,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // UIView转UIImage
-+ (UIImage *)andy_imageWithView:(UIView *)view withRect:(CGRect)rect {
++ (UIImage *)andy_imageWithView:(UIView *)view withRect:(CGRect)rect
+{
     CGSize cropImageSize = rect.size;
     UIGraphicsBeginImageContext(cropImageSize);
     CGContextRef resizedContext = UIGraphicsGetCurrentContext();
@@ -353,7 +376,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 //截取部分图像
--(UIImage *)andy_imageInRect:(CGRect)rect {
+-(UIImage *)andy_imageInRect:(CGRect)rect
+{
     CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, rect);
     CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
     
@@ -367,18 +391,21 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return smallImage;
 }
 
-- (UIImage *)andy_imageSquare {
+- (UIImage *)andy_imageSquare
+{
     CGSize size = self.size;
     CGFloat squareSize = MIN(size.width, size.height);
     CGRect squareRect = CGRectMake((size.width - squareSize) / 2.0, (size.height - squareSize) / 2.0, squareSize, squareSize);
     return [self andy_imageInRect:squareRect];
 }
 
-- (UIImage *)andy_imageRotatedByRadians:(CGFloat)radians {
+- (UIImage *)andy_imageRotatedByRadians:(CGFloat)radians
+{
     return [self andy_imageRotatedByDegrees:RadiansToDegrees(radians)];
 }
 
-- (UIImage *)andy_imageRotatedByDegrees:(CGFloat)degrees {
+- (UIImage *)andy_imageRotatedByDegrees:(CGFloat)degrees
+{
     // calculate the size of the rotated view's containing box for our drawing space
     UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.size.width, self.size.height)];
     CGAffineTransform t = CGAffineTransformMakeRotation(DegreesToRadians(degrees));
@@ -405,7 +432,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // 等比例缩放
-- (UIImage *)andy_imageWithScale:(CGFloat)scale {
+- (UIImage *)andy_imageWithScale:(CGFloat)scale
+{
     CGSize scaleSize = CGSizeMake(self.size.width * scale, self.size.height * scale);
     UIGraphicsBeginImageContext(scaleSize);
     [self drawInRect:CGRectMake(0, 0, scaleSize.width, scaleSize.height)];
@@ -416,17 +444,20 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // 按比例缩放适应指定大小
-- (UIImage *)andy_imageFitSize:(CGSize)size {
+- (UIImage *)andy_imageFitSize:(CGSize)size
+{
     CGSize imgSize = self.size;
     CGFloat radio = MAX(size.width / imgSize.width, size.height / imgSize.height);
-    if (radio < 1) {
+    if (radio < 1)
+    {
         return [self andy_imageWithScale:radio];
     }
     return self;
 }
 
 //遮罩合成新图片
-- (UIImage *)andy_imageWithMask:(UIImage *)maskImage {
+- (UIImage *)andy_imageWithMask:(UIImage *)maskImage
+{
     CGImageRef maskRef = maskImage.CGImage;
     CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
                                         CGImageGetHeight(maskRef),
@@ -441,7 +472,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return img;
 }
 
-- (UIImage *)andy_imageWithImage:(UIImage *)image {
+- (UIImage *)andy_imageWithImage:(UIImage *)image
+{
     CGSize size = CGSizeMake(self.size.width * self.scale, self.size.height * self.scale);
     UIGraphicsBeginImageContext(size);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
@@ -489,15 +521,18 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 - (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage
 {
     // Check pre-conditions.
-    if (self.size.width < 1 || self.size.height < 1) {
+    if (self.size.width < 1 || self.size.height < 1)
+    {
         NSLog (@"*** error: invalid size: (%.2f x %.2f). Both dimensions must be >= 1: %@", self.size.width, self.size.height, self);
         return nil;
     }
-    if (!self.CGImage) {
+    if (!self.CGImage)
+    {
         NSLog (@"*** error: image must be backed by a CGImage: %@", self);
         return nil;
     }
-    if (maskImage && !maskImage.CGImage) {
+    if (maskImage && !maskImage.CGImage)
+    {
         NSLog (@"*** error: maskImage must be backed by a CGImage: %@", maskImage);
         return nil;
     }
@@ -507,7 +542,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
     BOOL hasBlur = blurRadius > __FLT_EPSILON__;
     BOOL hasSaturationChange = fabs(saturationDeltaFactor - 1.) > __FLT_EPSILON__;
-    if (hasBlur || hasSaturationChange) {
+    if (hasBlur || hasSaturationChange)
+    {
         UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
         CGContextRef effectInContext = UIGraphicsGetCurrentContext();
         CGContextScaleCTM(effectInContext, 1.0, -1.0);
@@ -541,7 +577,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
             //
             CGFloat inputRadius = blurRadius * [[UIScreen mainScreen] scale];
             NSUInteger radius = floor(inputRadius * 3. * sqrt(2 * M_PI) / 4 + 0.5);
-            if (radius % 2 != 1) {
+            if (radius % 2 != 1)
+            {
                 radius += 1; // force radius to be odd so that the three box-blur methodology works.
             }
             vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (uint32_t)radius, (uint32_t)radius, 0, kvImageEdgeExtend);
@@ -549,7 +586,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
             vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (uint32_t)radius, (uint32_t)radius, 0, kvImageEdgeExtend);
         }
         BOOL effectImageBuffersAreSwapped = NO;
-        if (hasSaturationChange) {
+        if (hasSaturationChange)
+        {
             CGFloat s = saturationDeltaFactor;
             CGFloat floatingPointSaturationMatrix[] = {
                 0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,
@@ -560,23 +598,30 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
             const int32_t divisor = 256;
             NSUInteger matrixSize = sizeof(floatingPointSaturationMatrix)/sizeof(floatingPointSaturationMatrix[0]);
             int16_t saturationMatrix[matrixSize];
-            for (NSUInteger i = 0; i < matrixSize; ++i) {
+            for (NSUInteger i = 0; i < matrixSize; ++i)
+            {
                 saturationMatrix[i] = (int16_t)roundf(floatingPointSaturationMatrix[i] * divisor);
             }
-            if (hasBlur) {
+            if (hasBlur)
+            {
                 vImageMatrixMultiply_ARGB8888(&effectOutBuffer, &effectInBuffer, saturationMatrix, divisor, NULL, NULL, kvImageNoFlags);
                 effectImageBuffersAreSwapped = YES;
             }
-            else {
+            else
+            {
                 vImageMatrixMultiply_ARGB8888(&effectInBuffer, &effectOutBuffer, saturationMatrix, divisor, NULL, NULL, kvImageNoFlags);
             }
         }
         if (!effectImageBuffersAreSwapped)
+        {
             effectImage = UIGraphicsGetImageFromCurrentImageContext();
+        }
         UIGraphicsEndImageContext();
         
         if (effectImageBuffersAreSwapped)
+        {
             effectImage = UIGraphicsGetImageFromCurrentImageContext();
+        }
         UIGraphicsEndImageContext();
     }
     
@@ -590,9 +635,11 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     CGContextDrawImage(outputContext, imageRect, self.CGImage);
     
     // Draw effect image.
-    if (hasBlur) {
+    if (hasBlur)
+    {
         CGContextSaveGState(outputContext);
-        if (maskImage) {
+        if (maskImage)
+        {
             CGContextClipToMask(outputContext, imageRect, maskImage.CGImage);
         }
         CGContextDrawImage(outputContext, imageRect, effectImage.CGImage);
@@ -600,7 +647,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     }
     
     // Add in color tint.
-    if (tintColor) {
+    if (tintColor)
+    {
         CGContextSaveGState(outputContext);
         CGContextSetFillColorWithColor(outputContext, tintColor.CGColor);
         CGContextFillRect(outputContext, imageRect);
@@ -673,7 +721,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     
     CGColorSpaceRelease(colorSpace);
     
-    if (context == NULL) {
+    if (context == NULL)
+    {
         return nil;
     }
     
@@ -697,7 +746,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(context);
     
-    if(rgba[3] > 0) {
+    if(rgba[3] > 0)
+    {
         CGFloat alpha = ((CGFloat)rgba[3])/255.0;
         CGFloat multiplier = alpha/255.0;
         return [UIColor colorWithRed:((CGFloat)rgba[0])*multiplier
@@ -705,7 +755,8 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
                                 blue:((CGFloat)rgba[2])*multiplier
                                alpha:alpha];
     }
-    else {
+    else
+    {
         return [UIColor colorWithRed:((CGFloat)rgba[0])/255.0
                                green:((CGFloat)rgba[1])/255.0
                                 blue:((CGFloat)rgba[2])/255.0

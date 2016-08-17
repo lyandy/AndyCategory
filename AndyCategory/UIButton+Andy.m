@@ -11,7 +11,8 @@
 
 @implementation UIButton (Andy)
 
-+ (UIButton *)andy_buttonWithTitle:(NSString *)title titleColor:(UIColor *)color frame:(CGRect)frame{
++ (UIButton *)andy_buttonWithTitle:(NSString *)title titleColor:(UIColor *)color frame:(CGRect)frame
+{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = frame;
@@ -21,7 +22,8 @@
     return button;
 }
 
-+ (UIButton *)andy_roundCornerbuttonWithTitle:(NSString *)title titleColor:(UIColor *)color frame:(CGRect)frame radius:(CGFloat)radius{
++ (UIButton *)andy_roundCornerbuttonWithTitle:(NSString *)title titleColor:(UIColor *)color frame:(CGRect)frame radius:(CGFloat)radius
+{
     
     UIButton *button = [UIButton andy_buttonWithTitle:title titleColor:color frame:frame];
     button.layer.masksToBounds = YES;
@@ -30,7 +32,8 @@
     return button;
 }
 
-+ (UIButton *)andy_buttonWithFrame:(CGRect)frame target:(id)target selector:(SEL)selector{
++ (UIButton *)andy_buttonWithFrame:(CGRect)frame target:(id)target selector:(SEL)selector
+{
     
     UIButton *button = [UIButton andy_buttonWithTitle:nil titleColor:nil frame:frame];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
@@ -38,7 +41,8 @@
     return button;
 }
 
-+ (UIButton *)andy_roundCornerbuttonWithFrame:(CGRect)frame radius:(CGFloat)radius target:(id)target selector:(SEL)selector{
++ (UIButton *)andy_roundCornerbuttonWithFrame:(CGRect)frame radius:(CGFloat)radius target:(id)target selector:(SEL)selector
+{
     
     UIButton *button = [UIButton andy_roundCornerbuttonWithTitle:nil titleColor:nil frame:frame radius:radius];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
@@ -52,22 +56,26 @@
 }
 
 // 设置normal状态的多语言文本
-- (void)andy_setTextNormal:(NSString *)key {
+- (void)andy_setTextNormal:(NSString *)key
+{
     [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateNormal];
 }
 
 // 设置highlight状态的多语言文本
-- (void)andy_setTextHighlight:(NSString *)key {
+- (void)andy_setTextHighlight:(NSString *)key
+{
     [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateHighlighted];
 }
 
 // 设置Selected状态的多语言文本
-- (void)andy_setTextSelected:(NSString *)key {
+- (void)andy_setTextSelected:(NSString *)key
+{
     [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateSelected];
 }
 
 // 设置disable状态的多语言文本
-- (void)andy_setTextDisable:(NSString *)key {
+- (void)andy_setTextDisable:(NSString *)key
+{
     [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateDisabled];
 }
 

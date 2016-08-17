@@ -13,7 +13,8 @@
 
 - (void)andy_setImageWithUrl:(NSString *)url placeHolderImage:(UIImage *)placeHolderImage completion:(void (^)())completion
 {
-    [self sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:placeHolderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:placeHolderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+     {
         self.image = image ? image : placeHolderImage;
         
         if (completion != nil)

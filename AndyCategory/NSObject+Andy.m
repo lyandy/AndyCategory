@@ -19,7 +19,8 @@
     
     objc_property_t *property_t = class_copyPropertyList([self class], &count);
     
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++)
+    {
         objc_property_t item = property_t[i];
         const char *tmp = property_getName(item);
         [array addObject:[NSString stringWithCString:tmp encoding:NSUTF8StringEncoding]];

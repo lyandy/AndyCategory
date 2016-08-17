@@ -91,17 +91,31 @@
 + (NSDate *)andy_dateWithYear:(int)year
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay) fromDate:[NSDate date]];
+#else
     NSDateComponents *components = [calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:[NSDate date]];
+#endif
+    
     [components setYear:year];
     return [calendar dateFromComponents:components];
 }
 
 - (NSInteger)andy_getNowWeekday
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
     NSDateComponents *comps = [[NSDateComponents alloc] init];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |
+    NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+#else
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
     NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    
+#endif
+    
     NSDate *now = [NSDate date];
     // 话说在真机上需要设置区域，才能正确获取本地日期，天朝代码:zh_CN
     calendar.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
@@ -114,13 +128,17 @@
 @implementation NSDate (CSS)
 
 // 判断是否在某个时间段内,需要手动修改里起始时间
-- (BOOL)css_isInTime {
+- (BOOL)css_isInTime
+{
     // 判断时间是否在活动时间范围内,可以配置
     NSDate *startTime = [NSDate css_dateInYear:2016 month:8 day:10];
     NSDate *endTime = [NSDate css_dateInYear:2016 month:8 day:31];
-    if (([self compare:startTime] == NSOrderedDescending) && ([self compare:endTime] == NSOrderedAscending)) {
+    if (([self compare:startTime] == NSOrderedDescending) && ([self compare:endTime] == NSOrderedAscending))
+    {
         return YES;
-    } else {
+    }
+    else
+    {
         return NO;
     }
 }
@@ -263,9 +281,12 @@
     [calendar setFirstWeekday:2];//设定周一为周首日
     BOOL ok = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&beginDate interval:&interval forDate:self];
     //分别修改为 NSDayCalendarUnit NSWeekCalendarUnit NSYearCalendarUnit
-    if (ok) {
+    if (ok)
+    {
         endDate = [beginDate dateByAddingTimeInterval:interval-1];
-    }else {
+    }
+    else
+    {
         return @"";
     }
     
@@ -337,9 +358,12 @@
 
 - (NSDate *)css_dateToNextDay:(NSInteger)nextDay
 {
-    if (self.components.day < nextDay) {
+    if (self.components.day < nextDay)
+    {
         return [NSDate css_dateInYear:self.components.year month:self.components.month day:nextDay];
-    }else{
+    }
+    else
+    {
         NSDate *date = [self css_dateOffsetMonth:1];
         return [NSDate css_dateInYear:date.components.year month:date.components.month day:nextDay];
     }
@@ -351,7 +375,8 @@
     dateYMDFormatter.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     [dateYMDFormatter setDateFormat:@"yyyy-MM-dd"];
     
-    if (offset <= 0) {
+    if (offset <= 0)
+    {
         return self;
     }
     NSString *todayString = [self css_dateYMDString];
