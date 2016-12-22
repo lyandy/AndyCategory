@@ -177,6 +177,7 @@ char* printEnv(void)
 
 + (NSString *)andy_uuid
 {
+    //参考 http://www.jianshu.com/p/f1b59dfb482f
     return Valid([[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]);
 }
 
@@ -257,6 +258,19 @@ char* printEnv(void)
     
     return Valid([nickName andy_safe_substringToIndex:10]);
 }
+
+
+// 获取是否是iPhone
++ (double)andy_isIPhone
+{
+    static BOOL __isIPhone;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __isIPhone = [[self currentDevice].model rangeOfString:@"iPhone"].location != NSNotFound;
+    });
+    return __isIPhone;
+}
+
 
 + (double)andy_bootTime
 {
@@ -501,6 +515,15 @@ char* printEnv(void)
     }
     
     return ipAddress;
+}
+
++ (BOOL)andy_isPad {
+    static BOOL __isPad;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __isPad = [[self currentDevice].model rangeOfString:@"iPad"].location != NSNotFound;
+    });
+    return __isPad;
 }
 
 @end

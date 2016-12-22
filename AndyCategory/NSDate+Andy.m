@@ -10,10 +10,7 @@
 
 @implementation NSDate (Andy)
 
-/*
-**
-*  是否为今天
-*/
+/* 是否为今天 */
 - (BOOL)andy_isToday
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];

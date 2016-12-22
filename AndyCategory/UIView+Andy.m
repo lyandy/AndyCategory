@@ -151,6 +151,45 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
+- (void)andy_drawShadow
+{
+    self.layer.shadowRadius = 1.5f;
+    self.layer.shadowColor = [UIColor colorWithRed:200.f/255.f green:200.f/255.f blue:200.f/255.f alpha:1.f].CGColor;
+    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    self.layer.shadowOpacity = 0.9f;
+    self.layer.masksToBounds = NO;
+    
+    UIEdgeInsets shadowInsets = UIEdgeInsetsMake(-1.5f, -1.5f, -1.5f, -1.5f);
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(self.bounds, shadowInsets)];
+    self.layer.shadowPath = shadowPath.CGPath;
+}
+
+- (void)andy_drawShadowWithColor:(UIColor *)shadowColor
+{
+    self.layer.shadowRadius = 1.5f;
+    self.layer.shadowColor = shadowColor.CGColor;
+    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    self.layer.shadowOpacity = 0.9f;
+    self.layer.masksToBounds = NO;
+    
+    UIEdgeInsets shadowInsets = UIEdgeInsetsMake(-1.5f, -1.5f, -1.5f, -1.5f);
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(self.bounds, shadowInsets)];
+    self.layer.shadowPath = shadowPath.CGPath;
+}
+
+- (void)andy_hideShadow
+{
+    self.layer.shadowRadius = 0.0f;
+    self.layer.shadowColor = [UIColor clearColor].CGColor;
+    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    self.layer.shadowOpacity = 0.0f;
+    self.layer.masksToBounds = NO;
+    
+    UIEdgeInsets shadowInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(self.bounds, shadowInsets)];
+    self.layer.shadowPath = shadowPath.CGPath;
+}
+
 - (BOOL)andy_intersectsWithView:(UIView *)view
 {
     //都先转换为相对于窗口的坐标，然后进行判断是否重合

@@ -72,6 +72,33 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return reSizeImage;
 }
 
+/** 根据最大宽高重设图片大小 */
++ (UIImage *)andy_reSizeImage:(UIImage *)image maxEdge:(CGFloat)maxEdge
+{
+    CGSize imgSize = image.size;
+    if (imgSize.width > imgSize.height) {
+        CGFloat height = maxEdge / imgSize.width * imgSize.height;
+        return [self andy_reSizeImage:image toSize:CGSizeMake(maxEdge, height)];
+    } else {
+        CGFloat width = maxEdge / imgSize.height * imgSize.width;
+        return [self andy_reSizeImage:image toSize:CGSizeMake(width, maxEdge)];
+    }
+}
+
+
+/** 根据最小宽高重设图片大小 */
++ (UIImage *)andy_reSizeImage:(UIImage *)image minEdge:(CGFloat)minEdge
+{
+    CGSize imgSize = image.size;
+    if (imgSize.width > imgSize.height) {
+        CGFloat width = minEdge / imgSize.height * imgSize.width;
+        return [self andy_reSizeImage:image toSize:CGSizeMake(width, minEdge)];
+    } else {
+        CGFloat height = minEdge / imgSize.width * imgSize.height;
+        return [self andy_reSizeImage:image toSize:CGSizeMake(minEdge, height)];
+    }
+}
+
 + (UIImage *)andy_scaleImage:(UIImage *)image toSize:(CGSize)targetSize
 {
     UIImage *newImage = nil;
@@ -350,16 +377,51 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 // UIView转UIImage
 + (UIImage *)andy_imageWithView:(UIView *)view
 {
-    // 创建一个bitmap的context
-    // 并把它设置成为当前正在使用的context
-    UIGraphicsBeginImageContext(view.bounds.size);
-    CGContextRef currnetContext = UIGraphicsGetCurrentContext();
-    [view.layer renderInContext:currnetContext];
-    // 从当前context中创建一个改变大小后的图片
+    // 1.开启上下文
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
+    
+    // 2.将控制器view的layer渲染到上下文
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    // 3.取出图片
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    // 使当前的context出堆栈
+    
+    // 4.结束上下文
     UIGraphicsEndImageContext();
     return image;
+}
+
+
+// UIView转UIImage，后台线程跑，主线程返回
++ (void)andy_imageWithViewAsync:(UIView *)view complete:(void (^)(UIImage *image))complete
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        UIImage *img = [UIImage andy_imageWithView:view];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            complete(img);
+        });
+    });
+}
+
+UIImage* rotateUIImage(const UIImage* src, float angleDegrees)
+{
+    UIView* rotatedViewBox = [[UIView alloc] initWithFrame: CGRectMake(0, 0, src.size.width, src.size.height)];
+    float angleRadians = angleDegrees * ((float)M_PI / 180.0f);
+    CGAffineTransform t = CGAffineTransformMakeRotation(angleRadians);
+    rotatedViewBox.transform = t;
+    CGSize rotatedSize = rotatedViewBox.frame.size;
+    UIGraphicsBeginImageContext(rotatedSize);
+    //http://stackoverflow.com/questions/5017540/how-to-i-rotate-uiimageview-by-90-degrees-inside-a-uiscrollview-with-correct-ima
+    //UIGraphicsBeginImageContextWithOptions(rotatedSize,NO,0.f);
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
+    CGContextRotateCTM(bitmap, angleRadians);
+    CGContextScaleCTM(bitmap, 1.0, -1.0);
+    CGContextDrawImage(bitmap, CGRectMake(-src.size.width / 2, -src.size.height / 2, src.size.width, src.size.height), [src CGImage]);
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 // UIView转UIImage
@@ -485,7 +547,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 
 - (UIImage *)andy_blurImage
 {
-    return [self applyBlurWithRadius:20
+    return [self andy_applyBlurWithRadius:20
                            tintColor:[UIColor colorWithWhite:0 alpha:0.0]
                saturationDeltaFactor:1.4
                            maskImage:nil];
@@ -493,7 +555,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 
 - (UIImage *)andy_blurImageWithRadius:(CGFloat)radius
 {
-    return [self applyBlurWithRadius:radius
+    return [self andy_applyBlurWithRadius:radius
                            tintColor:[UIColor colorWithWhite:0 alpha:0.0]
                saturationDeltaFactor:1.4
                            maskImage:nil];
@@ -502,7 +564,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 
 - (UIImage *)andy_blurImageWithMask:(UIImage *)maskImage
 {
-    return [self applyBlurWithRadius:20
+    return [self andy_applyBlurWithRadius:20
                            tintColor:[UIColor colorWithWhite:0 alpha:0.0]
                saturationDeltaFactor:1.4
                            maskImage:maskImage];
@@ -518,7 +580,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 
 // 核心代码
-- (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage
+- (UIImage *)andy_applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage
 {
     // Check pre-conditions.
     if (self.size.width < 1 || self.size.height < 1)
@@ -696,7 +758,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
                           atFrame:(CGRect)frame
 {
     UIImage *blurredFrame = \
-    [[self croppedImageAtFrame:frame] applyBlurWithRadius:blurRadius
+    [[self croppedImageAtFrame:frame] andy_applyBlurWithRadius:blurRadius
                                                 tintColor:tintColor
                                     saturationDeltaFactor:saturationDeltaFactor
                                                 maskImage:maskImage];
@@ -762,6 +824,14 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
                                 blue:((CGFloat)rgba[2])/255.0
                                alpha:((CGFloat)rgba[3])/255.0];
     }
+}
+
+//保存到相册
+- (void)saveToCameraRoll:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler
+{
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        [PHAssetChangeRequest creationRequestForAssetFromImage:self];
+    } completionHandler:completionHandler];
 }
 
 @end

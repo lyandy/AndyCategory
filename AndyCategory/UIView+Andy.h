@@ -32,6 +32,12 @@
 
 + (instancetype)andy_viewFromXib;
 
+- (void)andy_drawShadow;
+
+- (void)andy_drawShadowWithColor:(UIColor *)shadowColor;
+
+- (void)andy_hideShadow;
+
 /**
  *  判断self和view是否重叠
  */

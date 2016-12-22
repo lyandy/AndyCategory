@@ -16,4 +16,13 @@
 // 获取当前对象的类名
 - (NSString *)andy_className;
 
+- (instancetype)andy_performSelector:(SEL)selector withObjects:(NSArray *)objects;
+
+- (UIViewController *)andy_topViewController;
+
+/**
+ @brief 添加一个block,当该对象释放时被调用
+ **/
+- (void)andy_guardDeallocBlock:(void(^)(void))block;
+
 @end

@@ -43,6 +43,9 @@
 // 获取开机时间
 + (double)andy_bootTime;
 
+// 获取是否是iPhone
++ (double)andy_isIPhone;
+
 // 获取可用空间大小
 + (double)andy_freeDiskSpace;
 
@@ -78,5 +81,7 @@
 
 // 根据域名获取IP地址   youyouyang.cn--->139.129.209.214
 + (NSArray *)andy_ipAddress:(NSString *)hostName;
+
++ (BOOL)andy_isPad;
 
 @end

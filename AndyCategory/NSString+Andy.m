@@ -378,6 +378,28 @@
     return nil;
 }
 
+//- (NSString *)andy_mimeType
+//{
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:self]) {
+//        return nil;
+//    }
+//    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge  CFStringRef)[self pathExtension], NULL);
+//    CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+//    CFRelease(UTI);
+//    if (!MIMEType) {
+//        return @"application/octet-stream";
+//    }
+//    return (__bridge NSString *)MIMEType;
+//}
+
+- (NSString *)andy_mimeType2
+{
+    NSURLResponse *response = nil;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:self]];
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    return response.MIMEType;
+}
+
 @end
 
 @implementation NSString (ParametersSafe)
