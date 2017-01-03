@@ -9,5 +9,6 @@
 #ifndef Global_h
 #define Global_h
 
+#import "AndyCategory.h"
 
 #endif /* Global_h */

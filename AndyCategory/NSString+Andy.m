@@ -400,6 +400,27 @@
     return response.MIMEType;
 }
 
+- (NSString *)andy_pinyin
+{
+    return [self pinyinWithTone:NO];
+}
+
+- (NSString *)andy_pinyinAndTone
+{
+    return [self pinyinWithTone:YES];
+}
+
+- (NSString *)pinyinWithTone:(BOOL)tone
+{
+    NSMutableString *string = [self mutableCopy];
+    CFStringTransform((__bridge CFMutableStringRef)string,NULL,kCFStringTransformMandarinLatin,NO);
+    if (!tone)
+    {
+        CFStringTransform((__bridge CFMutableStringRef)string,NULL,kCFStringTransformStripDiacritics,NO);
+    }
+    return [[NSString alloc] initWithString:string];
+}
+
 @end
 
 @implementation NSString (ParametersSafe)

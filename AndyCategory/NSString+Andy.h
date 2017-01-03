@@ -110,6 +110,16 @@
 //- (NSString *)andy_mimeType;
 - (NSString *)andy_mimeType2;
 
+/*
+ 返回汉字拼音,无声调
+ */
+- (NSString *)andy_pinyin;
+
+/*
+ 返回汉字拼音,包含声调
+ */
+- (NSString *)andy_pinyinAndTone;
+
 @end
 
 // oc 语言 是一个很严密的语言，不那么宽松，所以逻辑如果处理不好的时候，在各种数据类型转换、变化时候会导致各种闪退，比如说字典的value不能为nil,数组越界，字符串截取失败等等

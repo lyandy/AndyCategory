@@ -16,4 +16,9 @@
 - (NSData *)andy_aes256_encrypt:(NSString *)key;
 - (NSData *)andy_aes256_decrypt:(NSString *)key;
 
+/**
+ @brief 返回有效的UTF8编码的NSData数据,替换掉无效的编码
+ **/
+- (NSData *)andy_UTF8Data;
+
 @end

@@ -25,4 +25,6 @@
 #import "UIViewController+Andy.h"
 #import "UIWebView+Andy.h"
 #import "SVProgressHUD+Andy.h"
+#import "NSTimer+Andy.h"
+#import "NSFileManager+Andy.h"
 
