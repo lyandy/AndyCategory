@@ -12,44 +12,44 @@
 @interface NSString (Andy)
 
 // 对比两个字符串内容是否一致
-- (BOOL)andy_equals:(NSString *)string;
+- (BOOL)andy_equals:(NSString * __nullable)string;
 
 // 判断字符串是否以指定的前缀开头
-- (BOOL)andy_startsWith:(NSString *)prefix;
+- (BOOL)andy_startsWith:(NSString * __nullable)prefix;
 
 // 判断字符串是否以指定的后缀结束
-- (BOOL)andy_endsWith:(NSString *)suffix;
+- (BOOL)andy_endsWith:(NSString * __nullable)suffix;
 
 // 转换成小写
-- (NSString *)andy_toLowerCase;
+- (nullable NSString *)andy_toLowerCase;
 
 // 转换成大写
-- (NSString *)andy_toUpperCase;
+- (nonnull NSString *)andy_toUpperCase;
 
 // 截取字符串前后空格
-- (NSString *)andy_trim;
+- (nonnull NSString *)andy_trim;
 
 // 用指定分隔符将字符串分割成数组
-- (NSArray *)andy_split:(NSString *)separator;
+- (nonnull NSArray *)andy_split:(NSString * __nullable)separator;
 
 // 用指定字符串替换原字符串
-- (NSString *)andy_replaceAll:(NSString *)oldStr with:(NSString *)newStr;
+- (nonnull NSString *)andy_replaceAll:(NSString * __nullable)oldStr with:(NSString * __nullable)newStr;
 
 // 从指定的开始位置和结束位置开始截取字符串
-- (NSString *)andy_substringFromIndex:(int)begin toIndex:(int)end;
+- (nonnull NSString *)andy_substringFromIndex:(int)begin toIndex:(int)end;
 
 /**
  *  md5加密
  */
-- (NSString *)andy_md5HexDigest;
+- (nonnull NSString *)andy_md5HexDigest;
 
 /**
  *  sha1加密
  */
-- (NSString *)andy_sha1HexDigest;
+- (nonnull NSString *)andy_sha1HexDigest;
 
 // UTF-8转码
-- (NSString *)andy_UTF8String;
+- (nonnull NSString *)andy_UTF8String;
 
 // 正则IP地址
 - (BOOL)andy_isValidIPAdddress;
@@ -85,13 +85,13 @@
 - (BOOL)andy_isValidCarNumber;
 
 // 格式化手机号
-- (NSString *)andy_standardPhone;
+- (nonnull NSString *)andy_standardPhone;
 
 // 格式化手机号
-- (NSString *)andy_standardTele;
+- (nonnull NSString *)andy_standardTele;
 
 // 手机号*处理
-- (NSString *)andy_securitPhone;
+- (nonnull NSString *)andy_securitPhone;
 
 /**
  *  返回字符串所占用的尺寸
@@ -99,26 +99,36 @@
  *  @param font    字体
  *  @param maxSize 最大尺寸
  */
-- (CGSize)andy_sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font maxSize:(CGSize)maxSize;
 
 // AES加密
-- (NSString *)andy_aes256_encrypt:(NSString *)key;
+- (nonnull NSString *)andy_aes256_encrypt:(NSString * __nullable)key;
 
 // AES解密
-- (NSString *)andy_aes256_decrypt:(NSString *)key;
+- (nonnull NSString *)andy_aes256_decrypt:(NSString * __nullable)key;
 
 //- (NSString *)andy_mimeType;
-- (NSString *)andy_mimeType2;
+- (nonnull NSString *)andy_mimeType2;
 
 /*
  返回汉字拼音,无声调
  */
-- (NSString *)andy_pinyin;
+- (nonnull NSString *)andy_pinyin;
 
 /*
  返回汉字拼音,包含声调
  */
-- (NSString *)andy_pinyinAndTone;
+- (nonnull NSString *)andy_pinyinAndTone;
+
+- (nullable NSString *)andy_base64EncodedString;
+
++ (nullable NSString *)andy_stringWithBase64EncodedString:( NSString * __nullable )base64EncodedString;
+
+- (nullable NSString *)andy_stringByURLEncode;
+
+- (nullable NSString *)andy_stringByURLDecode;
+
+- (nullable NSString *)andy_stringByEscapingHTML;
 
 @end
 
@@ -127,12 +137,19 @@
 @interface NSString (ParametersSafe)
 
 // 安全初始化方法
-- (instancetype)andy_safe_initWithString:(NSString *)aString;
+- (nullable instancetype)andy_safe_initWithString:(NSString * __nullable)aString;
 
 // 安全截取方法
-- (NSString *)andy_safe_substringToIndex:(NSInteger)to;
+- (nullable NSString *)andy_safe_substringToIndex:(NSInteger)to;
 
 // 安全截取方法
-- (NSString *)andy_safe_substringFromIndex:(NSInteger)from;
+- (nullable NSString *)andy_safe_substringFromIndex:(NSInteger)from;
+
+@end
+
+@interface NSAttributedString (Andy)
+
+// 富文本设置行高
+- (nonnull NSAttributedString *)andy_adjustlineSpace:(float)space;
 
 @end

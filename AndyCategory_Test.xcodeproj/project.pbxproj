@@ -16,10 +16,11 @@
 		B6A789D31D5469060051CCF1 /* UIWebView+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D21D5469060051CCF1 /* UIWebView+Andy.m */; };
 		B6A789D61D546B5E0051CCF1 /* UIViewController+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */; };
 		B6A789D91D546D2B0051CCF1 /* UITextField+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */; };
-		B6A789DC1D546FF70051CCF1 /* NSAttributedString+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */; };
 		B6A789DF1D5470D20051CCF1 /* UIColor+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */; };
 		B6B707901E1B3C2C00347B96 /* NSFileManager+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B7078D1E1B3C2C00347B96 /* NSFileManager+Andy.m */; };
 		B6B707911E1B3C2C00347B96 /* NSTimer+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B7078F1E1B3C2C00347B96 /* NSTimer+Andy.m */; };
+		B6B707941E1B906D00347B96 /* NSArray+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B707931E1B906D00347B96 /* NSArray+Andy.m */; };
+		B6B707971E1B926700347B96 /* NSDictionary+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B707961E1B926700347B96 /* NSDictionary+Andy.m */; };
 		B6FDF88A1D53299100EE6FC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8891D53299100EE6FC0 /* main.m */; };
 		B6FDF8951D53299100EE6FC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FDF8941D53299100EE6FC0 /* Assets.xcassets */; };
 		B6FDF8A31D53299100EE6FC0 /* AndyCategory_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8A21D53299100EE6FC0 /* AndyCategory_TestTests.m */; };
@@ -76,14 +77,16 @@
 		B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Andy.m"; sourceTree = "<group>"; };
 		B6A789D71D546D2B0051CCF1 /* UITextField+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Andy.h"; sourceTree = "<group>"; };
 		B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Andy.m"; sourceTree = "<group>"; };
-		B6A789DA1D546FF70051CCF1 /* NSAttributedString+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Andy.h"; sourceTree = "<group>"; };
-		B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Andy.m"; sourceTree = "<group>"; };
 		B6A789DD1D5470D20051CCF1 /* UIColor+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Andy.h"; sourceTree = "<group>"; };
 		B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Andy.m"; sourceTree = "<group>"; };
 		B6B7078C1E1B3C2C00347B96 /* NSFileManager+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Andy.h"; sourceTree = "<group>"; };
 		B6B7078D1E1B3C2C00347B96 /* NSFileManager+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Andy.m"; sourceTree = "<group>"; };
 		B6B7078E1E1B3C2C00347B96 /* NSTimer+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Andy.h"; sourceTree = "<group>"; };
 		B6B7078F1E1B3C2C00347B96 /* NSTimer+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Andy.m"; sourceTree = "<group>"; };
+		B6B707921E1B906D00347B96 /* NSArray+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Andy.h"; sourceTree = "<group>"; };
+		B6B707931E1B906D00347B96 /* NSArray+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Andy.m"; sourceTree = "<group>"; };
+		B6B707951E1B926700347B96 /* NSDictionary+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Andy.h"; sourceTree = "<group>"; };
+		B6B707961E1B926700347B96 /* NSDictionary+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Andy.m"; sourceTree = "<group>"; };
 		B6FDF8851D53299100EE6FC0 /* AndyCategory_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AndyCategory_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FDF8891D53299100EE6FC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6FDF8941D53299100EE6FC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -290,10 +293,12 @@
 				B6A789D51D546B5E0051CCF1 /* UIViewController+Andy.m */,
 				B6A789D71D546D2B0051CCF1 /* UITextField+Andy.h */,
 				B6A789D81D546D2B0051CCF1 /* UITextField+Andy.m */,
-				B6A789DA1D546FF70051CCF1 /* NSAttributedString+Andy.h */,
-				B6A789DB1D546FF70051CCF1 /* NSAttributedString+Andy.m */,
 				B6A789DD1D5470D20051CCF1 /* UIColor+Andy.h */,
 				B6A789DE1D5470D20051CCF1 /* UIColor+Andy.m */,
+				B6B707921E1B906D00347B96 /* NSArray+Andy.h */,
+				B6B707931E1B906D00347B96 /* NSArray+Andy.m */,
+				B6B707951E1B926700347B96 /* NSDictionary+Andy.h */,
+				B6B707961E1B926700347B96 /* NSDictionary+Andy.m */,
 			);
 			path = AndyCategory;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6B707941E1B906D00347B96 /* NSArray+Andy.m in Sources */,
 				B6A789D61D546B5E0051CCF1 /* UIViewController+Andy.m in Sources */,
 				B6FDF8DC1D5336EC00EE6FC0 /* UIImageView+Andy.m in Sources */,
 				B6A789D01D544ED60051CCF1 /* UIButton+Andy.m in Sources */,
@@ -504,11 +510,11 @@
 				B6FDF88A1D53299100EE6FC0 /* main.m in Sources */,
 				B6FDF8C91D53310A00EE6FC0 /* AndyMainViewController.m in Sources */,
 				B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */,
-				B6A789DC1D546FF70051CCF1 /* NSAttributedString+Andy.m in Sources */,
 				B6A789D91D546D2B0051CCF1 /* UITextField+Andy.m in Sources */,
 				B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */,
 				B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */,
 				B6A789CD1D544EB10051CCF1 /* UILabel+Andy.m in Sources */,
+				B6B707971E1B926700347B96 /* NSDictionary+Andy.m in Sources */,
 				D7724ACA1D549C570087B037 /* NSObject+Andy.m in Sources */,
 				B6B707901E1B3C2C00347B96 /* NSFileManager+Andy.m in Sources */,
 				B6A789DF1D5470D20051CCF1 /* UIColor+Andy.m in Sources */,

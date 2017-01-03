@@ -40,6 +40,11 @@
     return array;
 }
 
++ (NSString *)andy_className
+{
+    return NSStringFromClass(self);
+}
+
 - (NSString *)andy_className
 {
     return [NSString stringWithUTF8String:class_getName([self class])];

@@ -10,6 +10,68 @@
 
 @implementation NSDate (Andy)
 
+- (NSInteger)andy_year {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self] year];
+}
+
+- (NSInteger)andy_month {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:self] month];
+}
+
+- (NSInteger)andy_day {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:self] day];
+}
+
+- (NSInteger)andy_hour {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self] hour];
+}
+
+- (NSInteger)andy_minute {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitMinute fromDate:self] minute];
+}
+
+- (NSInteger)andy_second {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] second];
+}
+
+- (NSInteger)andy_nanosecond {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] nanosecond];
+}
+
+- (NSInteger)andy_weekday {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self] weekday];
+}
+
+- (NSInteger)andy_weekdayOrdinal {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekdayOrdinal fromDate:self] weekdayOrdinal];
+}
+
+- (NSInteger)andy_weekOfMonth {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfMonth fromDate:self] weekOfMonth];
+}
+
+- (NSInteger)andy_weekOfYear {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfYear fromDate:self] weekOfYear];
+}
+
+- (NSInteger)andy_yearForWeekOfYear {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitYearForWeekOfYear fromDate:self] yearForWeekOfYear];
+}
+
+- (NSInteger)andy_quarter {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] quarter];
+}
+
+- (BOOL)andy_isLeapMonth {
+    return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] isLeapMonth];
+}
+
+- (BOOL)andy_isLeapYear {
+    NSUInteger year = self.andy_year;
+    return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)));
+}
+
+
 /* 是否为今天 */
 - (BOOL)andy_isToday
 {
@@ -300,7 +362,63 @@
     return range.length;
 }
 
-- (NSDate *)css_dateOffsetMonth:(NSInteger)offset
+- (NSDate *)css_dateOffsetYears:(NSInteger)offset
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.year = offset;
+    
+    return [calendar dateByAddingComponents:comps toDate:self options:0];
+}
+
+- (NSDate *)css_dateOffsetWeeks:(NSInteger)offset
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.weekOfYear = offset;
+    
+    return [calendar dateByAddingComponents:comps toDate:self options:0];
+
+}
+
+- (NSDate *)css_dateOffsetHours:(NSInteger)offset
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.hour = offset;
+    
+    return [calendar dateByAddingComponents:comps toDate:self options:0];
+}
+
+- (NSDate *)css_dateOffsetMinutes:(NSInteger)offset
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.minute = offset;
+    
+    return [calendar dateByAddingComponents:comps toDate:self options:0];
+}
+
+- (NSDate *)css_dateOffsetSeconds:(NSInteger)offset
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    comps.second = offset;
+    
+    return [calendar dateByAddingComponents:comps toDate:self options:0];
+}
+
+- (NSDate *)css_dateOffsetMonths:(NSInteger)offset
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
@@ -311,7 +429,7 @@
     return [calendar dateByAddingComponents:comps toDate:self options:0];
 }
 
-- (NSDate *)css_dateOffsetDay:(NSInteger)offset
+- (NSDate *)css_dateOffsetDays:(NSInteger)offset
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
@@ -361,7 +479,7 @@
     }
     else
     {
-        NSDate *date = [self css_dateOffsetMonth:1];
+        NSDate *date = [self css_dateOffsetMonths:1];
         return [NSDate css_dateInYear:date.components.year month:date.components.month day:nextDay];
     }
 }
@@ -378,7 +496,7 @@
     }
     NSString *todayString = [self css_dateYMDString];
     NSDate *today = [dateYMDFormatter dateFromString:todayString];
-    return [today css_dateOffsetDay:offset];
+    return [today css_dateOffsetDays:offset];
 }
 
 @end

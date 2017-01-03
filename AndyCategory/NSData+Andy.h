@@ -11,14 +11,20 @@
 
 @interface NSData (Andy)
 
-- (NSData *)andy_dataFromImage:(UIImage *)image compressionQuality:(CGFloat)compressionQuality;
+- (nullable NSData *)andy_dataFromImage:(UIImage * __nonnull)image compressionQuality:(CGFloat)compressionQuality;
 
-- (NSData *)andy_aes256_encrypt:(NSString *)key;
-- (NSData *)andy_aes256_decrypt:(NSString *)key;
+- (nullable NSData *)andy_aes256_encrypt:(NSString * __nullable)key;
+- (nullable NSData *)andy_aes256_decrypt:(NSString * __nullable)key;
 
 /**
  @brief 返回有效的UTF8编码的NSData数据,替换掉无效的编码
  **/
-- (NSData *)andy_UTF8Data;
+- (nullable NSData *)andy_UTF8Data;
+
+- (nullable NSString *)andy_utf8String;
+
+- (nullable NSString *)andy_base64EncodedString;
+
++ (nullable NSData *)andy_dataWithBase64EncodedString:(NSString * _Nullable)base64EncodedString;
 
 @end

@@ -10,6 +10,24 @@
 
 @interface NSDate (Andy)
 
+@property (nonatomic, readonly) NSInteger andy_year; ///< Year component
+@property (nonatomic, readonly) NSInteger andy_month; ///< Month component (1~12)
+@property (nonatomic, readonly) NSInteger andy_day; ///< Day component (1~31)
+@property (nonatomic, readonly) NSInteger andy_hour; ///< Hour component (0~23)
+@property (nonatomic, readonly) NSInteger andy_minute; ///< Minute component (0~59)
+@property (nonatomic, readonly) NSInteger andy_second; ///< Second component (0~59)
+@property (nonatomic, readonly) NSInteger andy_nanosecond; ///< Nanosecond component
+@property (nonatomic, readonly) NSInteger andy_weekday; ///< Weekday component (1~7, first day is based on user setting)
+@property (nonatomic, readonly) NSInteger andy_weekdayOrdinal; ///< WeekdayOrdinal component
+@property (nonatomic, readonly) NSInteger andy_weekOfMonth; ///< WeekOfMonth component (1~5)
+@property (nonatomic, readonly) NSInteger andy_weekOfYear; ///< WeekOfYear component (1~53)
+@property (nonatomic, readonly) NSInteger andy_yearForWeekOfYear; ///< YearForWeekOfYear component
+@property (nonatomic, readonly) NSInteger andy_quarter; ///< Quarter component
+@property (nonatomic, readonly) BOOL andy_isLeapMonth; ///< Weather the month is leap month
+@property (nonatomic, readonly) BOOL andy_isLeapYear; ///< Weather the year is leap year
+@property (nonatomic, readonly) BOOL andy_isToday; ///< Weather date is today (based on current locale)
+@property (nonatomic, readonly) BOOL andy_isYesterday; ///< Weather date is yesterday (based on current
+
 /**
  *  是否为今天
  */
@@ -90,19 +108,29 @@
  */
 - (NSInteger)css_daysInCurrentMonth;
 
+- (NSDate *)css_dateOffsetYears:(NSInteger)offset;
+
+- (NSDate *)css_dateOffsetWeeks:(NSInteger)offset;
+
+- (NSDate *)css_dateOffsetHours:(NSInteger)offset;
+
+- (NSDate *)css_dateOffsetMinutes:(NSInteger)offset;
+
+- (NSDate *)css_dateOffsetSeconds:(NSInteger)offset;
+
 /**
  *  获取当前日期所在月的下offset个月
  *
  *  @return 获得时间
  */
-- (NSDate *)css_dateOffsetMonth:(NSInteger)offset;
+- (NSDate *)css_dateOffsetMonths:(NSInteger)offset;
 
 /**
  *  获取当前日期的下offset个日期
  *
  *  @return 获得时间
  */
-- (NSDate *)css_dateOffsetDay:(NSInteger)offset;
+- (NSDate *)css_dateOffsetDays:(NSInteger)offset;
 
 /**
  *  获取当前日期距离下个date的天数

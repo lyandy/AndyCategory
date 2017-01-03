@@ -14,6 +14,8 @@
 // 获取当前对象的所有属性
 - (NSArray *)andy_properties;
 
++ (NSString *)andy_className;
+
 // 获取当前对象的类名
 - (NSString *)andy_className;
 
