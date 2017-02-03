@@ -835,4 +835,194 @@ UIImage* rotateUIImage(const UIImage* src, float angleDegrees)
     } completionHandler:completionHandler];
 }
 
+#pragma mark - 生成原始二维码
++ (void)andy_qrImageWithString:(NSString *)string size:(CGSize)size completion:(void (^)(UIImage *qrImage))completion{
+    
+    [self andy_qrImageWithString:string size:size iconImage:nil scale:0 completion:completion];
+}
+
+#pragma mark - 带图片二维码(图片为默认比例0.2、默认方形)
++ (void)andy_qrImageWithString:(NSString *)string size:(CGSize)size iconImage:(UIImage *)iconImage completion:(void (^)(UIImage * qrImage))completion {
+    
+    [self andy_qrImageWithString:string size:size iconImage:iconImage scale:0.20 completion:completion];
+}
+
+#pragma mark - 带图片二维码（图片指定比例、方形）
++ (void)andy_qrImageWithString:(NSString *)string size:(CGSize)size iconImage:(UIImage *)iconImage scale:(CGFloat)scale completion:(void (^)(UIImage * qrImage))completion {
+    // 传入 AndyCenterImageTypeSquare
+    [self andy_qrImageWithString:string size:size CenterImageType:AndyCenterImageTypeSquare iconImage:iconImage scale:scale completion:completion];
+}
+
+#pragma mark - 带图片二维码（图片指定比例、指定CenterImgType）
++ (void)andy_qrImageWithString:(NSString *)string size:(CGSize)size CenterImageType:(AndyCenterImageType)type iconImage:(UIImage *)iconImage scale:(CGFloat)scale completion:(void (^)(UIImage *qrImage))completion{
+    // 断言
+    NSAssert(completion, @"completion must be implemented");
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        // 获取输出文件
+        CIImage *ciImage = [UIImage andy_qrImageWithString:string];
+        
+        // 放大为高清图
+        UIImage *qrImage = [UIImage andy_ciImage:ciImage size:size];
+        
+        // 添加中间小图片
+        qrImage = [self andy_qrcodeImage:qrImage iconImage:iconImage centerImageType:type scale:scale];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 回调
+            completion(qrImage);
+        });
+    });
+    
+}
+
+
+#pragma mark - 给二维码设置背景（默认方形）
++ (void)andy_qrImage:(UIImage *)qrImage backgroundImage:(UIImage *)backgroundImage backgroundImageSize:(CGSize)backgroundImageSize completion:(void (^)(UIImage *qrImage))completion{
+    [self andy_qrIamge:qrImage centerImageType:AndyCenterImageTypeSquare backgroundImage:backgroundImage backgroundImageSize:backgroundImageSize completion:completion];
+}
+#pragma mark - 给二维码设置背景
++ (void)andy_qrIamge:(UIImage *)qrImage centerImageType:(AndyCenterImageType)type backgroundImage:(UIImage *)backgroundImage backgroundImageSize:(CGSize)backgroundImageSize completion:(void (^)(UIImage *qrImage))completion{
+    
+    // 断言
+    NSAssert(completion, @"completion must be implemented");
+    // 为二维码添加自定义背景
+    
+    __block UIImage * bgImg;
+    __block UIImage * qrImg;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // 保证背景、二维码两者的像素比例合适，分辨率跟newImage一致
+        bgImg = [self andy_scaleImage:backgroundImage toSize:backgroundImageSize];
+        qrImg = [self andy_scaleImage:qrImage toSize:qrImage.size];
+        
+        UIImage *newImage = [self andy_qrcodeImage:bgImg iconImage:qrImg centerImageType:type scale:1.0 * qrImg.size.width /  bgImg.size.width];;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            completion(newImage);
+        });
+    });
+    
+}
+
+#pragma mark - 字符串生成CIImage
++ (CIImage *)andy_qrImageWithString:(NSString *)string{
+    // 创建过滤器
+    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    
+    // 设置默认过滤属性
+    [qrFilter setDefaults];
+    
+    // 使用KVC设置属性 (将字符串转为data)
+    [qrFilter setValue:[string dataUsingEncoding:NSUTF8StringEncoding] forKey:@"inputMessage"];
+    
+    // 获取输出文件
+    CIImage *ciImage = qrFilter.outputImage;
+    
+    return ciImage;
+}
+
+
+#pragma mark  将CIImage转为高清的UIImage
++ (UIImage *)andy_ciImage:(CIImage *)ciImage size:(CGSize)size {
+    //
+    CGRect extent = CGRectIntegral(ciImage.extent);
+    // 倍数
+    CGFloat scale = MIN(size.width/CGRectGetWidth(extent), size.height/CGRectGetHeight(extent));
+    
+    // 1.创建bitmap;
+    size_t width = CGRectGetWidth(extent) * scale;
+    size_t height = CGRectGetHeight(extent) * scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:ciImage fromRect:extent];
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    // 2.保存bitmap到图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef);
+    CGImageRelease(bitmapImage);
+    //return [UIImage imageWithCGImage:scaledImage]; // 分辨率为72
+    return [UIImage imageWithCGImage:scaledImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]; // 分辨率根据屏幕分辨率扩大相应倍数 72 * 倍数
+}
+
+#pragma mark  小图片二维码合并
++ (UIImage *)andy_qrcodeImage:(UIImage *)qrImage iconImage:(UIImage *)iconImage centerImageType:(AndyCenterImageType)type scale:(CGFloat)scale {
+    // 图片放大倍数等于屏幕分辨类
+    CGFloat screenScale = [UIScreen mainScreen].scale; // 是屏幕缩放率
+    CGRect rect = CGRectMake(0, 0, qrImage.size.width * screenScale, qrImage.size.height * screenScale);
+    
+    UIGraphicsBeginImageContextWithOptions(rect.size, YES, screenScale);
+    
+    [qrImage drawInRect:rect];
+    
+    if(iconImage)
+    { // 如果有图片
+        
+        CGSize avatarSize = CGSizeMake(rect.size.width * scale, rect.size.height * scale);
+        CGFloat x = (rect.size.width - avatarSize.width) * 0.5;
+        CGFloat y = (rect.size.height - avatarSize.height) * 0.5;
+        if (type == AndyCenterImageTypeCircle)
+        { // 如果为圆形
+            
+            iconImage = [iconImage andy_circleImage];
+            
+        }
+        else if (type == AndyCenterImageTypeCornorRadious)
+        {
+            iconImage = [iconImage andy_cornerRadius:5.0f size:avatarSize];
+        }
+        
+        [iconImage drawInRect:CGRectMake(x, y, avatarSize.width, avatarSize.height)];
+    }
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return [UIImage imageWithCGImage:result.CGImage scale:screenScale orientation:UIImageOrientationUp] ;
+}
+
+
+
+#pragma mark - 图片切圆角
+- (UIImage *)andy_cornerRadius:(CGFloat)radius size:(CGSize)size
+{
+    CGRect rect = (CGRect){0.f, 0.f, size};
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
+    
+    CGContextAddPath(UIGraphicsGetCurrentContext(),
+                     [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath);
+    
+    CGContextClip(UIGraphicsGetCurrentContext());
+    
+    [self drawInRect:rect];
+    
+    UIImage *output = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return output;
+}
+
+#pragma mark  高斯模糊图片
++ (UIImage *)andy_createGaussianImage:(UIImage *)image
+{
+    CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:kCIInputImageKey, inputImage,@"inputRadius", @(70.5), nil];
+    
+    CIImage *outputImage = filter.outputImage;
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef outImage = [context createCGImage:outputImage fromRect:[inputImage extent]];
+    UIImage *resultImage = [UIImage imageWithCGImage:outImage];
+    CGImageRelease(outImage);
+    
+    return resultImage;
+}
+
+
 @end

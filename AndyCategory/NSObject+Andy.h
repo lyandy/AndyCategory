@@ -28,4 +28,13 @@
  **/
 - (void)andy_guardDeallocBlock:(void(^)(void))block;
 
+
+-(NSString *)andy_AppVersion;
+
+-(NSInteger)andy_AppBuild;
+
+-(NSString *)andy_AppIdentifier;
+
+-(NSString *)andy_AppCurrentLanguage;
+
 @end

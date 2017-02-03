@@ -12,4 +12,6 @@
 
 - (void)andy_setTextL:(NSString *)key;
 
+@property (assign,nonatomic) NSUInteger andy_maxLength;
+
 @end

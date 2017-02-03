@@ -79,4 +79,25 @@
     [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateDisabled];
 }
 
+- (void)andy_actionBlock:(AndyButtonActionBlock)actionBlock
+{
+    [self andy_controlEvents:UIControlEventTouchUpInside withActionBlock:actionBlock];
+}
+
+- (void)andy_controlEvents:(UIControlEvents)events withActionBlock:(AndyButtonActionBlock)actionBlock
+{
+    [self addTarget:self action:@selector(andy_buttonAction:) forControlEvents:events];
+    objc_setAssociatedObject(self, @"AndyButtonActionBlockKey", actionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void)andy_buttonAction:(id)sender {
+    AndyButtonActionBlock actionBlock = (AndyButtonActionBlock)objc_getAssociatedObject(sender, @"AndyButtonActionBlockKey");
+    if (actionBlock)
+    {
+        self.enabled = NO;
+        actionBlock(sender);
+        self.enabled = YES;
+    }
+}
+
 @end

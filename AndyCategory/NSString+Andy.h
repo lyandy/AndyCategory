@@ -51,6 +51,12 @@
 // UTF-8转码
 - (nonnull NSString *)andy_UTF8String;
 
+//判断是否为整形
++(BOOL)andy_isValidPureInt:(NSString * __nullable)string;
+
+//判断是否为浮点形
++(BOOL)andy_isValidPureFloat:(NSString * _Nullable)string;
+
 // 正则IP地址
 - (BOOL)andy_isValidIPAdddress;
 
@@ -129,6 +135,25 @@
 - (nullable NSString *)andy_stringByURLDecode;
 
 - (nullable NSString *)andy_stringByEscapingHTML;
+
+//判空字符串
++ (BOOL)andy_isBlankString:(NSString * __nullable)string;
+
++ (BOOL)andy_stringContainsEmoji:(NSString * __nullable)string;
+
+//字符转emoji
+- (nullable NSString *)andy_stringByReplacingEmojiCheatCodesWithUnicode;
+
+//emoji转字符
+- (nullable NSString *)andy_stringByReplacingEmojiUnicodeWithCheatCodes;
+
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width;
+
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width lineBreakMode:(NSInteger)lineBreakMode;
+
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToSize:(CGSize)size;
+
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToSize:(CGSize)size lineBreakMode:(NSInteger)lineBreakMode;
 
 @end
 

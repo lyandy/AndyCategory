@@ -8,6 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, AndyCenterImageType) {
+    // 方形
+    AndyCenterImageTypeSquare,
+    // 圆形
+    AndyCenterImageTypeCircle,
+    // 切圆角
+    AndyCenterImageTypeCornorRadious
+};
+
+typedef NS_ENUM(NSUInteger, AndyQRImageType) {
+    // 方形
+    AndyQRImageTypeSquare,
+    // 圆形
+    AndyQRImageTypeCircle,
+    // 切圆角
+    AndyQRImageTypeCornorRadious
+};
+
 @interface UIImage (Andy)
 
 /**
@@ -85,5 +103,35 @@
 
 //保存到相册
 - (void)saveToCameraRoll:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler;
+
+#pragma mark - 生成原始二维码
++ (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;
+
+#pragma mark - 带图片二维码(图片为默认比例0.2、默认方形)
++ (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size iconImage:(UIImage * __nullable)iconImage completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;
+
+#pragma mark - 带图片二维码（图片指定比例、方形）
++ (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size iconImage:(UIImage * __nullable)iconImage scale:(CGFloat)scale completion:(nonnull void (^)(UIImage * __nullable qrImage))completion ;
+
+#pragma mark - 带图片二维码（图片指定比例、指定CenterImgType）
++ (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size CenterImageType:(AndyCenterImageType)type iconImage:(UIImage * __nullable)iconImage scale:(CGFloat)scale completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;
+
+#pragma mark - 给二维码设置背景（默认方形）
++ (void)andy_qrImage:(UIImage * __nullable)qrImage backgroundImage:(UIImage * __nullable)backgroundImage backgroundImageSize:(CGSize)backgroundImageSize completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;
+
+#pragma mark - 给二维码设置背景
++ (void)andy_qrIamge:(UIImage * __nullable)qrImage centerImageType:(AndyCenterImageType)type backgroundImage:(UIImage * __nullable)backgroundImage backgroundImageSize:(CGSize)backgroundImageSize completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;
+
+#pragma mark - 字符串生成CIImage
++ (CIImage * __nullable)andy_qrImageWithString:(NSString * __nullable)string;
+
+#pragma mark  将CIImage转为高清的UIImage
++ (UIImage * __nullable)andy_ciImage:(CIImage * __nullable)ciImage size:(CGSize)size;
+
+#pragma mark - 图片切圆角
+- (UIImage * __nullable)andy_cornerRadius:(CGFloat)radius size:(CGSize)size;
+
+#pragma mark  高斯模糊图片
++ (UIImage * __nullable)andy_createGaussianImage:(UIImage * __nullable)image;
 
 @end

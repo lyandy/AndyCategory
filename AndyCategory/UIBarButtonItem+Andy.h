@@ -12,4 +12,8 @@
 
 + (instancetype)andy_itemWithImage:(NSString *)image highImage:(NSString *)highImage target:(id)target action:(SEL)action;
 
++ (instancetype)andy_itemWithImage:(NSString *)image highImage:(NSString *)highImage actionBlock:(void (^)(id sender))actionBlock;
+
++ (instancetype)andy_itemWithTitle:(NSString *)title style:(UIBarButtonItemStyle)style actionBlock:(void (^)(id sender))actionBlock;
+
 @end
