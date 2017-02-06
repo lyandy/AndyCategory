@@ -481,12 +481,13 @@ char* printEnv(void)
 
 + (NSArray *)andy_ipAddress:(NSString *)hostName
 {
-    Boolean result;
+    Boolean result = NO;
     CFHostRef hostRef;
     CFArrayRef addresses = NULL;
     NSMutableArray *ipAddress = [[NSMutableArray alloc] init];
     
     hostRef = CFHostCreateWithName(kCFAllocatorDefault, (__bridge CFStringRef)hostName);
+
     if (hostRef)
     {
         result = CFHostStartInfoResolution(hostRef, kCFHostAddresses, NULL); // pass an error instead of NULL here to find out why it failed
@@ -495,6 +496,7 @@ char* printEnv(void)
             addresses = CFHostGetAddressing(hostRef, &result);
         }
     }
+    
     if (result == TRUE)
     {
         
@@ -503,7 +505,7 @@ char* printEnv(void)
             
             CFDataRef ref = (CFDataRef) CFArrayGetValueAtIndex(addresses, i);
             struct sockaddr_in* remoteAddr;
-            char *ip_address;
+            char *ip_address = "";
             remoteAddr = (struct sockaddr_in*) CFDataGetBytePtr(ref);
             if (remoteAddr != NULL)
             {
@@ -512,6 +514,11 @@ char* printEnv(void)
             NSString *ip = [NSString stringWithCString:ip_address encoding:NSUTF8StringEncoding];
             [ipAddress addObject:ip];
         }
+    }
+    
+    if (hostRef != NULL)
+    {
+        CFRelease(hostRef);
     }
     
     return ipAddress;

@@ -947,8 +947,14 @@ UIImage* rotateUIImage(const UIImage* src, float angleDegrees)
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
+    CGColorSpaceRelease(cs);
     //return [UIImage imageWithCGImage:scaledImage]; // 分辨率为72
-    return [UIImage imageWithCGImage:scaledImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]; // 分辨率根据屏幕分辨率扩大相应倍数 72 * 倍数
+    
+    UIImage *image = [UIImage imageWithCGImage:scaledImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    
+    CGImageRelease(scaledImage);
+    
+    return image; // 分辨率根据屏幕分辨率扩大相应倍数 72 * 倍数
 }
 
 #pragma mark  小图片二维码合并

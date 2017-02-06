@@ -162,8 +162,6 @@
 
 - (NSInteger)andy_getNowWeekday
 {
-    
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |
@@ -178,7 +176,7 @@
     NSDate *now = [NSDate date];
     // 话说在真机上需要设置区域，才能正确获取本地日期，天朝代码:zh_CN
     calendar.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    comps = [calendar components:unitFlags fromDate:now];
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:now];
     return [comps day];
 }
 
@@ -333,7 +331,6 @@
 {
     double interval = 0;
     NSDate *beginDate = nil;
-    NSDate *endDate = nil;
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];;
     
@@ -342,7 +339,7 @@
     //分别修改为 NSDayCalendarUnit NSWeekCalendarUnit NSYearCalendarUnit
     if (ok)
     {
-        endDate = [beginDate dateByAddingTimeInterval:interval-1];
+
     }
     else
     {

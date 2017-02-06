@@ -108,10 +108,10 @@
 - (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font maxSize:(CGSize)maxSize;
 
 // AES加密
-- (nonnull NSString *)andy_aes256_encrypt:(NSString * __nullable)key;
+- (nullable NSString *)andy_aes256_encrypt:(NSString * __nullable)key;
 
 // AES解密
-- (nonnull NSString *)andy_aes256_decrypt:(NSString * __nullable)key;
+- (nullable NSString *)andy_aes256_decrypt:(NSString * __nullable)key;
 
 //- (NSString *)andy_mimeType;
 - (nonnull NSString *)andy_mimeType2;
