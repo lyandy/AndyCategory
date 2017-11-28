@@ -112,6 +112,7 @@
     {
         fittingHeight = 44;
     }
+    
     if (self.separatorStyle != UITableViewCellSeparatorStyleNone)
     {
         fittingHeight += 1.0 / [UIScreen mainScreen].scale;

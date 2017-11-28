@@ -66,8 +66,9 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 //从指定的开始位置和结束位置开始截取字符串
 - (NSString *)andy_substringFromIndex:(int)begin toIndex:(int)end
 {
-    if (end <= begin) {
-        return @"";
+    if (end <= begin)
+    {
+        return nil;
     }
     NSRange range = NSMakeRange(begin, end - begin);
     return [self substringWithRange:range];
@@ -365,7 +366,6 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
     //转换为2进制字符串
     if (result && result.length > 0)
     {
-        
         Byte *datas = (Byte*)[result bytes];
         NSMutableString *output = [NSMutableString stringWithCapacity:result.length * 2];
         for(int i = 0; i < result.length; i++)
@@ -455,7 +455,8 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 }
 
 - (NSString *)andy_stringByURLEncode {
-    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)])
+    {
         /**
          AFNetworking/AFURLRequestSerialization.m
          
@@ -479,7 +480,8 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
         NSUInteger index = 0;
         NSMutableString *escaped = @"".mutableCopy;
         
-        while (index < self.length) {
+        while (index < self.length)
+        {
             NSUInteger length = MIN(self.length - index, batchSize);
             NSRange range = NSMakeRange(index, length);
             // To avoid breaking up character sequences such as 👴🏻👮🏽
@@ -491,7 +493,9 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
             index += range.length;
         }
         return escaped;
-    } else {
+    }
+    else
+    {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
@@ -508,9 +512,12 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 }
 
 - (NSString *)andy_stringByURLDecode {
-    if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)]) {
+    if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)])
+    {
         return [self stringByRemovingPercentEncoding];
-    } else {
+    }
+    else
+    {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         CFStringEncoding en = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
@@ -527,34 +534,51 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
     }
 }
 
-- (NSString *)andy_stringByEscapingHTML {
+- (NSString *)andy_stringByEscapingHTML
+{
     NSUInteger len = self.length;
-    if (!len) return self;
-    
-    unichar *buf = malloc(sizeof(unichar) * len);
-    if (!buf) return self;
-    [self getCharacters:buf range:NSMakeRange(0, len)];
-    
-    NSMutableString *result = [NSMutableString string];
-    for (int i = 0; i < len; i++) {
-        unichar c = buf[i];
-        NSString *esc = nil;
-        switch (c) {
-            case 34: esc = @"&quot;"; break;
-            case 38: esc = @"&amp;"; break;
-            case 39: esc = @"&apos;"; break;
-            case 60: esc = @"&lt;"; break;
-            case 62: esc = @"&gt;"; break;
-            default: break;
+    if (len == 0)
+    {
+        return self;
+    }
+    else
+    {
+        unichar *buf = malloc(sizeof(unichar) * len);
+        if (buf == NULL)
+        {
+            return self;
         }
-        if (esc) {
-            [result appendString:esc];
-        } else {
-            CFStringAppendCharacters((CFMutableStringRef)result, &c, 1);
+        else
+        {
+            [self getCharacters:buf range:NSMakeRange(0, len)];
+            
+            NSMutableString *result = [NSMutableString string];
+            for (int i = 0; i < len; i++)
+            {
+                unichar c = buf[i];
+                NSString *esc = nil;
+                switch (c)
+                {
+                    case 34: esc = @"&quot;"; break;
+                    case 38: esc = @"&amp;"; break;
+                    case 39: esc = @"&apos;"; break;
+                    case 60: esc = @"&lt;"; break;
+                    case 62: esc = @"&gt;"; break;
+                    default: break;
+                }
+                if (esc != nil)
+                {
+                    [result appendString:esc];
+                }
+                else
+                {
+                    CFStringAppendCharacters((CFMutableStringRef)result, &c, 1);
+                }
+            }
+            free(buf);
+            return result;
         }
     }
-    free(buf);
-    return result;
 }
 
 //判断空字符串

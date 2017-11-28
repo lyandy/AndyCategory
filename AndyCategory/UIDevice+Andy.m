@@ -47,135 +47,111 @@ char* printEnv(void)
 
 @implementation UIDevice (Andy)
 
-+ (NSString *)andy_deviceVersion
-{
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-    
-    if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 2G (A1203)";
-    if ([platform isEqualToString:@"iPhone1,2"]) return @"iPhone 3G (A1241/A1324)";
-    if ([platform isEqualToString:@"iPhone2,1"]) return @"iPhone 3GS (A1303/A1325)";
-    if ([platform isEqualToString:@"iPhone3,1"]) return @"iPhone 4 (A1332)";
-    if ([platform isEqualToString:@"iPhone3,2"]) return @"iPhone 4 (A1332)";
-    if ([platform isEqualToString:@"iPhone3,3"]) return @"iPhone 4 (A1349)";
-    if ([platform isEqualToString:@"iPhone4,1"]) return @"iPhone 4S (A1387/A1431)";
-    if ([platform isEqualToString:@"iPhone5,1"]) return @"iPhone 5 (A1428)";
-    if ([platform isEqualToString:@"iPhone5,2"]) return @"iPhone 5 (A1429/A1442)";
-    if ([platform isEqualToString:@"iPhone5,3"]) return @"iPhone 5c (A1456/A1532)";
-    if ([platform isEqualToString:@"iPhone5,4"]) return @"iPhone 5c (A1507/A1516/A1526/A1529)";
-    if ([platform isEqualToString:@"iPhone6,1"]) return @"iPhone 5s (A1453/A1533)";
-    if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone 5s (A1457/A1518/A1528/A1530)";
-    if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone 6 Plus (A1522/A1524)";
-    if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6 (A1549/A1586)";
-    
-    if ([platform isEqualToString:@"iPod1,1"])   return @"iPod Touch 1G (A1213)";
-    if ([platform isEqualToString:@"iPod2,1"])   return @"iPod Touch 2G (A1288)";
-    if ([platform isEqualToString:@"iPod3,1"])   return @"iPod Touch 3G (A1318)";
-    if ([platform isEqualToString:@"iPod4,1"])   return @"iPod Touch 4G (A1367)";
-    if ([platform isEqualToString:@"iPod5,1"])   return @"iPod Touch 5G (A1421/A1509)";
-    
-    if ([platform isEqualToString:@"iPad1,1"])   return @"iPad 1G (A1219/A1337)";
-    
-    if ([platform isEqualToString:@"iPad2,1"])   return @"iPad 2 (A1395)";
-    if ([platform isEqualToString:@"iPad2,2"])   return @"iPad 2 (A1396)";
-    if ([platform isEqualToString:@"iPad2,3"])   return @"iPad 2 (A1397)";
-    if ([platform isEqualToString:@"iPad2,4"])   return @"iPad 2 (A1395+New Chip)";
-    if ([platform isEqualToString:@"iPad2,5"])   return @"iPad Mini 1G (A1432)";
-    if ([platform isEqualToString:@"iPad2,6"])   return @"iPad Mini 1G (A1454)";
-    if ([platform isEqualToString:@"iPad2,7"])   return @"iPad Mini 1G (A1455)";
-    
-    if ([platform isEqualToString:@"iPad3,1"])   return @"iPad 3 (A1416)";
-    if ([platform isEqualToString:@"iPad3,2"])   return @"iPad 3 (A1403)";
-    if ([platform isEqualToString:@"iPad3,3"])   return @"iPad 3 (A1430)";
-    if ([platform isEqualToString:@"iPad3,4"])   return @"iPad 4 (A1458)";
-    if ([platform isEqualToString:@"iPad3,5"])   return @"iPad 4 (A1459)";
-    if ([platform isEqualToString:@"iPad3,6"])   return @"iPad 4 (A1460)";
-    
-    if ([platform isEqualToString:@"iPad4,1"])   return @"iPad Air (A1474)";
-    if ([platform isEqualToString:@"iPad4,2"])   return @"iPad Air (A1475)";
-    if ([platform isEqualToString:@"iPad4,3"])   return @"iPad Air (A1476)";
-    if ([platform isEqualToString:@"iPad4,4"])   return @"iPad Mini 2G (A1489)";
-    if ([platform isEqualToString:@"iPad4,5"])   return @"iPad Mini 2G (A1490)";
-    if ([platform isEqualToString:@"iPad4,6"])   return @"iPad Mini 2G (A1491)";
-    
-    if ([platform isEqualToString:@"i386"])      return @"iPhone Simulator";
-    if ([platform isEqualToString:@"x86_64"])    return @"iPhone Simulator";
-    
-    return platform;
++ (NSString *)andy_machineModel {
+    static dispatch_once_t one;
+    static NSString *model;
+    dispatch_once(&one, ^{
+        size_t size;
+        sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+        char *machine = malloc(size);
+        sysctlbyname("hw.machine", machine, &size, NULL, 0);
+        model = [NSString stringWithUTF8String:machine];
+        free(machine);
+    });
+    return model;
 }
 
-+ (NSString *)andy_deviceName
-{
-    char *typeSpecifier = "hw.machine";
-    
-    size_t size;
-    sysctlbyname(typeSpecifier, NULL, &size, NULL, 0);
-    char *name = malloc(size);
-    sysctlbyname(typeSpecifier, name, &size, NULL, 0);
-    
-    NSString *machine = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
-    
-    free(name);
-    
-    return machine;
++ (NSString *)andy_machineModelName {
+    static dispatch_once_t one;
+    static NSString *name;
+    dispatch_once(&one, ^{
+        NSString *model = [self andy_machineModel];
+        if (!model) return;
+        NSDictionary *dic = @{
+                              @"Watch1,1" : @"Apple Watch 38mm",
+                              @"Watch1,2" : @"Apple Watch 42mm",
+                              @"Watch2,3" : @"Apple Watch Series 2 38mm",
+                              @"Watch2,4" : @"Apple Watch Series 2 42mm",
+                              @"Watch2,6" : @"Apple Watch Series 1 38mm",
+                              @"Watch2,7" : @"Apple Watch Series 1 42mm",
+                              
+                              @"iPod1,1" : @"iPod touch 1",
+                              @"iPod2,1" : @"iPod touch 2",
+                              @"iPod3,1" : @"iPod touch 3",
+                              @"iPod4,1" : @"iPod touch 4",
+                              @"iPod5,1" : @"iPod touch 5",
+                              @"iPod7,1" : @"iPod touch 6",
+                              
+                              @"iPhone1,1" : @"iPhone 1G",
+                              @"iPhone1,2" : @"iPhone 3G",
+                              @"iPhone2,1" : @"iPhone 3GS",
+                              @"iPhone3,1" : @"iPhone 4 (GSM)",
+                              @"iPhone3,2" : @"iPhone 4",
+                              @"iPhone3,3" : @"iPhone 4 (CDMA)",
+                              @"iPhone4,1" : @"iPhone 4S",
+                              @"iPhone5,1" : @"iPhone 5",
+                              @"iPhone5,2" : @"iPhone 5",
+                              @"iPhone5,3" : @"iPhone 5c",
+                              @"iPhone5,4" : @"iPhone 5c",
+                              @"iPhone6,1" : @"iPhone 5s",
+                              @"iPhone6,2" : @"iPhone 5s",
+                              @"iPhone7,1" : @"iPhone 6 Plus",
+                              @"iPhone7,2" : @"iPhone 6",
+                              @"iPhone8,1" : @"iPhone 6s",
+                              @"iPhone8,2" : @"iPhone 6s Plus",
+                              @"iPhone8,4" : @"iPhone SE",
+                              @"iPhone9,1" : @"iPhone 7",
+                              @"iPhone9,2" : @"iPhone 7 Plus",
+                              @"iPhone9,3" : @"iPhone 7",
+                              @"iPhone9,4" : @"iPhone 7 Plus",
+                              
+                              @"iPad1,1" : @"iPad 1",
+                              @"iPad2,1" : @"iPad 2 (WiFi)",
+                              @"iPad2,2" : @"iPad 2 (GSM)",
+                              @"iPad2,3" : @"iPad 2 (CDMA)",
+                              @"iPad2,4" : @"iPad 2",
+                              @"iPad2,5" : @"iPad mini 1",
+                              @"iPad2,6" : @"iPad mini 1",
+                              @"iPad2,7" : @"iPad mini 1",
+                              @"iPad3,1" : @"iPad 3 (WiFi)",
+                              @"iPad3,2" : @"iPad 3 (4G)",
+                              @"iPad3,3" : @"iPad 3 (4G)",
+                              @"iPad3,4" : @"iPad 4",
+                              @"iPad3,5" : @"iPad 4",
+                              @"iPad3,6" : @"iPad 4",
+                              @"iPad4,1" : @"iPad Air",
+                              @"iPad4,2" : @"iPad Air",
+                              @"iPad4,3" : @"iPad Air",
+                              @"iPad4,4" : @"iPad mini 2",
+                              @"iPad4,5" : @"iPad mini 2",
+                              @"iPad4,6" : @"iPad mini 2",
+                              @"iPad4,7" : @"iPad mini 3",
+                              @"iPad4,8" : @"iPad mini 3",
+                              @"iPad4,9" : @"iPad mini 3",
+                              @"iPad5,1" : @"iPad mini 4",
+                              @"iPad5,2" : @"iPad mini 4",
+                              @"iPad5,3" : @"iPad Air 2",
+                              @"iPad5,4" : @"iPad Air 2",
+                              @"iPad6,3" : @"iPad Pro (9.7 inch)",
+                              @"iPad6,4" : @"iPad Pro (9.7 inch)",
+                              @"iPad6,7" : @"iPad Pro (12.9 inch)",
+                              @"iPad6,8" : @"iPad Pro (12.9 inch)",
+                              
+                              @"AppleTV2,1" : @"Apple TV 2",
+                              @"AppleTV3,1" : @"Apple TV 3",
+                              @"AppleTV3,2" : @"Apple TV 3",
+                              @"AppleTV5,3" : @"Apple TV 4",
+                              
+                              @"i386" : @"Simulator x86",
+                              @"x86_64" : @"Simulator x64",
+                              };
+        name = dic[model];
+        if (!name) name = model;
+    });
+    return name;
 }
 
-+ (NSString *)andy_deviceType
-{
-    char *typeSpecifier = "hw.machine";
-    
-    size_t size;
-    sysctlbyname(typeSpecifier, NULL, &size, NULL, 0);
-    char *name = malloc(size);
-    sysctlbyname(typeSpecifier, name, &size, NULL, 0);
-    
-    NSString *machine = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
-    
-    free(name);
-    
-    // http://stackoverflow.com/questions/11197509/ios-how-to-get-device-make-and-model
-    // http://stackoverflow.com/questions/19584208/identify-new-iphone-model-on-xcode-5-5c-5s
-    
-    if( [machine isEqualToString:@"i386"] || [machine isEqualToString:@"x86_64"] ) machine = @"ios_Simulator";
-    
-    else if( [machine isEqualToString:@"iPhone1,1"] ) machine = @"iPhone_1G";
-    
-    else if( [machine isEqualToString:@"iPhone1,2"] ) machine = @"iPhone_3G";
-    else if( [machine isEqualToString:@"iPhone2,1"] ) machine = @"iPhone_3GS";
-    
-    else if( [machine isEqualToString:@"iPhone3,1"] ) machine = @"iPhone_4"; // (GSM)
-    else if( [machine isEqualToString:@"iPhone3,3"] ) machine = @"iPhone_4"; // (CDMA/Verizon/Sprint)
-    else if( [machine isEqualToString:@"iPhone4,1"] ) machine = @"iPhone_4S";
-    
-    else if( [machine isEqualToString:@"iPhone5,1"] ) machine = @"iPhone_5"; // (model A1428, AT&T/Canada)
-    else if( [machine isEqualToString:@"iPhone5,2"] ) machine = @"iPhone_5"; // (model A1429, everything else)
-    else if( [machine isEqualToString:@"iPhone5,3"] ) machine = @"iPhone_5C"; // (model A1456, A1532 | GSM)
-    else if( [machine isEqualToString:@"iPhone5,4"] ) machine = @"iPhone_5C"; // (model A1507, A1516, A1526 (China), A1529 | Global)
-    else if( [machine isEqualToString:@"iPhone6,1"] ) machine = @"iPhone_5S"; // (model A1433, A1533 | GSM)
-    else if( [machine isEqualToString:@"iPhone6,2"] ) machine = @"iPhone_5S"; // (model A1457, A1518, A1528 (China), A1530 | Global)
-    else if( [machine isEqualToString:@"iPhone6,2"] ) machine = @"iPhone_5S"; // (model A1457, A1518, A1528 (China), A1530 | Global)
-    
-    else if( [machine isEqualToString:@"iPhone7,1"] ) machine = @"iPhone_6Plus";
-    else if( [machine isEqualToString:@"iPhone7,2"] ) machine = @"iPhone_6";
-    
-    else if( [machine isEqualToString:@"iPhone8,1"] ) machine = @"iPhone_6S";
-    else if( [machine isEqualToString:@"iPhone8,2"] ) machine = @"iPhone_6SPlus";
-    
-    else if( [machine isEqualToString:@"iPhone8,4"] ) machine = @"iPhone_SE";
-    
-    else if( [machine isEqualToString:@"iPod1,1"] ) machine = @"iPod_Touch_1G";
-    else if( [machine isEqualToString:@"iPod2,1"] ) machine = @"iPod_Touch_2G";
-    else if( [machine isEqualToString:@"iPod3,1"] ) machine = @"iPod_Touch_3G";
-    else if( [machine isEqualToString:@"iPod4,1"] ) machine = @"iPod_Touch_4G";
-    
-    else if( [machine isEqualToString:@"iPad1,1"] ) machine = @"iPad_1";
-    else if( [machine isEqualToString:@"iPad2,1"] ) machine = @"iPad_2";
-    
-    return Valid(machine);
-}
-
-+ (NSString *)andy_uuid
++ (NSString *)andy_IDFA_uuid
 {
     //参考 http://www.jianshu.com/p/f1b59dfb482f
     return Valid([[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]);
@@ -185,10 +161,11 @@ char* printEnv(void)
 {
     BOOL deviceEnable = NO;
     
-    NSString *device = [self andy_deviceName];
+    NSString *device = [self andy_machineModel];
     NSMutableString *first = [NSMutableString stringWithString:Valid([device componentsSeparatedByString:@","].firstObject)];
     NSRange range = [first rangeOfString:@"iPhone"];
-    if (range.length > 0 && range.location != NSNotFound) {
+    if (range.length > 0 && range.location != NSNotFound)
+    {
         [first replaceOccurrencesOfString:@"iPhone" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, first.length)];
         if (first.integerValue >= 6)
         {
@@ -315,7 +292,8 @@ char* printEnv(void)
     
     CFArrayRef wifiInterfaces = CNCopySupportedInterfaces();
     
-    if (!wifiInterfaces) {
+    if (wifiInterfaces == NULL)
+    {
         return nil;
     }
     
@@ -445,7 +423,8 @@ char* printEnv(void)
         return YES;
     }
     
-    if (printEnv()) {
+    if (printEnv() != NULL)
+    {
         NSLog(@"The device is jail broken!!!!!");
         return YES;
     }
@@ -524,7 +503,8 @@ char* printEnv(void)
     return ipAddress;
 }
 
-+ (BOOL)andy_isPad {
++ (BOOL)andy_isPad
+{
     static BOOL __isPad;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

@@ -13,8 +13,10 @@
 @property (nonatomic, copy) void(^deallocBlock)(void);
 @end
 @implementation Parasite
-- (void)dealloc {
-    if (self.deallocBlock) {
+- (void)dealloc
+{
+    if (self.deallocBlock)
+    {
         self.deallocBlock();
     }
 }
@@ -54,7 +56,8 @@
 {
     // 方法签名(方法的描述)
     NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:selector];
-    if (signature == nil) {
+    if (signature == nil)
+    {
         //        @throw [NSException exceptionWithName:@"牛逼的错误" reason:@"方法找不到" userInfo:nil];
         [NSException raise:@"方法调用错误 " format:@" %@ 方法找不到", NSStringFromSelector(selector)];
     }
@@ -67,9 +70,13 @@
     // 设置参数
     NSInteger paramsCount = signature.numberOfArguments - 2; // 除self、_cmd以外的参数个数
     paramsCount = MIN(paramsCount, objects.count);
-    for (NSInteger i = 0; i < paramsCount; i++) {
+    for (NSInteger i = 0; i < paramsCount; i++)
+    {
         id object = objects[i];
-        if ([object isKindOfClass:[NSNull class]]) continue;
+        if ([object isKindOfClass:[NSNull class]])
+        {
+            continue;
+        }
         [invocation setArgument:&object atIndex:i + 2];
     }
     
@@ -78,7 +85,8 @@
     
     // 获取返回值
     id returnValue = nil;
-    if (signature.methodReturnLength) { // 有返回值类型，才去获得返回值
+    if (signature.methodReturnLength != 0)
+    { // 有返回值类型，才去获得返回值
         [invocation getReturnValue:&returnValue];
     }
     
@@ -89,20 +97,28 @@
 {
     UIViewController *resultVC;
     resultVC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
-    while (resultVC.presentedViewController) {
+    while (resultVC.presentedViewController)
+    {
         resultVC = [self topViewController:resultVC.presentedViewController];
     }
     return resultVC;
 }
 
-- (UIViewController *)topViewController:(UIViewController *)vc {
-    if ([vc isKindOfClass:[UINavigationController class]]) {
+- (UIViewController *)topViewController:(UIViewController *)vc
+{
+    if ([vc isKindOfClass:[UINavigationController class]])
+    {
         return [self topViewController:[(UINavigationController *)vc topViewController]];
-    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+    }
+    else if ([vc isKindOfClass:[UITabBarController class]])
+    {
         return [self topViewController:[(UITabBarController *)vc selectedViewController]];
-    } else {
+    }
+    else
+    {
         return vc;
     }
+    
     return nil;
 }
 
@@ -111,8 +127,9 @@
     @synchronized (self) {
         static NSString *kAssociatedKey = nil;
         NSMutableArray *parasiteList = objc_getAssociatedObject(self, &kAssociatedKey);
-        if (!parasiteList) {
-            parasiteList = [NSMutableArray new];
+        if (parasiteList == nil)
+        {
+            parasiteList = [[NSMutableArray alloc] init];
             objc_setAssociatedObject(self, &kAssociatedKey, parasiteList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
         Parasite *parasite = [Parasite new];

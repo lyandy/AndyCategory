@@ -36,7 +36,7 @@
 - (nonnull NSString *)andy_replaceAll:(NSString * __nullable)oldStr with:(NSString * __nullable)newStr;
 
 // 从指定的开始位置和结束位置开始截取字符串
-- (nonnull NSString *)andy_substringFromIndex:(int)begin toIndex:(int)end;
+- (nullable NSString *)andy_substringFromIndex:(int)begin toIndex:(int)end;
 
 /**
  *  md5加密
@@ -143,7 +143,7 @@
 
 + (nullable NSString *)andy_uuidString;
 
-+ (NSString *)andy_stringOfFileSize:(unsigned long long)size;
++ (nullable NSString *)andy_stringOfFileSize:(unsigned long long)size;
 
 //字符转emoji
 - (nullable NSString *)andy_stringByReplacingEmojiCheatCodesWithUnicode;

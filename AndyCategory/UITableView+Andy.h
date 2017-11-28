@@ -12,5 +12,4 @@
 
 - (CGFloat)andy_heightForCellWithIdentifier:(NSString *)identifier cacheByIndexPath:(NSIndexPath *)indexPath  configuration:(void (^)(id cell))configuration;
 
-
 @end

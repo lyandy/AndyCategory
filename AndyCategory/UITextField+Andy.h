@@ -10,8 +10,8 @@
 
 @interface UITextField (Andy)
 
-- (void)andy_setTextL:(NSString *)key;
-
 @property (assign,nonatomic) NSUInteger andy_maxLength;
+
+- (void)andy_setTextL:(NSString *)key;
 
 @end

@@ -11,24 +11,23 @@
 
 @interface UIDevice (Andy)
 
-// 获取设备版本
-+ (NSString *)andy_deviceVersion;
-
 // 获取设备名称
-+ (NSString *)andy_deviceName;
++ (NSString *)andy_machineModel;
 
-// 获取设备类型
-+ (NSString *)andy_deviceType;
+// 获取设备版本
++ (NSString *)andy_machineModelName;
 
 // 获取UUID
-+ (NSString *)andy_uuid;
++ (NSString *)andy_IDFA_uuid;
 
 // 判断touchId是否可用
 + (BOOL)andy_touchIdEnable;
 
 // 判断版本
 + (BOOL)andy_ios7OrLater;
+
 + (BOOL)andy_ios8OrLater;
+
 + (BOOL)andy_ios9OrLater;
 
 // 判断是否iPhone4

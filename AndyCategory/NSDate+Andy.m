@@ -10,63 +10,78 @@
 
 @implementation NSDate (Andy)
 
-- (NSInteger)andy_year {
+- (NSInteger)andy_year
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self] year];
 }
 
-- (NSInteger)andy_month {
+- (NSInteger)andy_month
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:self] month];
 }
 
-- (NSInteger)andy_day {
+- (NSInteger)andy_day
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:self] day];
 }
 
-- (NSInteger)andy_hour {
+- (NSInteger)andy_hour
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self] hour];
 }
 
-- (NSInteger)andy_minute {
+- (NSInteger)andy_minute
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitMinute fromDate:self] minute];
 }
 
-- (NSInteger)andy_second {
+- (NSInteger)andy_second
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] second];
 }
 
-- (NSInteger)andy_nanosecond {
+- (NSInteger)andy_nanosecond
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] nanosecond];
 }
 
-- (NSInteger)andy_weekday {
+- (NSInteger)andy_weekday
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self] weekday];
 }
 
-- (NSInteger)andy_weekdayOrdinal {
+- (NSInteger)andy_weekdayOrdinal
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekdayOrdinal fromDate:self] weekdayOrdinal];
 }
 
-- (NSInteger)andy_weekOfMonth {
+- (NSInteger)andy_weekOfMonth
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfMonth fromDate:self] weekOfMonth];
 }
 
-- (NSInteger)andy_weekOfYear {
+- (NSInteger)andy_weekOfYear
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfYear fromDate:self] weekOfYear];
 }
 
-- (NSInteger)andy_yearForWeekOfYear {
+- (NSInteger)andy_yearForWeekOfYear
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitYearForWeekOfYear fromDate:self] yearForWeekOfYear];
 }
 
-- (NSInteger)andy_quarter {
+- (NSInteger)andy_quarter
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] quarter];
 }
 
-- (BOOL)andy_isLeapMonth {
+- (BOOL)andy_isLeapMonth
+{
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] isLeapMonth];
 }
 
-- (BOOL)andy_isLeapYear {
+- (BOOL)andy_isLeapYear
+{
     NSUInteger year = self.andy_year;
     return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)));
 }
@@ -337,9 +352,8 @@
     [calendar setFirstWeekday:2];//设定周一为周首日
     BOOL ok = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&beginDate interval:&interval forDate:self];
     //分别修改为 NSDayCalendarUnit NSWeekCalendarUnit NSYearCalendarUnit
-    if (ok)
+    if (ok == YES)
     {
-
     }
     else
     {
