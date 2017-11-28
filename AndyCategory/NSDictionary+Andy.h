@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable NSDictionary *)andy_dictionaryWithXML:(id)xmlDataOrString;
 
+- (NSString *)andy_urlEncodedKeyValueString;
+- (NSString *)andy_jsonEncodedKeyValueString;
+- (NSString *)andy_plistEncodedKeyValueString;
+
 @end
 
 

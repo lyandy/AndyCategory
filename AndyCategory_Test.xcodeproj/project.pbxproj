@@ -21,6 +21,7 @@
 		B6B707911E1B3C2C00347B96 /* NSTimer+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B7078F1E1B3C2C00347B96 /* NSTimer+Andy.m */; };
 		B6B707941E1B906D00347B96 /* NSArray+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B707931E1B906D00347B96 /* NSArray+Andy.m */; };
 		B6B707971E1B926700347B96 /* NSDictionary+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B707961E1B926700347B96 /* NSDictionary+Andy.m */; };
+		B6D8838D1FCC38B000582BE6 /* UITableView+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D8838C1FCC38B000582BE6 /* UITableView+Andy.m */; };
 		B6FDF88A1D53299100EE6FC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8891D53299100EE6FC0 /* main.m */; };
 		B6FDF8951D53299100EE6FC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FDF8941D53299100EE6FC0 /* Assets.xcassets */; };
 		B6FDF8A31D53299100EE6FC0 /* AndyCategory_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FDF8A21D53299100EE6FC0 /* AndyCategory_TestTests.m */; };
@@ -87,6 +88,8 @@
 		B6B707931E1B906D00347B96 /* NSArray+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Andy.m"; sourceTree = "<group>"; };
 		B6B707951E1B926700347B96 /* NSDictionary+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Andy.h"; sourceTree = "<group>"; };
 		B6B707961E1B926700347B96 /* NSDictionary+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Andy.m"; sourceTree = "<group>"; };
+		B6D8838B1FCC38B000582BE6 /* UITableView+Andy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+Andy.h"; sourceTree = "<group>"; };
+		B6D8838C1FCC38B000582BE6 /* UITableView+Andy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Andy.m"; sourceTree = "<group>"; };
 		B6FDF8851D53299100EE6FC0 /* AndyCategory_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AndyCategory_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FDF8891D53299100EE6FC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B6FDF8941D53299100EE6FC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				B6B707931E1B906D00347B96 /* NSArray+Andy.m */,
 				B6B707951E1B926700347B96 /* NSDictionary+Andy.h */,
 				B6B707961E1B926700347B96 /* NSDictionary+Andy.m */,
+				B6D8838B1FCC38B000582BE6 /* UITableView+Andy.h */,
+				B6D8838C1FCC38B000582BE6 /* UITableView+Andy.m */,
 			);
 			path = AndyCategory;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				B6A789D31D5469060051CCF1 /* UIWebView+Andy.m in Sources */,
 				B6A789CA1D544D9B0051CCF1 /* NSData+Andy.m in Sources */,
 				B6FDF8DF1D5336F800EE6FC0 /* NSDate+Andy.m in Sources */,
+				B6D8838D1FCC38B000582BE6 /* UITableView+Andy.m in Sources */,
 				B6FDF88A1D53299100EE6FC0 /* main.m in Sources */,
 				B6FDF8C91D53310A00EE6FC0 /* AndyMainViewController.m in Sources */,
 				B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */,

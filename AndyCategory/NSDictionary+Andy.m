@@ -152,7 +152,7 @@
 @end
 
 
-@implementation NSDictionary (YYAdd)
+@implementation NSDictionary (Andy)
 
 + (NSDictionary *)andy_dictionaryWithPlistData:(NSData *)plist {
     if (!plist) return nil;
@@ -232,6 +232,53 @@
         parser = [[_YYXMLDictionaryParser alloc] initWithData:xml];
     }
     return [parser result];
+}
+
+- (NSString *)urlEncodeWithString:(NSString *)str
+{
+    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                 kCFAllocatorDefault,
+                                                                                 (CFStringRef)str, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
+                                                                                 kCFStringEncodingUTF8));
+}
+
+- (NSString *)andy_urlEncodedKeyValueString
+{
+    NSMutableString *string = [NSMutableString string];
+    for (NSString *key in self)
+    {
+        NSObject *value = [self valueForKey:key];
+        if([value isKindOfClass:[NSString class]])
+        {
+            [string appendFormat:@"%@=%@&", [self urlEncodeWithString:key], [self urlEncodeWithString:(NSString *)value]];
+        }
+        else
+        {
+            [string appendFormat:@"%@=%@&", [self urlEncodeWithString:key], value];
+        }
+    }
+    
+    if([string length] > 0)
+    {
+        [string deleteCharactersInRange:NSMakeRange([string length] - 1, 1)];
+    }
+    
+    return string;
+}
+
+- (NSString *)andy_jsonEncodedKeyValueString
+{
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+
+- (NSString *)andy_plistEncodedKeyValueString
+{
+    NSError *error = nil;
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

@@ -78,6 +78,11 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
  */
 - (NSString *)andy_md5HexDigest
 {
+    if(self == nil || [self length] == 0)
+    {
+        return self;
+    }
+    
     const char *str = [self UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(str, (unsigned int)strlen(str), result);
@@ -553,7 +558,7 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 }
 
 //判断空字符串
-+ (BOOL)andy_isBlankString:(NSString *)string
++ (BOOL)andy_isEmptyString:(NSString *)string
 {
     if (string == nil || string == NULL)
     {
@@ -1907,6 +1912,53 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
     }
 }
 
++ (NSString *)andy_uuidString
+{
+    CFUUIDRef uuidObj = CFUUIDCreate(nil);
+    NSString *uuidString = nil;
+    
+    if (uuidObj != NULL)
+    {
+        uuidString = (__bridge_transfer NSString*)CFUUIDCreateString(nil, uuidObj);
+        
+        CFRelease(uuidObj);
+        uuidObj = NULL;
+    }
+    
+    return uuidString;
+}
+
++ (NSString *)andy_stringOfFileSize:(unsigned long long)size
+{
+    static NSArray* UNITS = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UNITS = @[@"B", @"KB", @"MB", @"GB", @"TB", @"PB", @"EB", @"ZB", @"YB", @"BB"];
+    });
+    
+    int last = 0;
+    NSString* unit = nil;
+    for (NSInteger i = 0; i < UNITS.count; i++)
+    {
+        unit = UNITS[i];
+        if (size < 1024 || i == UNITS.count - 1)
+        {
+            break;
+        }
+        
+        last = size % 1024;
+        size /= 1024;
+    }
+    if (last == 0)
+    {
+        return [NSString stringWithFormat:@"%lld %@", size, unit];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%.2f %@", (size + last / 1024.0), unit];
+    }
+}
+
 //字符转emoji
 - (NSString *)andy_stringByReplacingEmojiCheatCodesWithUnicode
 {
@@ -1950,6 +2002,18 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
         return newText;
     }
     return self;
+}
+
+- (CGSize)andy_sizeWithFont:(UIFont *)font
+{
+    if ([self respondsToSelector:@selector(sizeWithAttributes:)])
+    {
+        return [self sizeWithAttributes:@{NSFontAttributeName : font}];
+    }
+    else
+    {
+        return [self sizeWithAttributes:@{NSFontAttributeName : font}];
+    }
 }
 
 - (CGSize)andy_sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)width

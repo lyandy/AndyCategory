@@ -12,11 +12,8 @@
 
 - (void)andy_setImageWithUrl:(NSString *)url placeHolderImage:(UIImage *)placeHolderImage completion:(void (^)())completion;
 
-- (void)andy_setImageToBlur:(UIImage *)image
-       completionBlock:(void (^)())completion;
+- (void)andy_setImageToBlur:(UIImage *)image completionBlock:(void (^)())completion;
 
-- (void)andy_setImageToBlur:(UIImage *)image
-            blurRadius:(CGFloat)blurRadius
-       completionBlock:(void (^)())completion;
+- (void)andy_setImageToBlur:(UIImage *)image blurRadius:(CGFloat)blurRadius completionBlock:(void (^)())completion;
 
 @end

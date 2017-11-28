@@ -41,7 +41,7 @@
 /**
  *  md5加密
  */
-- (nonnull NSString *)andy_md5HexDigest;
+- (nullable NSString *)andy_md5HexDigest;
 
 /**
  *  sha1加密
@@ -137,15 +137,21 @@
 - (nullable NSString *)andy_stringByEscapingHTML;
 
 //判空字符串
-+ (BOOL)andy_isBlankString:(NSString * __nullable)string;
++ (BOOL)andy_isEmptyString:(NSString * __nullable)string;
 
 + (BOOL)andy_stringContainsEmoji:(NSString * __nullable)string;
+
++ (nullable NSString *)andy_uuidString;
+
++ (NSString *)andy_stringOfFileSize:(unsigned long long)size;
 
 //字符转emoji
 - (nullable NSString *)andy_stringByReplacingEmojiCheatCodesWithUnicode;
 
 //emoji转字符
 - (nullable NSString *)andy_stringByReplacingEmojiUnicodeWithCheatCodes;
+
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font;
 
 - (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width;
 
