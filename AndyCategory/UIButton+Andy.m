@@ -56,30 +56,6 @@
     [self setBackgroundImage:[UIImage andy_createImageWithColor:bgColor] forState:state];
 }
 
-// 设置normal状态的多语言文本
-- (void)andy_setTextNormal:(NSString *)key
-{
-    [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateNormal];
-}
-
-// 设置highlight状态的多语言文本
-- (void)andy_setTextHighlight:(NSString *)key
-{
-    [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateHighlighted];
-}
-
-// 设置Selected状态的多语言文本
-- (void)andy_setTextSelected:(NSString *)key
-{
-    [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateSelected];
-}
-
-// 设置disable状态的多语言文本
-- (void)andy_setTextDisable:(NSString *)key
-{
-    [self setTitle:NSLocalizedString(key, nil) forState:UIControlStateDisabled];
-}
-
 - (void)andy_actionBlock:(AndyButtonActionBlock)actionBlock
 {
     [self andy_controlEvents:UIControlEventTouchUpInside withActionBlock:actionBlock];

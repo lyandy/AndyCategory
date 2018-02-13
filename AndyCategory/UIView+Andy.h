@@ -54,20 +54,6 @@
 
 @end
 
-@interface UIView (Hierarchy)
-
-/**
- * 获取当前view最近的uiviewcontroller。
- */
-@property (nonatomic, readonly) UIViewController *viewController;
-
-/**
- * 移除所有子视图。
- */
-- (void)andy_removeAllSubviews;
-
-@end
-
 @interface UIView (Gesture)
 
 /**

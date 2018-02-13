@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+CGFloat DegreesToRadians(CGFloat degrees);
+CGFloat RadiansToDegrees(CGFloat radians);
+
 typedef NS_ENUM(NSUInteger, AndyCenterImageType) {
     // 方形
     AndyCenterImageTypeSquare,
@@ -92,17 +95,6 @@ typedef NS_ENUM(NSUInteger, AndyQRImageType) {
 
 // 平均的颜色
 - (UIColor * _Nonnull)andy_averageColor;
-
-// 模糊效果(渲染很耗时间,建议在子线程中渲染)
-- (UIImage  * _Nullable )andy_blurImage;
-- (UIImage  * _Nullable )andy_blurImageWithMask:(UIImage * _Nonnull)maskImage;
-- (UIImage  * _Nullable )andy_blurImageWithRadius:(CGFloat)radius;
-- (UIImage  * _Nullable )andy_blurImageAtFrame:(CGRect)frame;
-
-- (UIImage * _Nullable)andy_applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor * _Nullable)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage * _Nullable)maskImage;
-
-//保存到相册
-- (void)saveToCameraRoll:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler;
 
 #pragma mark - 生成原始二维码
 + (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;

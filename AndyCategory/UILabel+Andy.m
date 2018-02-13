@@ -52,11 +52,6 @@
     return label;
 }
 
-- (void)andy_setTextL:(NSString *)key
-{
-    [self setText:NSLocalizedString(key, nil)];
-}
-
 + (CGFloat)andy_getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
 {
     

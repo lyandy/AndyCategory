@@ -264,14 +264,17 @@
 
 - (UIViewController *)andy_selfViewController
 {
-    for (UIView *next = [self superview]; next != nil; next = next.superview)
+    UIResponder *nextResponder =  self;
+    
+    do
     {
-        UIResponder *nextResponder = [next nextResponder];
+        nextResponder = [nextResponder nextResponder];
+        
         if ([nextResponder isKindOfClass:[UIViewController class]])
-        {
             return (UIViewController *)nextResponder;
-        }
-    }
+        
+    } while (nextResponder != nil);
+    
     return nil;
 }
 
@@ -288,35 +291,6 @@
 }
 
 @end
-
-@implementation UIView (Hierarchy)
-
-- (UIViewController *)viewController
-{
-    UIResponder *nextResponder =  self;
-    
-    do
-    {
-        nextResponder = [nextResponder nextResponder];
-        
-        if ([nextResponder isKindOfClass:[UIViewController class]])
-            return (UIViewController *)nextResponder;
-        
-    } while (nextResponder != nil);
-    
-    return nil;
-}
-
-- (void)andy_removeAllSubviews
-{
-    for (UIView *subview in self.subviews)
-    {
-        [subview removeFromSuperview];
-    }
-}
-
-@end
-
 
 @implementation UIView (Gesture)
 

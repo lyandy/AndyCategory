@@ -18,9 +18,6 @@
 
 + (UILabel *)andy_roundCornerLabelWithText:(NSString *)text fontSize:(NSInteger)fontSize radius:(CGFloat)radius frame:(CGRect)frame textAlignment:(NSTextAlignment)textAlignment;
 
-// 设置多语言文本
-- (void)andy_setTextL:(NSString *)key;
-
 // 计算文字的高度  width:所显示文字显示的最大宽度
 + (CGFloat)andy_getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
 
