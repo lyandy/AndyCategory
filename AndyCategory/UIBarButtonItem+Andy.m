@@ -20,6 +20,10 @@ static const void *AndyBarButtonItemBlockKey = @"AndyBarButtonItemBlockKey";
     [button setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:highImage] forState:UIControlStateHighlighted];
     button.andy_Size = button.currentBackgroundImage.size;
+    if (@available(iOS 9, *)) {
+        [button.widthAnchor constraintEqualToConstant:button.currentBackgroundImage.size.width].active = YES;
+        [button.heightAnchor constraintEqualToConstant:button.currentBackgroundImage.size.height].active = YES;
+    }
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return [[self alloc] initWithCustomView:button];
 }
@@ -30,6 +34,10 @@ static const void *AndyBarButtonItemBlockKey = @"AndyBarButtonItemBlockKey";
     [button setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:highImage] forState:UIControlStateHighlighted];
     button.andy_Size = button.currentBackgroundImage.size;
+    if (@available(iOS 9, *)) {
+        [button.widthAnchor constraintEqualToConstant:button.currentBackgroundImage.size.width].active = YES;
+        [button.heightAnchor constraintEqualToConstant:button.currentBackgroundImage.size.height].active = YES;
+    }
     [button addTarget:self action:@selector(andy_handleAction:) forControlEvents:UIControlEventTouchUpInside];
     objc_setAssociatedObject(button, AndyBarButtonItemBlockKey, actionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
 
