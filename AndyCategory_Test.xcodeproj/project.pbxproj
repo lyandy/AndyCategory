@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */; };
 		B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */; };
 		B6A789C71D5444760051CCF1 /* NSError+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C61D5444760051CCF1 /* NSError+Andy.m */; };
 		B6A789CA1D544D9B0051CCF1 /* NSData+Andy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A789C91D544D9B0051CCF1 /* NSData+Andy.m */; };
@@ -59,8 +58,6 @@
 		028C8E1FBD01CEEE4EAD3071 /* libPods-AndyCategory_Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AndyCategory_Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04629120B6BC83F57A48B3E5 /* Pods-AndyCategory_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AndyCategory_Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test.debug.xcconfig"; sourceTree = "<group>"; };
 		3448AF7B4AD193CBD1811B70 /* Pods-AndyCategory_Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AndyCategory_Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test.release.xcconfig"; sourceTree = "<group>"; };
-		B6A789BF1D543A3D0051CCF1 /* SVProgressHUD+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Andy.h"; sourceTree = "<group>"; };
-		B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Andy.m"; sourceTree = "<group>"; };
 		B6A789C21D543AE20051CCF1 /* UIDevice+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Andy.h"; sourceTree = "<group>"; };
 		B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Andy.m"; sourceTree = "<group>"; };
 		B6A789C51D5444760051CCF1 /* NSError+Andy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Andy.h"; sourceTree = "<group>"; };
@@ -273,8 +270,6 @@
 				B6FDF8DE1D5336F800EE6FC0 /* NSDate+Andy.m */,
 				B6FDF8E01D53370200EE6FC0 /* UIBarButtonItem+Andy.h */,
 				B6FDF8E11D53370200EE6FC0 /* UIBarButtonItem+Andy.m */,
-				B6A789BF1D543A3D0051CCF1 /* SVProgressHUD+Andy.h */,
-				B6A789C01D543A3D0051CCF1 /* SVProgressHUD+Andy.m */,
 				B6A789C21D543AE20051CCF1 /* UIDevice+Andy.h */,
 				B6A789C31D543AE20051CCF1 /* UIDevice+Andy.m */,
 				B6A789C51D5444760051CCF1 /* NSError+Andy.h */,
@@ -323,8 +318,6 @@
 				B6FDF8811D53299100EE6FC0 /* Sources */,
 				B6FDF8821D53299100EE6FC0 /* Frameworks */,
 				B6FDF8831D53299100EE6FC0 /* Resources */,
-				1BF3F1AD0A70D1BD3984DC0F /* [CP] Embed Pods Frameworks */,
-				72F7E23659BB5801367487FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -442,49 +435,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BF3F1AD0A70D1BD3984DC0F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		40901C78FEB3353B4B9BD095 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AndyCategory_Test-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		72F7E23659BB5801367487FF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AndyCategory_Test/Pods-AndyCategory_Test-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -510,7 +476,6 @@
 				B6D8838D1FCC38B000582BE6 /* UITableView+Andy.m in Sources */,
 				B6FDF88A1D53299100EE6FC0 /* main.m in Sources */,
 				B6FDF8C91D53310A00EE6FC0 /* AndyMainViewController.m in Sources */,
-				B6A789C11D543A3D0051CCF1 /* SVProgressHUD+Andy.m in Sources */,
 				B6A789D91D546D2B0051CCF1 /* UITextField+Andy.m in Sources */,
 				B6FDF8E21D53370200EE6FC0 /* UIBarButtonItem+Andy.m in Sources */,
 				B6A789C41D543AE20051CCF1 /* UIDevice+Andy.m in Sources */,
