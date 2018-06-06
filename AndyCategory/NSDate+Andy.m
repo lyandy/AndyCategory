@@ -287,6 +287,15 @@
     return [dateMDFormatter2 stringFromDate:self];
 }
 
+- (NSString *)css_mdString3
+{
+    NSDateFormatter *dateMDFormatter2 = [[NSDateFormatter alloc] init];
+    dateMDFormatter2.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [dateMDFormatter2 setDateFormat:@"MM.dd"];
+    
+    return [dateMDFormatter2 stringFromDate:self];
+}
+
 - (NSString *)css_fullString;
 {
     NSDateFormatter *dateFullFormatter = [[NSDateFormatter alloc] init];

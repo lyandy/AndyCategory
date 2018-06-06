@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-CGFloat DegreesToRadians(CGFloat degrees);
-CGFloat RadiansToDegrees(CGFloat radians);
+//CGFloat DegreesToRadians(CGFloat degrees);
+//CGFloat RadiansToDegrees(CGFloat radians);
 
 typedef NS_ENUM(NSUInteger, AndyCenterImageType) {
     // 方形
@@ -95,6 +96,14 @@ typedef NS_ENUM(NSUInteger, AndyQRImageType) {
 
 // 平均的颜色
 - (UIColor * _Nonnull)andy_averageColor;
+
+// 获取视频第一帧
++ (UIImage *)andy_videoFramerateWithAVURLAsset:(AVURLAsset *)avUrlAsset;
+
+// 获取视频第一帧
++ (UIImage *)andy_videoFramerateWithVideoPath:(NSString *)videoPath;
+
++ (UIImage *)andy_imageWithLineWithImageView:(UIImageView *)imageView color:(UIColor *)color;
 
 #pragma mark - 生成原始二维码
 + (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;

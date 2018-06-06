@@ -81,6 +81,7 @@
 - (NSString *)css_ymString2;
 - (NSString *)css_mdString;
 - (NSString *)css_mdString2;
+- (NSString *)css_mdString3;
 - (NSString *)css_fullString;
 - (NSString *)css_yString;
 - (NSString *)css_mString;

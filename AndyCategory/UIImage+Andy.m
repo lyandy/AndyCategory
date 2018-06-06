@@ -631,6 +631,52 @@ UIImage* rotateUIImage(const UIImage* src, float angleDegrees)
     }
 }
 
+// 获取视频第一帧
++ (UIImage *)andy_videoFramerateWithAVURLAsset:(AVURLAsset *)avUrlAsset;
+{
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:avUrlAsset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = 0;
+    NSError *thumbnailImageGenerationError = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&thumbnailImageGenerationError];
+    if (!thumbnailImageRef) {
+        return nil;
+    }
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc] initWithCGImage:thumbnailImageRef] : nil;
+    CGImageRelease(thumbnailImageRef);
+    return thumbnailImage;
+}
+
+// 获取视频第一帧
++ (UIImage *)andy_videoFramerateWithVideoPath:(NSString *)videoPath
+{
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:videoPath] options:nil];
+    return [self andy_videoFramerateWithAVURLAsset:asset];
+}
+
++ (UIImage *)andy_imageWithLineWithImageView:(UIImageView *)imageView color:(UIColor *)color
+{
+    CGFloat width = imageView.frame.size.width;
+    CGFloat height = imageView.frame.size.height;
+
+    UIGraphicsBeginImageContext(imageView.frame.size);
+    [imageView.image drawInRect:CGRectMake(0, 0, width, height)];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextBeginPath(context);
+    CGContextSetLineWidth(context,1);
+    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    CGFloat lengths[] = {4,4};
+    CGContextSetLineDash(context, 0, lengths,2);
+    CGContextMoveToPoint(context, 0, 0);
+    CGContextAddLineToPoint(context, 0,height);
+    CGContextStrokePath(context);
+    CGContextClosePath(context);
+
+    return  UIGraphicsGetImageFromCurrentImageContext();
+}
+
 #pragma mark - 生成原始二维码
 + (void)andy_qrImageWithString:(NSString *)string size:(CGSize)size completion:(void (^)(UIImage *qrImage))completion{
     

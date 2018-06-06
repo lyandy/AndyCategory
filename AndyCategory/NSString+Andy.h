@@ -11,6 +11,8 @@
 
 @interface NSString (Andy)
 
+- (NSDictionary *)andy_decomposeUrlQueryStr;
+
 // 对比两个字符串内容是否一致
 - (BOOL)andy_equals:(NSString * __nullable)string;
 

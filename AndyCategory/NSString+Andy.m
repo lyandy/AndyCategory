@@ -14,6 +14,32 @@
 
 static NSDictionary * s_unicodeToCheatCodes = nil;
 static NSDictionary * s_cheatCodesToUnicode = nil;
+/*
+ * used to decompose the url string and store the keys and values to dictionary.
+ *    eg.
+ *        @"key1=value1&key2=value2&key=value3"
+ *  will be stored to dictionary as:
+ *        key1<=value1,  key2<=value2, key3<=value3
+ */
+- (NSDictionary *)andy_decomposeUrlQueryStr
+{
+    NSArray *array = [self componentsSeparatedByString:@"&"];
+    if ([array count] > 0) {
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:10];
+        
+        for(NSString *str in array){
+            NSArray *keyandvalue = [str componentsSeparatedByString:@"="];
+            if([keyandvalue count] == 2)
+                [dic setValue:[[keyandvalue objectAtIndex:1] andy_stringByURLDecode] forKey:[keyandvalue objectAtIndex:0]];
+        }
+        if ([[dic allKeys] count] >0)
+            return dic;
+        return nil;
+    }
+    return nil;
+    
+}
 
 // 对比两个字符串内容是否一致
 - (BOOL)andy_equals:(NSString *)string
@@ -255,8 +281,8 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 {
     NSString *pattern = @"^[0-9A-Za-z]{1,50}";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
-    BOOL isMatch = [pred evaluateWithObject:self];
-    return isMatch;
+    BOOL isNotMatch = [pred evaluateWithObject:self];
+    return !isNotMatch;
 }
 
 // 正则匹配昵称
@@ -455,83 +481,96 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 }
 
 - (NSString *)andy_stringByURLEncode {
-    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)])
-    {
-        /**
-         AFNetworking/AFURLRequestSerialization.m
-         
-         Returns a percent-escaped string following RFC 3986 for a query string key or value.
-         RFC 3986 states that the following characters are "reserved" characters.
-         - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
-         - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
-         In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
-         query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
-         should be percent-escaped in the query string.
-         - parameter string: The string to be percent-escaped.
-         - returns: The percent-escaped string.
-         */
-        static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
-        static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
-        
-        NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-        [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
-        static NSUInteger const batchSize = 50;
-        
-        NSUInteger index = 0;
-        NSMutableString *escaped = @"".mutableCopy;
-        
-        while (index < self.length)
-        {
-            NSUInteger length = MIN(self.length - index, batchSize);
-            NSRange range = NSMakeRange(index, length);
-            // To avoid breaking up character sequences such as 👴🏻👮🏽
-            range = [self rangeOfComposedCharacterSequencesForRange:range];
-            NSString *substring = [self substringWithRange:range];
-            NSString *encoded = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
-            [escaped appendString:encoded];
-            
-            index += range.length;
-        }
-        return escaped;
-    }
-    else
-    {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
-        NSString *encoded = (__bridge_transfer NSString *)
-        CFURLCreateStringByAddingPercentEscapes(
-                                                kCFAllocatorDefault,
-                                                (__bridge CFStringRef)self,
-                                                NULL,
-                                                CFSTR("!#$&'()*+,/:;=?@[]"),
-                                                cfEncoding);
-        return encoded;
-#pragma clang diagnostic pop
-    }
+//    if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)])
+//    {
+//        /**
+//         AFNetworking/AFURLRequestSerialization.m
+//
+//         Returns a percent-escaped string following RFC 3986 for a query string key or value.
+//         RFC 3986 states that the following characters are "reserved" characters.
+//         - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
+//         - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
+//         In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
+//         query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
+//         should be percent-escaped in the query string.
+//         - parameter string: The string to be percent-escaped.
+//         - returns: The percent-escaped string.
+//         */
+//        static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
+//        static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
+//
+//        NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+//        [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
+//        static NSUInteger const batchSize = 50;
+//
+//        NSUInteger index = 0;
+//        NSMutableString *escaped = @"".mutableCopy;
+//
+//        while (index < self.length)
+//        {
+//            NSUInteger length = MIN(self.length - index, batchSize);
+//            NSRange range = NSMakeRange(index, length);
+//            // To avoid breaking up character sequences such as 👴🏻👮🏽
+//            range = [self rangeOfComposedCharacterSequencesForRange:range];
+//            NSString *substring = [self substringWithRange:range];
+//            NSString *encoded = [substring stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+//            [escaped appendString:encoded];
+//
+//            index += range.length;
+//        }
+//        return escaped;
+//    }
+//    else
+//    {
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//        CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
+//        NSString *encoded = (__bridge_transfer NSString *)
+//        CFURLCreateStringByAddingPercentEscapes(
+//                                                kCFAllocatorDefault,
+//                                                (__bridge CFStringRef)self,
+//                                                NULL,
+//                                                CFSTR("!#$&'()*+,/:;=?@[]"),
+//                                                cfEncoding);
+//        return encoded;
+//#pragma clang diagnostic pop
+//    }
+    
+    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                           (CFStringRef)self,
+                                                                           NULL,
+                                                                           CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                           kCFStringEncodingUTF8);
+    return result;
 }
 
 - (NSString *)andy_stringByURLDecode {
-    if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)])
-    {
-        return [self stringByRemovingPercentEncoding];
-    }
-    else
-    {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        CFStringEncoding en = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
-        NSString *decoded = [self stringByReplacingOccurrencesOfString:@"+"
-                                                            withString:@" "];
-        decoded = (__bridge_transfer NSString *)
-        CFURLCreateStringByReplacingPercentEscapesUsingEncoding(
-                                                                NULL,
-                                                                (__bridge CFStringRef)decoded,
-                                                                CFSTR(""),
-                                                                en);
-        return decoded;
-#pragma clang diagnostic pop
-    }
+//    if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)])
+//    {
+//        return [self stringByRemovingPercentEncoding];
+//    }
+//    else
+//    {
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//        CFStringEncoding en = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
+//        NSString *decoded = [self stringByReplacingOccurrencesOfString:@"+"
+//                                                            withString:@" "];
+//        decoded = (__bridge_transfer NSString *)
+//        CFURLCreateStringByReplacingPercentEscapesUsingEncoding(
+//                                                                NULL,
+//                                                                (__bridge CFStringRef)decoded,
+//                                                                CFSTR(""),
+//                                                                en);
+//        return decoded;
+//#pragma clang diagnostic pop
+//    }
+    
+    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+                                                                                           (CFStringRef)self,
+                                                                                           CFSTR(""),
+                                                                                           kCFStringEncodingUTF8);
+    return result;
 }
 
 - (NSString *)andy_stringByEscapingHTML
