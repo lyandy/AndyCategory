@@ -24,4 +24,20 @@
 // 计算文字的宽度
 + (CGFloat)andy_getWidthWithTitle:(NSString *)title font:(UIFont *)font;
 
+
+/**
+ *  改变行间距
+ */
++ (void)andy_changeLineSpaceForLabel:(UILabel *)label WithSpace:(float)space;
+
+/**
+ *  改变字间距
+ */
++ (void)andy_changeWordSpaceForLabel:(UILabel *)label WithSpace:(float)space;
+
+/**
+ *  改变行间距和字间距
+ */
++ (void)andy_changeSpaceForLabel:(UILabel *)label withLineSpace:(float)lineSpace WordSpace:(float)wordSpace;
+
 @end

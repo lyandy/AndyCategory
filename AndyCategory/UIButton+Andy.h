@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^AndyButtonActionBlock)(id);
+typedef void (^AndyButtonActionBlock)(UIButton *button);
 
 @interface UIButton (Andy)
 

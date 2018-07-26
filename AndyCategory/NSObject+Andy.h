@@ -29,12 +29,14 @@
 - (void)andy_guardDeallocBlock:(void(^)(void))block;
 
 
--(NSString *)andy_AppVersion;
+-(NSString *)andy_appVersion;
 
--(NSInteger)andy_AppBuild;
+-(NSInteger)andy_integerAppBuild;
 
--(NSString *)andy_AppIdentifier;
+-(NSString *)andy_stringAppBuild;
 
--(NSString *)andy_AppCurrentLanguage;
+-(NSString *)andy_appIdentifier;
+
+-(NSString *)andy_appCurrentLanguage;
 
 @end

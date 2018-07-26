@@ -536,11 +536,18 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 //#pragma clang diagnostic pop
 //    }
     
-    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                           (CFStringRef)self,
-                                                                           NULL,
-                                                                           CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                           kCFStringEncodingUTF8);
+//    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                           (CFStringRef)self,
+//                                                                           NULL,
+//                                                                           CFSTR("!*'();:@&=+$,/?%#[]"),
+//                                                                           kCFStringEncodingUTF8);
+    
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                             (CFStringRef)self,
+                                                                                             (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                                                                                             NULL,
+                                                                                             kCFStringEncodingUTF8));
+    
     return result;
 }
 

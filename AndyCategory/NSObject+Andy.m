@@ -138,28 +138,35 @@
     }
 }
 
--(NSString *)andy_AppVersion
+-(NSString *)andy_appVersion
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     return app_Version;
 }
 
--(NSInteger)andy_AppBuild
+-(NSInteger)andy_integerAppBuild
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
     return [app_build integerValue];
 }
 
--(NSString *)andy_AppIdentifier
+- (NSString *)andy_stringAppBuild
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
+    return app_build;
+}
+
+-(NSString *)andy_appIdentifier
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString * bundleIdentifier = [infoDictionary objectForKey:@"CFBundleIdentifier"];
     return bundleIdentifier;
 }
 
--(NSString *)andy_AppCurrentLanguage
+-(NSString *)andy_appCurrentLanguage
 {
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages firstObject];
