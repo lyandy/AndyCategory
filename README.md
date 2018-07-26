@@ -5,7 +5,7 @@ A summary of Object-C categories
 
 _Before you run, you need pod install first. :)_
 
-_The version is 1.0.4_
+_The version is 1.0.5_
 
 _There are a lot of experience to improve_
 
