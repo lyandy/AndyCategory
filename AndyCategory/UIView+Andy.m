@@ -182,6 +182,19 @@
     self.layer.shadowPath = shadowPath.CGPath;
 }
 
+- (void)andy_drawShadowWithColor:(UIColor *)shadowColor edgeInset:(UIEdgeInsets)edgeInset offset:(CGSize)offset
+{
+    self.layer.shadowRadius = 3.0f;
+    self.layer.shadowColor = shadowColor.CGColor;
+    self.layer.shadowOffset = offset;
+    self.layer.shadowOpacity = 1.0f;
+    self.layer.masksToBounds = NO;
+    
+    UIEdgeInsets shadowInsets = edgeInset;
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(self.bounds, shadowInsets)];
+    self.layer.shadowPath = shadowPath.CGPath;
+}
+
 - (void)andy_hideShadow
 {
     self.layer.shadowRadius = 0.0f;

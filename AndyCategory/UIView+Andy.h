@@ -38,6 +38,8 @@
 
 - (void)andy_drawShadowWithColor:(UIColor *)shadowColor;
 
+- (void)andy_drawShadowWithColor:(UIColor *)shadowColor edgeInset:(UIEdgeInsets)edgeInset offset:(CGSize)offset;
+
 - (void)andy_hideShadow;
 
 /**
