@@ -39,4 +39,9 @@
 
 -(NSString *)andy_appCurrentLanguage;
 
+- (NSData *)andy_JSONDataSerialization;
+- (NSString *)andy_JSONStringSerialization;
+- (NSString *)andy_JSONStringSerializationPrinted:(BOOL)isPretined;
+
+
 @end

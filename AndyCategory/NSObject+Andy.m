@@ -173,4 +173,22 @@
     return [NSString stringWithString:currentLanguage];
 }
 
+- (NSData *)andy_JSONDataSerialization
+{
+    NSError *error = nil;
+    return [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
+}
+
+- (NSString *)andy_JSONStringSerialization
+{
+    return [self andy_JSONStringSerializationPrinted:NO];
+}
+
+- (NSString *)andy_JSONStringSerializationPrinted:(BOOL)isPretined
+{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:isPretined ? NSJSONWritingPrettyPrinted : 0 error:&error];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 @end
