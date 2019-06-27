@@ -9,6 +9,7 @@
 #import "NSString+Andy.h"
 #import "NSData+Andy.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <zlib.h>
 
 @implementation NSString (Andy)
 
@@ -2091,7 +2092,7 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
     return ([self andy_sizeWithFont:font constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByCharWrapping]);
 }
 
-- (CGSize)andy_sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)width lineBreakMode:(NSInteger)lineBreakMode
+- (CGSize)andy_sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)width lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
     return ([self andy_sizeWithFont:font constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:lineBreakMode]);
 }
@@ -2101,7 +2102,7 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
     return ([self andy_sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping]);
 }
 
-- (CGSize)andy_sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSInteger)lineBreakMode
+- (CGSize)andy_sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
 #ifdef __IPHONE_7_0
     return ([self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font} context:nil].size);
@@ -2110,6 +2111,47 @@ static NSDictionary * s_cheatCodesToUnicode = nil;
 #endif
 }
 
++ (instancetype)andy_randomStringWithoutDigitalWithLength:(int)length
+{
+    if (length <= 0) return nil;
+    
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+    NSMutableString *string = [NSMutableString stringWithCapacity:length];
+    for (int i = 0; i < length; i++) {
+        uint32_t index = arc4random_uniform((uint32_t)letters.length);
+        unichar c = [letters characterAtIndex:index];
+        [string appendFormat:@"%C", c];
+    }
+    return string;
+}
+
+- (instancetype)andy_stringByRemovingSpace
+{
+    return [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
+- (NSArray *)andy_componentsSeparatedBySpace
+{
+    if (self.andy_stringByRemovingSpace.length == 0) return nil;
+    return [self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
++ (instancetype)andy_stringWithFilename:(NSString *)filename
+                            extension:(NSString *)extension
+{
+    if (filename.andy_stringByRemovingSpace.length == 0) return nil;
+    
+    return [self stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:filename withExtension:extension] encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (NSString *)andy_crc32
+{
+    if (self.length == 0) return nil;
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    uLong crc = crc32(0L, Z_NULL, 0);
+    crc = crc32(crc, data.bytes, (uInt)data.length);
+    return [NSString stringWithFormat:@"%lu", crc];
+}
 
 @end
 

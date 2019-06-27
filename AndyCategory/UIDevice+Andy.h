@@ -23,9 +23,6 @@
 // 判断touchId是否可用
 + (BOOL)andy_touchIdEnable;
 
-// 判断版本
-+ (BOOL)andy_ios7OrLater;
-
 + (BOOL)andy_ios8OrLater;
 
 + (BOOL)andy_ios9OrLater;

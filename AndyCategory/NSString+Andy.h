@@ -11,7 +11,7 @@
 
 @interface NSString (Andy)
 
-- (NSDictionary *)andy_decomposeUrlQueryStr;
+- (nullable NSDictionary *)andy_decomposeUrlQueryStr;
 
 // 对比两个字符串内容是否一致
 - (BOOL)andy_equals:(NSString * __nullable)string;
@@ -157,11 +157,27 @@
 
 - (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width;
 
-- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width lineBreakMode:(NSInteger)lineBreakMode;
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToWidth:(CGFloat)width lineBreakMode:(NSLineBreakMode)lineBreakMode;
 
 - (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToSize:(CGSize)size;
 
-- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToSize:(CGSize)size lineBreakMode:(NSInteger)lineBreakMode;
+- (CGSize)andy_sizeWithFont:(UIFont * __nonnull)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode;
+
+/** 生成length长度的随机字符串（不包含数字） */
++ (nonnull instancetype)andy_randomStringWithoutDigitalWithLength:(int)length;
+
+/** 去除空格 */
+- (nullable instancetype)andy_stringByRemovingSpace;
+
+/** 将字符串用空格分割成数组 */
+- (nullable NSArray *)andy_componentsSeparatedBySpace;
+
+/** 从mainBundle中加载文件数据 */
++ (nullable instancetype)andy_stringWithFilename:(NSString * __nullable)filename
+                            extension:(NSString * __nullable)extension;
+
+/** 生成crc32 */
+- (nullable NSString *)andy_crc32;
 
 @end
 

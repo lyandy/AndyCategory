@@ -10,7 +10,7 @@
 
 @implementation UIFont (Andy)
 
-+ (nullable UIFont *)andy_fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
++ (UIFont *)andy_fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
 {
     UIFont *font = [UIFont fontWithName:fontName size:fontSize];
     if (font == nil)

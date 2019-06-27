@@ -98,12 +98,12 @@ typedef NS_ENUM(NSUInteger, AndyQRImageType) {
 - (UIColor * _Nonnull)andy_averageColor;
 
 // 获取视频第一帧
-+ (UIImage *)andy_videoFramerateWithAVURLAsset:(AVURLAsset *)avUrlAsset;
++ (UIImage * _Nonnull)andy_videoFramerateWithAVURLAsset:(AVURLAsset * __nullable)avUrlAsset;
 
 // 获取视频第一帧
-+ (UIImage *)andy_videoFramerateWithVideoPath:(NSString *)videoPath;
++ (UIImage * _Nonnull )andy_videoFramerateWithVideoPath:(NSString * __nullable)videoPath;
 
-+ (UIImage *)andy_imageWithLineWithImageView:(UIImageView *)imageView color:(UIColor *)color;
++ (UIImage * _Nonnull)andy_imageWithLineWithImageView:(UIImageView * __nullable)imageView color:(UIColor * __nullable)color;
 
 #pragma mark - 生成原始二维码
 + (void)andy_qrImageWithString:(NSString * __nullable)string size:(CGSize)size completion:(nonnull void (^)(UIImage * __nullable qrImage))completion;

@@ -10,6 +10,6 @@
 
 @interface UIFont (Andy)
 
-+ (nullable UIFont *)andy_fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
++ (nullable UIFont *)andy_fontWithName:(NSString * __nullable)fontName size:(CGFloat)fontSize;
 
 @end

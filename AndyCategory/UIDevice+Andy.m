@@ -176,11 +176,6 @@ char* printEnv(void)
     return [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && deviceEnable;
 }
 
-+ (BOOL)andy_ios7OrLater
-{
-    return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO;
-}
-
 + (BOOL)andy_ios8OrLater
 {
     return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO;
